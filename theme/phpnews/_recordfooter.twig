@@ -1,9 +1,9 @@
 {# This file is inserted as the 'footer' of each listed record. #}
 
-    Written by <a href="/author/{{record.author}}">
+    Written by <strong><a href="/author/{{record.author}}">
         {% set a = '' ~ record.author %}
         {{ attribute(rssfeeds, a).name -}}
-    </a>
+    </a></strong>
     {% if record.source %}
     - Published on <a href="{{ record.source }}" target="_blank">
         {{ attribute(rssfeeds, a).title -}}

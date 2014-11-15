@@ -52,55 +52,36 @@
         <hr>
 
 
-                {% for record in records %}
+            {% for record in records %}
 
-
-               <div class="post-preview">
-                    <a href="{{ record.link }}">
-                        <h2 class="post-title">
-                            {{ record.title }}
-                        </h2>                      
-                    </a>
-                    <p>
-                        {{ record.content|excerpt(400) }}
-                    </p>
-
-                    <p>
-                        <a href="{{ record.link }}" class="btn btn-primary">Read more &raquo;</a>
-                    </p>
-
-                    <p class="post-meta">{% include '_recordfooter.twig' with {record: record} %}</p>
-                </div>
-                <hr>
+                {% include '_listitem.twig' %}
                
+            {% else %}
 
-                    {% else %}
-                <article>
-                    <h2>No content found.</h2>
+            <article>
+                <h2>No content found.</h2>
 
-                    <p>
-                        Unfortunately, no content could be found. Try another page, or go to the
-                        <a href="{{ paths.root }}">homepage</a>.
-                    </p>
+                <p>
+                    Unfortunately, no content could be found. Try another page, or go to the
+                    <a href="{{ paths.root }}">homepage</a>.
+                </p>
 
-                    {#
-                    optionally, you can redirect the browser to another page. Just uncomment the next line to do so.
-                    {{ redirect('/') }}
-                    #}
+                {#
+                optionally, you can redirect the browser to another page. Just uncomment the next line to do so.
+                {{ redirect('/') }}
+                #}
+            </article>
 
-                </article>
+           
+            {% endfor %}
 
-               
-                {% endfor %}
-
-                <!-- Pager -->
-                {{ pager() }}
-
+            <!-- Pager -->
+            {{ pager() }}
 
             </div>
 
             <div class="col-lg-3 col-lg-offset-1 col-md-10 col-md-offset-1">
-            {% include '_aside.twig' %}
+                {% include '_aside.twig' %}
             </div>
 
         </div>

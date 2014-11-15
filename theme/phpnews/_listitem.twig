@@ -1,0 +1,21 @@
+<div class="post-preview">
+    <a href="{{ record.link }}">
+        <h2 class="post-title">
+            {{ record.title }}
+        </h2>                      
+    </a>
+    {% if record.image is not empty %}
+    <div class="listingimage"><img src="{{record.image}}"></div>
+    {% endif %}
+    <p>
+        {{ record.content|excerpt(400) }}
+    </p>
+
+    <p>
+        <a href="{{ record.link }}" class="btn btn-primary">Read more &raquo;</a>
+    </p>
+
+    <p class="post-meta">{% include '_recordfooter.twig' with {record: record} %}</p>
+</div>
+
+<hr>

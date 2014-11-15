@@ -31,30 +31,12 @@
             {% setcontent records = "feeditems/latest/6" allowpaging %}
                 {% for record in records %}
 
-
-               <div class="post-preview">
-                    <a href="{{ record.link }}">
-                        <h2 class="post-title">
-                            {{ record.title }}
-                        </h2>                      
-                    </a>
-                    <p>
-                        {{ record.content|excerpt(400) }}
-                    </p>
-
-                    <p>
-                        <a href="{{ record.link }}" class="btn btn-primary">Read more &raquo;</a>
-                    </p>
-
-                    <p class="post-meta">{% include '_recordfooter.twig' with {record: record} %}</p>
-                </div>
-                <hr>
-               
+                    {% include '_listitem.twig' %}
+                
                 {% endfor %}
 
                 <!-- Pager -->
                 {{ pager() }}
-
 
             </div>
 

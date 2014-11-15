@@ -446,6 +446,18 @@ a[href*="feedburner.com"] {
   display: none;
 }
 
+.listingimage {
+  border: 1px solid #BBB;
+  padding: 3px;
+  width: auto;
+  margin: 16px 0 0 16px;
+  float: right;
+}
+
+.listingimage img {
+  max-width: 240px;
+}
+
 @media only screen and (max-width: 767px) {
   
   p, li {

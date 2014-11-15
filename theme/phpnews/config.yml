@@ -5,9 +5,9 @@
 
 homebg: home-bg.jpg
 
-facebook: https://www.facebook.com/PixelSwap.fr
-twitter: https://twitter.com/MikeScops
-github: https://github.com/Mikescops/
+#facebook: https://www.facebook.com/PixelSwap.fr
+twitter: https://twitter.com/phpnews_io
+github: https://github.com/bobdenotter/phpnews
 
 backgrounds:
   - bg1.jpg
