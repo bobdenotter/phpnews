@@ -1,11 +1,11 @@
 cacheMaxAge: 30
-itemAmount: 20
+itemAmount: 10
 
 # Set the key, to prevent people from trying to DDOS your server by triggering
 # /bolt/rssaggregate a lot. 
 key: aGhgdhTRV35FS
 
-feeds:
+xfeeds:
     derekrethans:
         name: "Derick Rethans"
         title: "Derick Rethans' blog'"
@@ -106,7 +106,36 @@ feeds:
         title: "Rafael Dohms' blog"
         url: "http://blog.doh.ms/"
         feed: "http://blog.doh.ms/feed/"
-
+    sitepoint:
+        name: "Sitepoint"
+        title: "Sitepoint"
+        url: "http://www.sitepoint.com/"
+        feed: "http://www.sitepoint.com/php/feed/"        
+    symfony: 
+        name: "Symfony blog"
+        title: "The Symfony blog"
+        url: "http://symfony.com/blog/"
+        feed: "http://feeds.feedburner.com/symfony/blog"
+    annafilina:
+        name: "Anna Filina"
+        title: "Anna Filina's weblog"
+        url: "http://afilina.com/"
+        feed: "http://afilina.com/feed"
+    ericlbarnes:
+        name: "Eric L. Barnes"
+        title: "Eric L. Barnes' Weblog"
+        url: "http://ericlbarnes.com/"
+        feed: "http://ericlbarnes.com/feed/"
+    joshuathijssen:
+        name: "Joshua Thijssen"
+        title: "Joshua Thijssen's weblog"
+        url: "https://www.adayinthelifeof.nl/"
+        feed: "https://www.adayinthelifeof.nl/feed/"
+    mtdowling:
+        name: "Michael Dowling"
+        title: "Michael Dowling's blog"
+        url: "http://mtdowling.com/"
+        feed: "http://mtdowling.com/atom.xml"
 
 
 # http://www.brandonsavage.net/best-php-blogs-to-follow
