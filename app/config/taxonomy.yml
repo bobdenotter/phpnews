@@ -8,6 +8,14 @@ tags:
     postfix: "Add some freeform tags. Start a new tag by typing a comma or space."    
     #listing_template: tag-listing.twig #custom template
 
+authors:
+    slug: authors
+    singular_slug: author
+    behaves_like: tags
+    postfix: "The author (key) of this posting."    
+    #listing_template: tag-listing.twig #custom template
+
+
 chapters:
     slug: chapters
     singular_slug: chapter

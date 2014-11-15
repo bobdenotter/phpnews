@@ -1,19 +1,15 @@
-# Database setup. The driver can be either sqlite, mysql or postgres. For
-# SQLite, only the databasename is required, while MySQL and PostgreSQL also
-# require username, password and perhaps a hostname.
-# If you're trying out Bolt, just keep it set to SQLite for now.
-database:
-  driver: sqlite
-  databasename: bolt
+
+# Note: DB-settings are in config_local.yml, which is not in Git.
+
 
 # The name of the website
-sitename: A sample site
-payoff: The amazing payoff goes here
+sitename: PHPNews
+payoff: The best new articles on PHP, aggregated on one site.
 
 # The theme to use. Be sure to copy the {theme_path}/base-2014 folder, and change the
 # name here accordingly. Don't edit the templates in theme/base-2014, because
 # they _will_ get updated in next releases
-theme: base-2014
+theme: phpnews
 
 # The locale that'll be used by the application. If no locale is set the
 # fallback locale is 'en_GB'. For available options, see: http://docs.bolt.cm/locales
@@ -69,11 +65,6 @@ record_template: record.twig
 listing_template: listing.twig
 listing_records: 6
 listing_sort: datepublish DESC
-
-# Because of limitations on how the underlying database queries work, there are 
-# only two options for sorting on taxonomies. 'ASC' for roughly "oldest first" 
-# and 'DESC' for roughly 'newest first'. 
-taxonomy_sort: DESC
 
 # Template for showing the search results. If not defined, uses the settings
 # for listing_template and listing_records
@@ -174,17 +165,17 @@ strict_variables: false
 # options are set to 'false'. If you choose to enable them for your editors, please
 # instruct them thoroughly on their responsibility not to break the layout.
 wysiwyg:
-  images: false
+  images: true
   anchor: false
-  tables: false
+  tables: true
   fontcolor: false
   align: false        # Add 'align left', 'align right',etc. 
-  subsuper: false     # Add buttons for subscript and superscript, using <sub> and <sup>
-  embed: false        # allows the user to insert embedded video's from Youtube, Vimeo, etc. 
+  subsuper: true     # Add buttons for subscript and superscript, using <sub> and <sup>
+  embed: true        # allows the user to insert embedded video's from Youtube, Vimeo, etc. 
   underline: false    # add a button to underline text, using the <u>-tag.
-  strike: false       # add a button to add stikethrough, using the <s>-tag.
-  blockquote: false 
-  codesnippet: false
+  strike: true       # add a button to add stikethrough, using the <s>-tag.
+  blockquote: true 
+  codesnippet: true
   specialchar: false  # adds a button to insert special chars like '€' or '™'. 
   ck:
     allowedContent: true # If set to 'true', any elements and attributes are allowed in Wysiwg Elements
