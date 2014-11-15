@@ -1,0 +1,14 @@
+{# This file is inserted as the 'footer' of each listed record. #}
+
+    Written by <a href="/author/{{record.author}}">
+        {% set a = '' ~ record.author %}
+        {{ attribute(rssfeeds, a).name -}}
+    </a>
+    {% if record.source %}
+    - Published on <a href="{{ record.source }}" target="_blank">
+        {{ attribute(rssfeeds, a).title -}}
+    </a>
+    {% endif %}
+    <br>
+    Aggregated on {{ record.datepublish|localdate("%A %B %e, %Y")}} -
+    <a href="{{ record.link }}">Permalink</a> 

@@ -1,0 +1,23 @@
+{
+    "name": "mikescops/clean-blog",
+    "description": "Clean personal news blog. ",
+    "type": "bolt-theme",
+    "keywords": ["theme", "bootstrap", "news", "simple", "blog", "clean"],
+    "require": {
+        "bolt/bolt": ">=2.0.0,<3.0.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name" : "Corentin Mors",
+            "email" : "mikescops@pixelswap.fr"
+        }, {
+            "name" : "Thaís Santos"
+        }
+    ],
+    "extra": {
+        "bolt-screenshots": [
+            "clean-blog-home.jpg"
+        ]
+    }
+}

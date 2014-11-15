@@ -1,0 +1,72 @@
+{% include '_head.twig' %}
+
+{% include '_menu.twig' %}
+
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    {% set headerimage = paths.theme ~ 'img/' ~ random(theme.backgrounds) %}
+    <header class="intro-header" style="background-image: url('{{ headerimage }}')">{# thumbnail(record.image, 1000, 700) #}    
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>{{ app.config.get('general/sitename') }}</h1>
+                        <hr class="small">
+                        {% if app.config.get('general/payoff') %}
+                        <span class="subheading">{{ app.config.get('general/payoff') }}</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
+               
+
+            {% setcontent records = "feeditems/latest/6" allowpaging %}
+                {% for record in records %}
+
+
+               <div class="post-preview">
+                    <a href="{{ record.link }}">
+                        <h2 class="post-title">
+                            {{ record.title }}
+                        </h2>                      
+                    </a>
+                    <p>
+                        {{ record.content|excerpt(400) }}
+                    </p>
+
+                    <p>
+                        <a href="{{ record.link }}" class="btn btn-primary">Read more &raquo;</a>
+                    </p>
+
+                    <p class="post-meta">{% include '_recordfooter.twig' with {record: record} %}</p>
+                </div>
+                <hr>
+               
+                {% endfor %}
+
+                <!-- Pager -->
+                {{ pager() }}
+
+
+            </div>
+
+
+            <div class="col-lg-3 col-lg-offset-1 col-md-10 col-md-offset-1">
+            {% include '_aside.twig' %}
+            </div>
+
+        </div>
+    </div>
+
+    <hr>
+
+ {% include '_footer.twig' %}
+
