@@ -73,7 +73,7 @@ pages:
         image:
             type: image
         teaser:
-            type: text
+            type: html
         content:
             type: html
             height: 300px
