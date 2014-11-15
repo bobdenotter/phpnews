@@ -1,0 +1,20 @@
+{% import '_macro/_panels.twig' as panels %}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <i class="fa fa-cog fa-fw"></i> {{ __('contenttypes.generic.actions-one',{'%contenttype%': context.contenttype.slug}) }}
+    </div>
+
+    <div class="panel-body">
+        {% include 'editcontent/_aside-save.twig' %}
+        {% include 'editcontent/_aside-preview.twig' %}
+        {% include 'editcontent/_aside-status.twig' %}
+
+
+
+    </div>
+</div>
+
+{{ panels.lastmodified(context.contenttype.slug, context.content.id) }}
+
+{{ panels.stack(5) }}

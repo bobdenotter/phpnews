@@ -1,0 +1,87 @@
+{#=== OPTIONS ========================================================================================================#}
+
+{% set option = {
+    class:     field.class|default(''),
+    label:     field.label|default(''),
+    multiple:  (field.multiple is defined and field.multiple),
+    values:    field.values|default([]),
+    info:      field.info|default('')
+}%}
+
+{#=== INIT ===========================================================================================================#}
+
+{% if option.values is iterable %}
+    {% set values = option.values %}
+{% else %}
+    {% set lookuptype = option.values|split('/')|first %}
+    {% set lookupfield = option.values|split('/')|last %}
+    {% if ',' in lookupfield %}
+        {% set lookupfield = lookupfield|split(',') %}
+    {% endif %}
+    {% setcontent lookups = lookuptype order lookupfield nohydrate %}
+    {% set values = lookups|selectfield(lookupfield) %}
+{% endif %}
+
+{% set attr_select = {
+    class:     option.class,
+    id:        key,
+    multiple:  option.multiple,
+    name:      (option.multiple) ? key~'[]' : key,
+}%}
+
+{#=== FIELDSET =======================================================================================================#}
+
+{% if option.multiple %}
+
+    <fieldset class="multiselect">
+
+        <label class="col-sm-3 control-label">{{ (option.info) ? macro.infopop(labelkey, option.info) : labelkey }}</label>
+        <div class="col-sm-9">
+            <select{{ macro.attr(attr_select) }}>
+                {% for value in values %}
+
+                    {% set is_array = (value is iterable and (value | length) > 1) %}
+                    {% set attr_opt = {
+                        value:     (is_array ? value[0] : value),
+                        selected:  (is_array ? (value[0] in context.content.get(key)) : (value in context.content.get(key))),
+                    }%}
+
+                    <option{{ macro.attr(attr_opt) }}>{{ is_array ? value[1] : value }}</option>
+                {% endfor %}
+            </select>
+
+            <div>{# TODO: move onclick-events to JS #}
+                <a href="#" class="btn btn-default btn-xs" onclick="jQuery('#{{ key }} option').prop('selected', true); return false;">
+                    <i class="fa fa-fw fa-check-square-o"></i>{{ __("Select all") }}
+                </a>
+                <a href="#" class="btn btn-default btn-xs" onclick="jQuery('#{{ key }} option').prop('selected', false); return false;">
+                    <i class="fa fa-fw fa-square-o"></i>{{ __("Select none") }}
+                </a>
+            </div>
+        </div>
+
+    </fieldset>
+
+{% else %}
+
+    <fieldset class="select">
+
+        <label class="col-sm-3 control-label">{{ (option.info) ? macro.infopop(labelkey, option.info) : labelkey }}</label>
+        <div class="col-sm-9">
+            <select{{ macro.attr(attr_select) }}>
+                {% for value in values %}
+
+                    {% set is_array = (value is iterable and (value | length) > 1) %}
+                    {% set attr_opt = {
+                        value:     (is_array ? value[0] : value),
+                        selected:  (context.content.get(key) == (is_array ? value[0] : value)),
+                    }%}
+
+                    <option{{ macro.attr(attr_opt) }}>{{ is_array ? value[1] : value }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+    </fieldset>
+
+{% endif %}

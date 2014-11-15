@@ -1,0 +1,48 @@
+{##
+ # Sidebar-Panel: Displays actions for contenttype
+ #}
+{% extends '_base/_panel.twig' %}
+
+{% block panel_class 'panel-news' %}
+
+{% block panel_icon 'fa-cog' %}
+
+{% block panel_head __('contenttypes.generic.actions-all', {'%contenttypes%': context.contenttype.slug}) %}
+
+{% block panel_body %}
+    <a class="btn btn-primary" href="{{ path('editcontent', {'contenttypeslug': context.contenttype.slug, 'id': ''}) }}">
+        <i class="fa fa-plus"></i> {{ __('contenttypes.generic.new', {'%contenttype%': context.contenttype.slug}) }}
+    </a>
+
+    <form class="form-inline" style="margin-top:15px;">
+        <input type="text" class="form-control" value="{{ request('filter', '', true) }}" name="filter" style="width: 110px;" placeholder="{{ __('Filtering …') }}">
+        <button type="submit" class="btn btn-tertiary">{{ __('Filter') }}</button>
+    </form>
+
+    {% if request('filter') or request('order') %}
+        <a class="btn btn-tertiary" href="?" style="margin-top: 15px">{{ __('Clear sort/filter') }}</a>
+    {% endif %}
+
+    <div class="description">
+        {{ context.contenttype.description|default('')|markdown }}
+    </div>
+
+    <p><strong>{{ __("Details") }}</strong></p>
+    <ul>
+        <li>{{ __("Default status") }}: {{ context.contenttype.default_status|default('published') }}</li>
+        <li>{{ __("Listing template") }}: <code>{{ context.contenttype.listing_template|default( app.config.get('general/listing_template') ) }}</code></li>
+        <li>{{ __("Detail template") }}: <code>{{ context.contenttype.record_template|default( app.config.get('general/record_template') ) }}</code></li>
+        {% if context.contenttype.taxonomy|default('') is iterable %}
+            <li>{{ __("Taxonomy") }}: {{ context.contenttype.taxonomy|join(', ') }}</li>
+        {% endif %}
+        {% if context.contenttype.relations|default('') is iterable %}
+            <li>
+                {{ __("Relationships") }}:
+                {% for rel, data in context.contenttype.relations %}
+                    {{ rel }}{% if not loop.last %}, {% endif %}
+                {% endfor %}
+            </li>
+        {% endif %}
+    </ul>
+
+{% endblock panel_body %}

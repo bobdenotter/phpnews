@@ -1,0 +1,59 @@
+{% set sub = [
+    {
+        icon: 'fa:group',
+        label: __('Users'),
+        link: path('users'),
+        isallowed: 'users'
+    }, {
+        icon: 'fa:cog',
+        label: __('Main configuration'),
+        link: path('fileedit', {'namespace': 'app', 'file': 'config/config.yml'}),
+        isallowed: 'files:config'
+    }, {
+        icon: 'fa:paint-brush',
+        label: __('Contenttypes'),
+        link: path('fileedit', {'namespace': 'app', 'file': 'config/contenttypes.yml'}),
+        isallowed: 'files:config'
+    }, {
+        icon: 'fa:tags',
+        label: __('Taxonomy'),
+        link: path('fileedit', {'namespace': 'app', 'file': 'config/taxonomy.yml'}),
+        isallowed: 'files:config'
+    }, {
+        icon: 'fa:sliders',
+        label: __('Permissions'),
+        link: path('fileedit', {'namespace': 'app', 'file': 'config/permissions.yml'}),
+        isallowed: 'files:config'
+    },
+    '-',
+    {
+        icon: 'fa:list',
+        label: __('Menu setup'),
+        link: path('fileedit', {'namespace': 'app', 'file': 'config/menu.yml'}),
+        isallowed: 'files:config'
+    }, {
+        icon: 'fa:random',
+        label: __('Routing setup'),
+        link: path('fileedit', {'namespace': 'app', 'file': 'config/routing.yml'}),
+        isallowed: 'files:config'
+    },
+    '-',
+    {
+        icon: 'fa:database',
+        label: __('Check database'),
+        link: path('dbcheck'),
+        isallowed: 'dbupdate'
+    }, {
+        icon: 'fa:eraser',
+        label: __('Clear the cache'),
+        link: path('clearcache'),
+        isallowed: 'clearcache'
+    }, {
+        icon: 'fa:archive',
+        label: __('Activity log'),
+        link: path('activitylog'),
+        isallowed: 'activitylog'
+    }
+] %}
+
+{{ nav.submenu('fa:cogs', __('Configuration'), sub, (page_nav == 'Settings/Configuration')) }}
