@@ -244,7 +244,7 @@ hr.small {
   color: #808080;
   font-size: 18px;
   font-style: italic;
-  margin-top: 0;
+  /* margin-top: 0; */
 }
 .post-preview > .post-meta > a {
   text-decoration: none;
@@ -469,13 +469,25 @@ a[href*="feedburner.com"] {
     font-size: 16px;
   }
 
+  .container span.meta {
+    font-size: 15px;
+    line-height: 19px;
+  }
+
   .post-preview > .post-meta {
     font-size: 14px;    
   }
+
 
   pre { 
     font-size: 13px;
   }
 
+  .navbar-custom .navbar-brand {
+    text-shadow: 0 0 0;
+  }
 
+  .navbar-custom .nav li a {
+    text-shadow: 0 0 0;
+  }
 }

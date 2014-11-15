@@ -2,9 +2,8 @@
 # details: http://docs.bolt.cm/menus
 
 main:
-  - label: Home
+  - label: About this Site
     title: This is the first menu item.
-    path: homepage
-    class: first
-  - label: About this site
     path: page/about
+  - label: Contact us
+    path: page/contact
