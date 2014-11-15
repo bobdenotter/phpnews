@@ -5,7 +5,7 @@ itemAmount: 10
 # /bolt/rssaggregate a lot. 
 key: aGhgdhTRV35FS
 
-xfeeds:
+feeds:
     derekrethans:
         name: "Derick Rethans"
         title: "Derick Rethans' blog'"
