@@ -12,7 +12,6 @@
                     <div class="post-heading">
                         <h1>{{ record.title }}</h1>
                         <h2 class="subheading">{{ record.teaser }}</h2>
-                        <span class="meta">{% include '_recordfooter.twig' with {record: record} %}</span>
                     </div>
                 </div>
             </div>
@@ -24,6 +23,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                    <span class="meta">{% include '_recordfooter.twig' with {record: record} %}</span>
+                                        
                     {{ record.content }}
 
                     <p>

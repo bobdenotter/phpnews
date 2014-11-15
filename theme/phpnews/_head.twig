@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
     <link rel="sitemap" type="application/xml" title="Sitemap" href="http://www.phpnews.io/sitemap.xml" />
-
     <title>
-      {% if record.title is defined %}{{ record.title|striptags }} | {% endif %}
-      {{ app.config.get('general/sitename') }}
-      {% if record.title is not defined and app.config.get('general/payoff') %} | {{ app.config.get('general/payoff') }}{% endif %}
+    {% set seotitle = record.seotitle|default(record.title) %}
+    {{ seotitle -}}
+    {% if app.request.get('_route') != "homepage" %} | {{ app.config.get('general/sitename') }}{% endif -%}
     </title>
+    {% set description = record.metadescription|default(record.content|excerpt(250)) %}
+    {% if description is not empty %}
+    <meta name="description" content="{{ description|replace({"\n": " ", "\r": " ", "  ": " "})|trim }}" />
+    {% endif %}
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ paths.theme }}css/bootstrap.min.css" rel="stylesheet">

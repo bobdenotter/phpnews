@@ -73,11 +73,11 @@ pages:
         image:
             type: image
         teaser:
-            type: html
-            height: 150px
-        body:
+            type: text
+        content:
             type: html
             height: 300px
+            allowtwig: true
         template:
             type: templateselect
             filter: '*.twig'

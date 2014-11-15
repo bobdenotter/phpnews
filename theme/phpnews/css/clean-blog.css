@@ -458,6 +458,11 @@ a[href*="feedburner.com"] {
   max-width: 240px;
 }
 
+.container span.meta {
+  color: #666;
+  font-style: italic;
+}
+
 @media only screen and (max-width: 767px) {
   
   p, li {
