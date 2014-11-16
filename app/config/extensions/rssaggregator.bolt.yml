@@ -1,5 +1,5 @@
 cacheMaxAge: 30
-itemAmount: 10
+itemAmount: 2
 
 # Set the key, to prevent people from trying to DDOS your server by triggering
 # /bolt/rssaggregate a lot. 
@@ -55,7 +55,7 @@ feeds:
         name: "Phil Sturgeon"
         title: "Phil Sturgeon's blog"
         url: "https://philsturgeon.uk/blog"
-        feed: "https://philsturgeon.uk/blog/rss/all.rss"
+        feed: "http://philsturgeon.uk/blog/rss/all.rss"
     skoop: 
         name: "Stefan Koopmanschap"
         title: "Left on the web"
