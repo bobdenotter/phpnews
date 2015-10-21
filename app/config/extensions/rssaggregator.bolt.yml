@@ -1,5 +1,5 @@
 cacheMaxAge: 30
-itemAmount: 20
+itemAmount: 2
 
 # Set the key, to prevent people from trying to DDOS your server by triggering
 # /bolt/rssaggregate a lot.

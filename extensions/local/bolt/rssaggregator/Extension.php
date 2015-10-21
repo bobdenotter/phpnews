@@ -146,7 +146,7 @@ class Extension extends \Bolt\BaseExtension
                 'slug' => $this->app['slugify']->slugify($article->title),
                 'raw' => "" . $raw,
                 'content' => "" . $content,
-                'source' => "" . $article->link,
+                'source' => "" . $article->url,
                 'author' => $author,
                 'image' => $image,
                 'status' => 'published',
@@ -164,7 +164,7 @@ class Extension extends \Bolt\BaseExtension
             $record->setValues($values);
             $id = $this->app['storage']->saveContent($record);
 
-            // dump($item);
+            // dump($article);
             // dump($values);
             // echo "<hr><hr>";
 
