@@ -2,6 +2,9 @@
 
 namespace Bolt\Extension\Bolt\RSSAggregator;
 
+use PicoFeed\Reader\Reader;
+use PicoFeed\PicoFeedException;
+
 /**
  * RSS Aggregator Extension for Bolt
  *
@@ -42,7 +45,7 @@ class Extension extends \Bolt\BaseExtension
         }
     }
 
-    public function RSSAggregator() 
+    public function RSSAggregator()
     {
 
         if (!empty($this->config['key']) && ($this->config['key'] !== $_GET['key'])) {
@@ -51,37 +54,46 @@ class Extension extends \Bolt\BaseExtension
 
         $cachedir = $this->app['resources']->getPath('cache') . '/rssaggregator/';
 
-        \Dumper::dump($this->config['feeds']);
+        // dump($this->config['feeds']);
 
         foreach ($this->config['feeds'] as $author => $feed) {
-            $this->parseFeed($author, $feed); 
+            $this->parseFeed($author, $feed);
         }
 
         return "<br><br><br> Done.";
     }
-    private function parseFeed($author, $feed) 
+    private function parseFeed($author, $feed)
     {
-        $fastFeed = \FastFeed\Factory::create();
 
-        $parser = new \FastFeed\Parser\RSSParser();
-        $parser->pushAggregator(new \FastFeed\Aggregator\RSSContentAggregator());
-        $fastFeed->pushParser($parser);
-        $parser = new \FastFeed\Parser\AtomParser();
-        $parser->pushAggregator(new \FastFeed\Aggregator\RSSContentAggregator());
-        $fastFeed->pushParser($parser);
+        $reader = new Reader;
 
-        $fastFeed->addFeed('default', $feed['feed']);
-        $items = $fastFeed->fetch('default');
+        try {
+            $resource = $reader->download($feed['feed']);
 
-        // slice 
-        $items = array_slice($items, 0, $this->config['itemAmount']);
+            $parser = $reader->getParser(
+                $resource->getUrl(),
+                $resource->getContent(),
+                $resource->getEncoding()
+            );
 
-        foreach ($items as $item) {
+            $parsedfeed = $parser->execute();
 
-            // try to get an existing record for this item 
+            // dump($parsedfeed);
+
+            $items = array_slice($parsedfeed->items, 0, $this->config['itemAmount']);
+
+        }
+        catch (PicoFeedException $e) {
+            echo "<p><b>ERROR IN: " . $feed['feed'] . "</b></p>";
+            $items = [];
+        }
+
+        foreach ($items as $article) {
+
+            // try to get an existing record for this item
             $record = $this->app['storage']->getContent(
                 'feeditems', array(
-                    'itemid' => $item->getId(), 
+                    'itemid' => $article->id,
                     'returnsingle' => true
                 ) );
 
@@ -95,15 +107,20 @@ class Extension extends \Bolt\BaseExtension
                 $new = false;
             }
 
-            $date = $item->getDate();
+            if ($article->date) {
+                $date = $article->date;
+            } else {
+                echo "datum onbekend";
+                dump($article);
+            }
 
-            // \Dumper::dump($item);
-            // die();
-
-            if ($item->getContent() != false) {
-                $raw = $item->getContent();
-            } else { 
-                $raw = $item->getIntro();
+            if ($article->content) {
+                $raw = $article->content;
+            } else {
+                echo "item onbekend.";
+                dump($article);
+                dump($feed);
+                // $raw = $item->getIntro();
             }
 
 
@@ -117,20 +134,21 @@ class Extension extends \Bolt\BaseExtension
             );
             $content = $maid->clean($raw);
 
-            if ($item->getImage() != "") {
-                $image = $item->getImage();                
+            if ($item->enclosure_url != "") {
+                $image = $item->enclosure_url;
             } else {
                 $image = $this->findImage($content, $feed['url']);
             }
 
             $values = array(
-                'itemid' => $item->getId(),
-                'title' => "" . $item->getName(),
+                'itemid' => $article->id,
+                'title' => "" . $article->title,
+                'slug' => $this->app['slugify']->slugify($article->title),
                 'raw' => "" . $raw,
                 'content' => "" . $content,
-                'source' => "" . $item->getSource(),
+                'source' => "" . $article->link,
                 'author' => $author,
-                'image' => "" . $image,
+                'image' => $image,
                 'status' => 'published',
                 'sitetitle' => $feed['title'],
                 'sitesource' => $feed['url']
@@ -141,13 +159,13 @@ class Extension extends \Bolt\BaseExtension
                 $values['datepublish'] = ($date instanceof \DateTime) ? $date->format('Y-m-d H:i:s') : "";
             }
 
-            $record->setTaxonomy('tags', $item->getTags());
+            // $record->setTaxonomy('tags', $item->getTags());
             $record->setTaxonomy('authors', $author);
             $record->setValues($values);
             $id = $this->app['storage']->saveContent($record);
 
-            // \Dumper::dump($item);
-            // \Dumper::dump($values);
+            // dump($item);
+            // dump($values);
             // echo "<hr><hr>";
 
             echo $values['sitetitle'] . " - " . $values['title'];
@@ -156,7 +174,7 @@ class Extension extends \Bolt\BaseExtension
     }
 
 
-    private function findImage($html, $baseurl) 
+    private function findImage($html, $baseurl)
     {
         $doc = new \DOMDocument();
         @$doc->loadHTML($html);
@@ -175,7 +193,7 @@ class Extension extends \Bolt\BaseExtension
 
             $image = $tag->getAttribute('src');
 
-            if (strpos($image, "http") === false) { 
+            if (strpos($image, "http") === false) {
                 $baseurl = parse_url($baseurl);
                 $image = $baseurl['scheme'] . "://" . $baseurl['host'] . $image;
             }
