@@ -1,0 +1,39 @@
+{
+    "require": {
+        "bolt/disqus": "dev-master",
+        "bolt/rssaggregator": "dev-master",
+        "bolt/sitemap": "dev-master",
+        "bolt/simpleforms": "dev-master"
+    },
+    "repositories": {
+        "bolt": {
+            "type": "composer",
+            "url": "https://extensions.bolt.cm/satis/"
+        },
+        "packagist": false
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "provide": {
+        "bolt/bolt": "2.2.13"
+    },
+    "extra": {
+        "bolt-web-path": ".././"
+    },
+    "scripts": {
+        "post-package-install": "Bolt\\Composer\\ExtensionInstaller::handle",
+        "post-package-update": "Bolt\\Composer\\ExtensionInstaller::handle"
+    },
+    "autoload": {
+        "files": [
+            "installer.php"
+        ],
+        "psr-4": {
+            "Bolt\\Composer\\": ""
+        }
+    },
+    "config": {
+        "discard-changes": true,
+        "preferred-install": "dist"
+    }
+}
