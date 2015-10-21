@@ -168,7 +168,7 @@ class Extension extends \Bolt\BaseExtension
             // dump($values);
             // echo "<hr><hr>";
 
-            echo $values['sitetitle'] . " - " . $values['title'];
+            echo $values['sitetitle'] . " - " . $values['title'] . ' - ' . $id;
         }
 
     }
