@@ -1,0 +1,28 @@
+{
+	"name" : "bolt/rssaggregator",
+	"description" : "RSS aggregator extension for Bolt",
+	"type" : "bolt-extension",
+	"keywords" : [
+		"RSS"
+	],
+	"require" : {
+		"bolt/bolt" : ">=2.0.0,<3.0.0"
+	},
+	"license" : "GPL-3.0+",
+	"authors" : [{
+			"name" : "Sebastian Klier",
+			"email" : "sebastian@sebastianklier.com"
+		}, {
+			"name" : "Gawain Lynch",
+			"email" : "gawain.lynch@gmail.com"
+		}
+	],
+	"autoload" : {
+		"files" : [
+			"init.php"
+		],
+		"psr-4" : {
+			"Bolt\\Extension\\Bolt\\RSSAggregator\\" : ""
+		}
+	}
+}

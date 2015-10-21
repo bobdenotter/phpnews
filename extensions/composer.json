@@ -1,7 +1,6 @@
 {
     "require": {
         "bolt/disqus": "dev-master",
-        "bolt/rssaggregator": "dev-master",
         "bolt/sitemap": "dev-master",
         "bolt/simpleforms": "dev-master"
     },
@@ -29,7 +28,8 @@
             "installer.php"
         ],
         "psr-4": {
-            "Bolt\\Composer\\": ""
+            "Bolt\\Composer\\": "",
+            "Bolt\\Extension\\Bolt\\RSSAggregator\\": "local/bolt/rssaggregator/"
         }
     },
     "config": {
