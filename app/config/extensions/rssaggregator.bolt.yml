@@ -1,8 +1,8 @@
 cacheMaxAge: 30
-itemAmount: 2
+itemAmount: 20
 
 # Set the key, to prevent people from trying to DDOS your server by triggering
-# /bolt/rssaggregate a lot. 
+# /bolt/rssaggregate a lot.
 key: aGhgdhTRV35FS
 
 feeds:
@@ -16,26 +16,26 @@ feeds:
         title: "There are no solutions, only tradeoffs."
         url: "http://paul-m-jones.com/"
         feed: "http://paul-m-jones.com/feed"
-    brandonsavage:
-        name: "Brandon Savage"
-        url: "http://www.brandonsavage.net/blog/"
-        feed: "http://www.brandonsavage.net/feed/"
-        title: "Brandon Savage's blog"
     mwop:
         url: "https://mwop.net/blog"
         title: "phly, boy, phly: matthew weier o'phinney"
         name: "Matthew Weier o'Phinney"
         feed: "https://mwop.net/blog/rss.xml"
+    brandonsavage:
+        name: "Brandon Savage"
+        url: "http://www.brandonsavage.net/blog/"
+        feed: "http://www.brandonsavage.net/feed/"
+        title: "Brandon Savage's blog"
     erikaheidi:
         url: "http://erikaheidi.com/"
         title: "Erika Heidi's blog"
         name: "Erika Heidi"
-        feed: "http://erikaheidi.com/entries/rss/feed.rss"
+        feed: "http://feeds.feedburner.com/erikaheidi/blog" # http://erikaheidi.com/entries/rss/feed.rss"
     calevans:
         name: "Cal Evans"
         title: "Cal Evans - Postcards From My Life"
         url: "http://blog.calevans.com/"
-        feed: "http://blog.calevans.com/feed/"
+        feed: "http://feeds.feedburner.com/PostcardsFromMyLife" # "http://blog.calevans.com/feed/"
     chrishartjes:
         name: "Chris Hartjes"
         title: "@TheKeyboard"
@@ -55,13 +55,13 @@ feeds:
         name: "Phil Sturgeon"
         title: "Phil Sturgeon's blog"
         url: "https://philsturgeon.uk/blog"
-        feed: "http://philsturgeon.uk/blog/rss/all.rss"
-    skoop: 
+        feed: "https://philsturgeon.uk/feed.xml" # "http://philsturgeon.uk/blog/rss/all.rss"
+    skoop:
         name: "Stefan Koopmanschap"
         title: "Left on the web"
         url: "http://leftontheweb.com/"
         feed: "http://leftontheweb.com/atom.xml"
-    krakjoe: 
+    krakjoe:
         name: "Krakjoe"
         title: "Musings, ninja ones"
         url: "http://blog.krakjoe.ninja/"
@@ -82,16 +82,16 @@ feeds:
         url: "http://php-and-symfony.matthiasnoback.nl/"
         feed: "http://php-and-symfony.matthiasnoback.nl/atom.xml"
     taylorotwell:
-        name: "Taylor Otwell" 
-        title: "Taylor Otwell's blog" 
-        url: "http://taylorotwell.com/"   
+        name: "Taylor Otwell"
+        title: "Taylor Otwell's blog"
+        url: "http://taylorotwell.com/"
         feed: "http://taylorotwell.com/feed"
     evertpot:
         name: "Evert Pot"
         title: "Het Bijstere Spoor"
         url: "http://evertpot.com"
         feed: "http://feeds.feedburner.com/bijsterespoor"
-    jordiboggiano: 
+    jordiboggiano:
         name: "Jordi Boggiano"
         title: "Jordi Boggiano's blog"
         url: "http://seld.be/"
@@ -99,9 +99,9 @@ feeds:
     beberlei:
         name: "Benjamin Eberlei"
         title: "Benjamin Eberlei's weblog"
-        url: "http://www.whitewashing.de/" 
+        url: "http://www.whitewashing.de/"
         feed: "http://www.whitewashing.de/rss.xml"
-    rdohms: 
+    rdohms:
         name: "Rafael Dohms"
         title: "Rafael Dohms' blog"
         url: "http://blog.doh.ms/"
@@ -110,8 +110,8 @@ feeds:
         name: "Sitepoint"
         title: "Sitepoint"
         url: "http://www.sitepoint.com/"
-        feed: "http://www.sitepoint.com/php/feed/"        
-    symfony: 
+        feed: "http://www.sitepoint.com/php/feed/"
+    symfony:
         name: "Symfony blog"
         title: "The Symfony blog"
         url: "http://symfony.com/blog/"
@@ -136,7 +136,7 @@ feeds:
         title: "Michael Dowling's blog"
         url: "http://mtdowling.com/"
         feed: "http://mtdowling.com/atom.xml"
-    davedevelopment: 
+    davedevelopment:
         name: "Dave Marshall"
         title: "Dave Marshall's weblog"
         feed: "http://davedevelopment.co.uk/atom.xml"
