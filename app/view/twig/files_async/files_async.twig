@@ -11,12 +11,12 @@
             {% if context.pathsegments|length > 0 %}
                 <p>
                     {{ __('Path:') }}
-                    <a href="#" data-action="bolt.stack.changeFolder('{{ context.key }}', '{{ path('asyncbrowse', {'namespace': context.namespace, 'key': context.key}) }}');" class="folder">
-                        {{ context.namespace -}}
+                    <a href="#" data-action="Bolt.stack.changeFolder('{{ context.key }}', '{{ path('asyncbrowse', {'namespace': context.namespace, 'key': context.key}) }}');" class="folder">
+                        {{ context.namespace|excerpt(40)|shy -}}
                     </a> /
                     {% for path, segment in context.pathsegments %}
                     {% if not loop.first %} / {% endif %}
-                    <a href="#" data-action="bolt.stack.changeFolder('{{ context.key }}', '{{ path('asyncbrowse', {'namespace': context.namespace, 'path': path, 'key': context.key}) }}');" class="folder">{{ segment|default('…') }}</a>
+                    <a href="#" data-action="Bolt.stack.changeFolder('{{ context.key }}', '{{ path('asyncbrowse', {'namespace': context.namespace, 'path': path, 'key': context.key}) }}');" class="folder">{{ segment|default('…')|excerpt(40)|shy }}</a>
                     {% endfor %}
                 </p>
             {% endif %}
@@ -30,7 +30,7 @@
                     {% for folder in context.folders %}
                         <tr style="height: 30px;">
                             <td> <i class="fa fa-fw fa-folder-open-o"></i>
-                                <a href="#" data-action="bolt.stack.changeFolder('{{ context.key }}', '{{ path('asyncbrowse', {'namespace': context.namespace, 'path': folder.newpath, 'key': context.key}) }}');" class="folder"><b>{{ folder.foldername }}/</b>
+                                <a href="#" data-action="Bolt.stack.changeFolder('{{ context.key }}', '{{ path('asyncbrowse', {'namespace': context.namespace, 'path': folder.newpath, 'key': context.key}) }}');" class="folder"><b>{{ folder.foldername|excerpt(40)|shy }}/</b>
                                 </a>
                             </td>
                         </tr>
@@ -41,11 +41,9 @@
             {% if context.files|length > 0 %}
             <table class="dashboardlisting">
                 <tr>
-                    <th>{{ __('Files') }}</th>
-                    <th>{{ __('Filesize') }}</th>
+                    <th>{{ __('page.ckeditor-browse-server.files') }}</th>
+                    <th style="min-width: 102px;">{{ __('page.ckeditor-browse-server.size') }}</th>
                     <th>&nbsp;</th>
-                    <th>&nbsp;</th>
-                    {# <th>&nbsp;</th> #}
                 </tr>
 
                 {% for file in context.files %}
@@ -56,26 +54,25 @@
                                 <i class="fa fa-fw fa-file-image-o"></i>
 
                                 {% if file.readable %}
-                                    <a href="#" data-action="bolt.stack.selectFromPulldown('{{ context.key }}', '{{ file.relativepath }}');" class="file">
-                                        <b>{{ file.filename|trimtext(30) }}</b>
+                                    <a href="#" data-action="Bolt.stack.selectFromPulldown('{{ context.key }}', '{{ file.relativepath }}');" class="file">
+                                        <b>{{ file.filename|excerpt(80)|shy }}</b>
                                     </a>
                                 {% else %}
-                                    <b>{{ file.filename|trimtext(30) }} </b><i class="fa fa-lock"></i>
+                                    <b>{{ file.filename|excerpt(80)|shy }} </b><i class="fa fa-lock"></i>
                                 {% endif %}
                             </td>
 
-                            <td>{{ file.filesize }}.</td>
-
-                            <td>{% if file.imagesize is defined %}{{ file.imagesize }} px.{% endif %}</td>
-
-                            <td class="listthumb">
-                                    {{file.newpath|showimage(54, 40, 'c')}}
+                            <td>
+                                {{ file.filesize }}.
+                                {% if file.imagesize is defined %}
+                                    <br>{{ file.imagesize }} px.
+                                {% endif %}
                             </td>
 
-                            {# <td>
-                                <a href="{{ file.newpath|thumbnail(1000, 1000, 'r') }}" class="btn btn-small preview magnific" title="Image: {{ file.filename }}">
-                                {{ __('Preview') }}</a>
-                            </td> #}
+                            <td class="listthumb">
+                                {{ file.newpath|showimage(54, 40, 'c') }}
+                            </td>
+
                         </tr>
                     {% else %}
 
@@ -85,24 +82,18 @@
                                 <i class="fa fa-fw fa-file-image-o"></i>
 
                                 {% if file.readable %}
-                                    <a href="#" data-action="bolt.stack.selectFromPulldown('{{ context.key }}', '{{ file.relativepath }}');" class="file">
-                                        <b>{{ file.filename|trimtext(30) }}</b>
+                                    <a href="#" data-action="Bolt.stack.selectFromPulldown('{{ context.key }}', '{{ file.relativepath }}');" class="file">
+                                        <b>{{ file.filename|excerpt(80)|shy }}</b>
                                     </a>
                                 {% else %}
-                                    <b>{{ file.filename|trimtext(30) }} </b><i class="fa fa-lock"></i>
+                                    <b>{{ file.filename|excerpt(80)|shy }} </b><i class="fa fa-lock"></i>
                                 {% endif %}
                             </td>
 
                             <td>{{ file.filesize }}.</td>
 
-                            <td>&nbsp;</td>
-
                             <td class="listthumb">&nbsp;</td>
 
-                            {# <td>
-                                <a href="{{ file.newpath|thumbnail(1000, 1000, 'r') }}" class="btn btn-small preview magnific" title="Image: {{ file.filename }}">
-                                {{ __('Preview') }}</a>
-                            </td> #}
                         </tr>
 
                     {% endif %}
@@ -116,10 +107,4 @@
         </div>
 
     </body>
-
-    <script type="text/javascript">
-        $(function() {
-            init.dataActions();
-        });
-    </script>
 </html>

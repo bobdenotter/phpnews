@@ -7,17 +7,17 @@
     info:      field.info|default(''),
     required:  field.required|default(false),
     errortext: field.error|default(''),
-}%}
+} %}
 
 {#=== INIT ===========================================================================================================#}
 
 {% set attr_text = {
     class:     option.class,
-    name:      key,
+    name:      name,
     required:  option.required,
-    style:     option.height ? 'height: '~option.height~';' : '',
+    style:     option.height ? 'height: ' ~ option.height ~ ';' : '',
     data_errortext: option.errortext,
-}%}
+} %}
 
 {#=== FIELDSET =======================================================================================================#}
 
@@ -25,7 +25,7 @@
 
     <div class="col-sm-12">
         <label class="control-label">{{ (option.info) ? macro.infopop(labelkey, option.info) : labelkey }}</label>
-        <textarea{{ macro.attr(attr_text) }}>{{ context.content.get(key)|default('') }}</textarea>
+        <textarea{{ macro.attr(attr_text) }}>{{ context.content.get(contentkey)|default('') }}</textarea>
     </div>
 
 </fieldset>

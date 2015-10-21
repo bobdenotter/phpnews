@@ -13,6 +13,7 @@
 
 {% set page_locale_long = app.locale %}
 {% set page_locale_short = page_locale_long|slice(0, 2) %}
+{% set page_timezone_offset = app.timezone_offset %}
 
 {% if block('page_subtitle') is empty %}
     {% set page_title = block('page_title') %}
@@ -20,30 +21,25 @@
     {% set page_title = block('page_title') ~ ' » ' ~ block('page_subtitle') %}
 {% endif %}
 
-{# bootstrap.js: Bolt's compiled and uglified Bootstrap javascript. Generate with 'grunt uglify:bootstrap' #}
+{# TODO: Refactor this out. Too much business logic in the template. #}
 {% set page_scripts_inc = [
-    'view/js/jquery-1.11.1.min.js',
-    'view/js/underscore-min.js',
-    'view/js/backbone-min.js',
-    'view/js/jquery-ui-1.10.3.custom.min.js',
-    'view/js/jquery.plugins.js',
-    'view/js/bootstrap.js',
-    'view/js/jquery.magnific-popup.min.js',
-    'view/lib/select2/select2.min.js',
-    'view/lib/ckeditor/ckeditor.js',
-    'view/lib/upload/jquery.iframe-transport.js',
-    'view/lib/upload/jquery.fileupload.js',
-    'view/js/moment.min.js',
-    'view/js/bootbox.min.js',
-    'view/js/modernizr.custom.2.8.3.js',
+    'view/js/lib.min.js'
 ] %}
 
 {# Add locale include for datepicker #}
-{% set dppath = 'view/js/i18n/datepicker-' %}
-{% if file_exists(paths.apppath ~ '/' ~ dppath ~ page_locale_long|replace({'_': '-'}) ~ '.js') %}
-    {% set page_scripts_inc = page_scripts_inc|merge([dppath ~ page_locale_long|replace({'_': '-'}) ~ '.js']) %}
-{% elseif page_locale_short != 'en' and file_exists(paths.apppath ~ '/' ~ dppath ~ page_locale_short ~ '.js') %}
-    {% set page_scripts_inc = page_scripts_inc|merge([dppath ~ page_locale_short ~ '.js']) %}
+{% set localepath = 'view/js/locale/datepicker/' %}
+{% if file_exists(paths.apppath ~ '/' ~ localepath ~ page_locale_long ~ '.min.js') %}
+    {% set page_scripts_inc = page_scripts_inc|merge([localepath ~ page_locale_long ~ '.min.js']) %}
+{% elseif page_locale_short != 'en' and file_exists(paths.apppath ~ '/' ~ localepath ~ page_locale_short ~ '.min.js') %}
+    {% set page_scripts_inc = page_scripts_inc|merge([localepath ~ page_locale_short ~ '.min.js']) %}
+{% endif %}
+
+{# Add locale include for moment #}
+{% set localepath = 'view/js/locale/moment/' %}
+{% if file_exists(paths.apppath ~ '/' ~ localepath ~ page_locale_long ~ '.min.js') %}
+    {% set page_scripts_inc = page_scripts_inc|merge([localepath ~ page_locale_long ~ '.min.js']) %}
+{% elseif page_locale_short != 'en' and file_exists(paths.apppath ~ '/' ~ localepath ~ page_locale_short ~ '.min.js') %}
+    {% set page_scripts_inc = page_scripts_inc|merge([localepath ~ page_locale_short ~ '.min.js']) %}
 {% endif %}
 
 {% endspaceless -%}
@@ -55,12 +51,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 
-    <title>{{ page_title|striptags|trim }} – {{ app.config.get('general/branding/name') }}</title>
+    <title>{{ page_title|striptags|trim|raw }} – {{ app.config.get('general/branding/name') }}</title>
 
-    <link rel="stylesheet" href="{{ paths.app }}view/css/smoothness/jquery-ui-1.10.3.custom.min.css">
-    <link rel="stylesheet" href="{{ paths.app }}view/css/magnific-popup.css">
-    <link rel="stylesheet" href="{{ paths.app }}view/lib/select2/select2.css">
-    <link rel="stylesheet" href="{{ paths.app }}view/lib/upload/jquery.fileupload-ui.css">
+    <link rel="stylesheet" href="{{ paths.app }}view/css/lib.css">
 
     <!--[if lt IE 9]>
         <link rel="stylesheet" href="{{ paths.app }}view/css/bolt-old-ie.css" media="screen, projection">
@@ -95,14 +88,23 @@
         short: page_locale_short,
         long: page_locale_long,
     },
+    timezone: {
+        offset: page_timezone_offset,
+    },
     paths: {
         bolt:  paths.bolt,
         async: paths.async,
         app:   paths.app,
         root:  paths.root,
+        origin: paths.rooturl
+    },
+    uploadConfig: {
+        maxSize: app['filepermissions'].getMaxUploadSize(),
+        maxSizeNice: app['filepermissions'].getMaxUploadSizeNice(),
     },
     ckeditor: {
         images:      0 + config.get('general/wysiwyg/images'),
+        styles:      0 + config.get('general/wysiwyg/styles'),
         tables:      0 + config.get('general/wysiwyg/tables'),
         anchor:      0 + config.get('general/wysiwyg/anchor'),
         fontcolor:   0 + config.get('general/wysiwyg/fontcolor'),
@@ -110,6 +112,7 @@
         subsuper:    0 + config.get('general/wysiwyg/subsuper'),
         embed:       0 + config.get('general/wysiwyg/embed'),
         blockquote:  0 + config.get('general/wysiwyg/blockquote'),
+        ruler:       0 + config.get('general/wysiwyg/ruler'),
         strike:      0 + config.get('general/wysiwyg/strike'),
         underline:   0 + config.get('general/wysiwyg/underline'),
         codesnippet: 0 + config.get('general/wysiwyg/codesnippet'),
@@ -118,8 +121,9 @@
         filebrowser: (config.get('general/wysiwyg/filebrowser') is iterable)
                         ? config.get('general/wysiwyg/filebrowser') : false,
     },
-}%}
-<script src="{{ paths.app }}view/js/bolt.js" data-config="{{ bconfig|json_encode }}"></script>
+} %}
+<script src="{{ paths.app }}view/js/bolt.min.js" data-config="{{ bconfig|json_encode }}" data-jsdata="{{ app.jsdata|json_encode }}"></script>
+
 {% block page_script %}
 {% endblock page_script %}
 

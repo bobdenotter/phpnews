@@ -2,14 +2,14 @@
 
 namespace Bolt\Controllers;
 
-use Silex;
-use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\EventDispatcher\Event;
 use Bolt\Events\CronEvent;
 use Bolt\Events\CronEvents;
+use Silex\Application;
+use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\EventDispatcher\Event;
 
 /**
- * Simple cron dispatch class for Bolt
+ * Simple cron dispatch class for Bolt.
  *
  * To create a listener you need to something similar in your class:
  *      use Bolt\Events\CronEvents;
@@ -23,71 +23,48 @@ use Bolt\Events\CronEvents;
  *      * CRON_YEARLY
  *
  * @author Gawain Lynch <gawain.lynch@gmail.com>
- *
- * @property \Bolt\Application $app
  **/
 class Cron extends Event
 {
-    /**
-     * @var Silex\Application
-     */
+    /** @var \Silex\Application */
     private $app;
 
-    /**
-     * @var Symfony\Component\Console\Output\OutputInterface
-     */
+    /** @var \Symfony\Component\Console\Output\OutputInterface */
     private $output;
 
-    /**
-     * Passed in console paramters
-     *
-     * @var array
-     */
+    /** @var array Passed in console paramters. */
     private $param;
 
-    /**
-     * The next elegible run time for each interim
-     *
-     * @var array
-     */
-    private $next_run_time;
+    /** @var array The next elegible run time for each interim. */
+    private $nextRunTime;
 
-    /**
-     * True for a required database insert
-     *
-     * @var boolean
-     */
+    /** @var boolean True for a required database insert. */
     private $insert;
 
-    /**
-     * @var string
-     */
+    /** @var string */
     private $tablename;
 
-    /**
-     * The start of the execution time for this cron instance
-     *
-     * @var string
-     */
+    /** @var string The start of the execution time for this cron instance.*/
     private $runtime;
 
-    /**
-     * @var string
-     */
-    private $cron_hour;
+    /** @var string */
+    private $cronHour;
 
-    /**
-     * @var array
-     */
+    /** @var array */
     public $lastruns = array();
 
-    public function __construct(Silex\Application $app, OutputInterface $output = null, $param = false)
+    /**
+     * @param Application     $app
+     * @param OutputInterface $output
+     * @param array           $param
+     */
+    public function __construct(Application $app, OutputInterface $output = null, $param = array())
     {
         $this->app = $app;
         $this->output = $output;
         $this->param = $param;
         $this->runtime = time();
-        $this->next_run_time = array(
+        $this->nextRunTime = array(
             CronEvents::CRON_HOURLY  => 0,
             CronEvents::CRON_DAILY   => 0,
             CronEvents::CRON_WEEKLY  => 0,
@@ -106,6 +83,11 @@ class Cron extends Event
         $this->execute();
     }
 
+    /**
+     * Run the jobs.
+     *
+     * @return void
+     */
     public function execute()
     {
         $event = new CronEvent($this->app, $this->output);
@@ -173,9 +155,10 @@ class Cron extends Event
     }
 
     /**
-     * Test whether or not to call dispatcher
+     * Test whether or not to call dispatcher.
      *
-     * @param  string  $name The cron event name
+     * @param string $name The cron event name
+     *
      * @return boolean Dispatch event or not
      */
     private function isExecutable($name)
@@ -183,9 +166,9 @@ class Cron extends Event
         if ($this->param['run'] && $this->param['event'] == $name) {
             return true;
         } elseif ($this->app['dispatcher']->hasListeners($name)) {
-            if ($name == CronEvents::CRON_HOURLY && $this->next_run_time[CronEvents::CRON_HOURLY] <= $this->runtime) {
+            if ($name == CronEvents::CRON_HOURLY && $this->nextRunTime[CronEvents::CRON_HOURLY] <= $this->runtime) {
                 return true;
-            } elseif (time() > $this->cron_hour && $this->next_run_time[$name] <= $this->runtime) {
+            } elseif (time() > $this->cronHour && $this->nextRunTime[$name] <= $this->runtime) {
                 // Only run non-hourly event jobs if we've passed our cron hour today
                 return true;
             }
@@ -195,36 +178,44 @@ class Cron extends Event
     }
 
     /**
-     * Get our configured hour and convert it to UNIX time
+     * Get our configured hour and convert it to UNIX time.
+     *
+     * @return void
      */
     private function getScheduleThreshold()
     {
         $hour = $this->app['config']->get('general/cron_hour');
 
         if (empty($hour)) {
-            $this->cron_hour = strtotime("03:00");
+            $this->cronHour = strtotime('03:00');
         } elseif (is_numeric($hour)) {
-            $this->cron_hour = strtotime($hour . ":00");
+            $this->cronHour = strtotime($hour . ':00');
         } elseif (is_string($hour)) {
-            $this->cron_hour = strtotime($hour);
+            $this->cronHour = strtotime($hour);
         }
     }
 
     /**
      * If we're passed an OutputInterface, we're called from Nut and can notify
-     * the end user
+     * the end user.
+     *
+     * @param string $msg
+     *
+     * @return void
      */
     private function notify($msg)
     {
-        if ($this->output !== false) {
+        if ($this->output !== null) {
             $this->output->writeln("<info>{$msg}</info>");
         }
 
-        $this->app['log']->add($msg, 0, false, '');
+        $this->app['logger.system']->info("$msg", array('event' => 'cron'));
     }
 
     /**
-     * Set the formatted name of our table
+     * Set the formatted name of our table.
+     *
+     * @return void
      */
     private function setTableName()
     {
@@ -238,11 +229,13 @@ class Cron extends Event
     }
 
     /**
-     * Query table for next run time of each interim
+     * Query table for next run time of each interim.
+     *
+     * @return void
      */
     private function getNextRunTimes()
     {
-        foreach ($this->next_run_time as $interim => $date) {
+        foreach ($this->nextRunTime as $interim => $date) {
             // Handle old style naming
             $oldname = strtolower(str_replace('cron.', '', $interim));
 
@@ -258,10 +251,10 @@ class Cron extends Event
             // run time and notify the update method to do an INSERT rather than
             // an UPDATE.
             if (empty($result)) {
-                $this->next_run_time[$interim] = $this->runtime;
+                $this->nextRunTime[$interim] = $this->runtime;
                 $this->insert[$interim] = true;
             } else {
-                $this->next_run_time[$interim] = $this->getNextIterimRunTime($interim, $result['lastrun']);
+                $this->nextRunTime[$interim] = $this->getNextIterimRunTime($interim, $result['lastrun']);
 
                 // @TODO remove this in v3.0
                 // Update old record types
@@ -275,43 +268,50 @@ class Cron extends Event
     }
 
     /**
-     * Get the next run time for a given interim
+     * Get the next run time for a given interim.
      *
-     * @param  string  $interim       The interim; CRON_HOURLY, CRON_DAILY, CRON_WEEKLY, CRON_MONTHLY or CRON_YEARLY
-     * @param  string  $last_run_time The last execution time of the interim
+     * @param string $interim     The interim; CRON_HOURLY, CRON_DAILY, CRON_WEEKLY, CRON_MONTHLY or CRON_YEARLY
+     * @param string $lastRunTime The last execution time of the interim
+     *
      * @return integer The UNIX timestamp for the interims next valid execution time
      */
-    private function getNextIterimRunTime($interim, $last_run_time)
+    private function getNextIterimRunTime($interim, $lastRunTime)
     {
         if ($interim == CronEvents::CRON_HOURLY) {
             // For hourly we just default to the turn of the hour
-            $last_cron_hour  = strtotime(date('Y-m-d H', strtotime($last_run_time)) . ':00:00');
+            $lastCronHour  = strtotime(date('Y-m-d H', strtotime($lastRunTime)) . ':00:00');
 
-            return strtotime("+1 hour", $last_cron_hour);
+            return strtotime("+1 hour", $lastCronHour);
         } else {
             // Get the cron time of the last run time/date
-            $last_cron_hour  = strtotime(date('Y-m-d', strtotime($last_run_time)) . ' ' . $this->cron_hour);
+            $lastCronHour  = strtotime(date('Y-m-d', strtotime($lastRunTime)) . ' ' . $this->cronHour);
 
             if ($interim == CronEvents::CRON_DAILY) {
-                return strtotime("+1 day", $last_cron_hour);
+                return strtotime('+1 day', $lastCronHour);
             } elseif ($interim == CronEvents::CRON_WEEKLY) {
-                return strtotime("+1 week", $last_cron_hour);
+                return strtotime('+1 week', $lastCronHour);
             } elseif ($interim == CronEvents::CRON_MONTHLY) {
-                return strtotime("+1 month", $last_cron_hour);
+                return strtotime('+1 month', $lastCronHour);
             } elseif ($interim == CronEvents::CRON_YEARLY) {
-                return strtotime("+1 year", $last_cron_hour);
+                return strtotime('+1 year', $lastCronHour);
             }
         }
+
+        return 0;
     }
 
     /**
-     * Update table for last run time of each interim
+     * Update table for last run time of each interim.
+     *
+     * @param string $interim
+     *
+     * @return void
      */
     private function setLastRun($interim)
     {
         // Define the mapping
         $map = array(
-            'interim'  => $interim,
+            'interim'   => $interim,
             'lastrun'   => date('Y-m-d H:i:s', $this->runtime),
         );
 
@@ -324,10 +324,12 @@ class Cron extends Event
     }
 
     /**
-     * Provide feedback on exceptions in cron jobs
+     * Provide feedback on exceptions in cron jobs.
      *
      * @param \Exception $e       The passed exception
      * @param string     $interim The cron handler name
+     *
+     * @return void
      */
     private function handleError(\Exception $e, $interim)
     {
@@ -338,6 +340,6 @@ class Cron extends Event
         $this->output->writeln('<error>' . $e->getTraceAsString() . '</error>');
 
         // Application log
-        $this->app['log']->add('A ' . $interim . ' job failed', 2, false, substr($e->getTraceAsString(), 0, 1024));
+        $this->app['logger.system']->error("$interim job failed: " . substr($e->getTraceAsString(), 0, 1024), array('event' => 'cron'));
     }
 }

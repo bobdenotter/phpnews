@@ -4,11 +4,11 @@
     class:       field.class|default(''),
     label:       field.label|default(''),
     extensions:  field.extensions|default([]),
-    attrib:      (field.attrib is defined) ? (field.attrib is iterable ?: {0: field.attrib}) : false,
+    attrib:      (field.attrib is defined and field.attrib is iterable) ? field.attrib : [ field.attrib|default(null) ],
     upload:      field.upload|default(''),
+    can_upload:  field.canUpload,
     info:        field.info|default('info.upload.image')
-}%}
-{# attrib[title] #}
+} %}
 
 {#=== INIT ===========================================================================================================#}
 
@@ -16,25 +16,25 @@
 {% set preview_h = 150 %}
 
 {# Convert from old stored image format that is used until re-saved #}
-{% set image = (context.content.get(key) is iterable) ? context.content.get(key) : {'file': context.content.get(key)} %}
+{% set image = (context.content.get(contentkey) is iterable) ? context.content.get(contentkey) : {'file': context.content.get(contentkey)} %}
 
 {% set attr_inp = {
-    class:       option.class~' imageinput wide',
-    id:          'field-'~key,
-    name:        key~'[file]',
+    class:       option.class ~ ' imageinput wide',
+    id:          'field-' ~ key,
+    name:        name ~ '[file]',
     type:        'text',
     placeholder: __('field.general.allowed-filetypes') ~ ' ' ~ option.extensions|join(', ') ~ ' …',
     value:       image.file|default(''),
-}%}
+} %}
 
 {% set attr_upload = {
-    accept:       option.extensions ? '.'~option.extensions|join(',.') : '',
+    accept:       option.extensions ? '.' ~ option.extensions|join(',.') : '',
     data_upload:  {type: 'Image', key: key, width: preview_w, height: preview_h}|json_encode(),
     data_url:     url('upload', {'handler': option.upload}),
-    id:           'fileupload-'~key,
+    id:           'fileupload-' ~ key,
     name:         'files[]',
     type:         'file',
-}%}
+} %}
 
 
 {#=== BLOCKS =========================================================================================================#}
@@ -54,9 +54,8 @@
 
 {% macro attributes(key, option, image) %}
     {% if option.attrib %}
-        {# We are only interested in the 'title' attribute right now, but this will allow easy extension #}
         {% for attrib in option.attrib %}
-            {% if attrib == 'title' %}
+            {% if attrib|lower == 'title' %}
                 <div class="form-group">
                     <div class="col-sm-2">
                         <label for="{{ key }}[title]">{{ __('Title') }}</label>
@@ -66,13 +65,13 @@
                     </div>
                 </div>
             {% endif %}
-            {% if attrib == 'Alt text' %}
+            {% if attrib|lower in ['alt text', 'alt'] %}
                 <div class="form-group">
                     <div class="col-sm-2">
                         <label for="{{ key }}[alt]">{{ __('Alt') }}</label>
                     </div>
                     <div class="col-sm-10">
-                        <input type="text" name="{{ key }}[alt]" id="{{ key }}-alt" value="{{ image.title|default('') }}" class="form-control">
+                        <input type="text" name="{{ key }}[alt]" id="{{ key }}-alt" value="{{ image.alt|default('') }}" class="form-control">
                     </div>
                 </div>
             {% endif %}
@@ -80,42 +79,9 @@
     {% endif %}
 {% endmacro %}
 
-{% macro buttons(key, paths, option, attr_upload) %}
-    {% import '_macro/_macro.twig' as macro %}
-    {# The fileinput-button span is used to style the file input field as button #}
-    <span class="btn btn-secondary fileinput-button">
-        <i class="fa fa-upload"></i>
-        <span>{{ __('Upload image') }}</span>
-        <input{{ macro.attr(attr_upload) }}>
-    </span>
-
-    <a data-target="#selectModal-{{ key }}" href="{{ paths.async }}browse/files{{ option.upload ? '/'~option.upload : '' }}?key={{ key }}" class="btn btn-tertiary" data-toggle="modal">
-        <i class="fa fa-download"></i>
-        {{ __('field.general.select-from-server') }}
-    </a>
-{% endmacro %}
-
-{% macro stack(key, items) %}
-    {% if items %}
-        <div class="btn-group">
-            <a class="btn btn-tertiary dropdown-toggle" data-toggle="dropdown">
-                <i class="fa fa-paperclip"></i>
-                {{ __('field.general.select-from-stack') }}<span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu" id="stack-{{ key }}">
-                {% for item in items %}
-                    <li>
-                        <a href="#" data-action="bolt.stack.selectFromPulldown('{{ key }}', '{{ item.filepath }}');">{{ item.basename }} <small>({{ item.filesize }})</small></a>
-                    </li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
-{% endmacro %}
-
 {% macro progress(key) %}
-    <div class="progress progress-striped active" id="progress-{{ key }}">
-        <div class="bar" style="width: 0%;"></div>
+    <div class="progress file-progress progress-striped active" id="progress-{{ key }}">
+        <div class="progress-bar" style="width: 0%;"></div>
     </div>
 {% endmacro %}
 
@@ -133,31 +99,31 @@
 <fieldset class="image">
     <div class="dropzone clearfix" id="dropzone-{{ key }}">
     <label class="col-xs-12 control-label">{{ macro.infopop(labelkey, option.info) }}</label>
-    <div class="col-sm-8">
+    <div class="col-xs-8">
         <div class="form-group">
             <div class="col-sm-12">
                 {{ block.imagepath(labelkey, option, image, attr_inp) }}
             </div>
         </div>
         {{ block.attributes(key, option, image) }}
-        <div class="button-wrap">
-            {{ block.buttons(key, paths, option, attr_upload) }}
-            {{ block.stack(key, stackitems(7, 'image')) }}
-        </div>
+        {% set can_upload = context.can_upload and option.can_upload %}
+        {{ macro.upload_buttons('image', key, attr_upload, option.upload, can_upload) }}
         {{ block.progress(key) }}
         {{ block.serverselect(key, __('Cancel')) }}
     </div>
 
-    <div class="col-sm-4">
-        <label>{{ __('Preview') }}</label>
-        <div class="content-preview imageholder" id="thumbnail-{{ key }}">
-            {% if context.content.get(key) != '' %}
-                {% set preview_path = image.file|thumbnail(preview_w, preview_h, 'c') %}
-            {% else %}
-                {% set preview_path = app.paths.app~'view/img/default_empty_4x3.png' %}
-            {% endif %}
-            {# <img src="{{ preview_path }}" width="{{ preview_w }}" height="{{ preview_h }}" alt="Preview"> #}
-            <img src="{{ preview_path }}" alt="Preview" width="{{ preview_w }}" height="{{ preview_h }}">
+    <div class="col-xs-4">
+        <div class="right-on-large">{# to make the preview align right on wide screens #}
+            <label>{{ __('Preview') }}</label>
+            <div class="content-preview imageholder" id="thumbnail-{{ key }}" style="max-width:{{ preview_w }}px;max-height:{{ preview_h }}px">
+                {% if context.content.get(contentkey) != '' %}
+                    {% set preview_path = image.file|thumbnail(preview_w, preview_h, 'c') %}
+                {% else %}
+                    {% set preview_path = app.paths.app ~ 'view/img/default_empty_4x3.png' %}
+                {% endif %}
+                {# <img src="{{ preview_path }}" width="{{ preview_w }}" height="{{ preview_h }}" alt="Preview"> #}
+                <img src="{{ preview_path }}" alt="Preview">
+            </div>
         </div>
     </div>
 </div>

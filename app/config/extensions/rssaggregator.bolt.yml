@@ -136,6 +136,11 @@ feeds:
         title: "Michael Dowling's blog"
         url: "http://mtdowling.com/"
         feed: "http://mtdowling.com/atom.xml"
+    davedevelopment: 
+        name: "Dave Marshall"
+        title: "Dave Marshall's weblog"
+        feed: "http://davedevelopment.co.uk/atom.xml"
+        url: "http://davedevelopment.co.uk/"
 
 
 # http://www.brandonsavage.net/best-php-blogs-to-follow

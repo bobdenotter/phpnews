@@ -2,13 +2,14 @@
 
 namespace Bolt\DataCollector;
 
-use Symfony\Component\HttpKernel\DataCollector\DataCollector;
+use Bolt\Application;
+use Bolt\Library as Lib;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Bolt\Library as Lib;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
- * TwigDataCollector
+ * TwigDataCollector.
  *
  * @author Vincent Bouzeran <vincent.bouzeran@elao.com>
  */
@@ -18,18 +19,20 @@ class TwigDataCollector extends DataCollector
 
     protected $data;
 
+    private $trackedvalues;
+
     /**
-     * The Constructor for the Twig Datacollector
+     * The Constructor for the Twig Datacollector.
      *
-     * @param \Bolt\Application $app The Silex app
+     * @param Application $app The Silex app
      */
-    public function __construct(\Bolt\Application $app)
+    public function __construct(Application $app)
     {
         $this->app = $app;
     }
 
     /**
-     * Collect information from Twig
+     * Collect information from Twig.
      *
      * @param Request    $request   The Request Object
      * @param Response   $response  The Response Object
@@ -43,8 +46,9 @@ class TwigDataCollector extends DataCollector
         $functions = array();
 
         foreach ($this->getTwig()->getExtensions() as $extensionName => $extension) {
+            /** @var $extension \Twig_ExtensionInterface */
             $extensions[] = array(
-                'name' => $extensionName,
+                'name'  => $extensionName,
                 'class' => get_class($extension)
             );
             foreach ($extension->getFilters() as $filterName => $filter) {
@@ -53,59 +57,65 @@ class TwigDataCollector extends DataCollector
                     if (is_array($call) && is_callable($call)) {
                         $call = 'Method ' . $call[1] . ' of an object ' . get_class($call[0]);
                     }
-                } else {
+                } elseif ($filter instanceof \Twig_SimpleFilter) {
                     $call = $filter->getName();
+                } else {
+                    continue;
                 }
 
                 $filters[] = array(
-                    'name' => $filterName,
+                    'name'      => $filterName,
                     'extension' => $extensionName,
-                    'call' => $call,
+                    'call'      => $call,
                 );
             }
 
             foreach ($extension->getTests() as $testName => $test) {
                 if ($test instanceof \Twig_TestInterface) {
                     $call = $test->compile();
-                } else {
+                } elseif ($test instanceof \Twig_SimpleTest) {
                     $call = $test->getName();
+                } else {
+                    continue;
                 }
 
                 $tests[] = array(
-                    'name' => $testName,
+                    'name'      => $testName,
                     'extension' => $extensionName,
-                    'call' => $call,
+                    'call'      => $call,
                 );
             }
 
             foreach ($extension->getFunctions() as $functionName => $function) {
                 if ($function instanceof \Twig_FunctionInterface) {
                     $call = $function->compile();
-                } else {
+                } elseif ($function instanceof \Twig_SimpleFunction) {
                     $call = $function->getName();
+                } else {
+                    continue;
                 }
 
                 $functions[] = array(
-                    'name' => $functionName,
+                    'name'      => $functionName,
                     'extension' => $extensionName,
-                    'call' => $call,
+                    'call'      => $call,
                 );
             }
         }
 
         $this->data = array(
-            'extensions' => $extensions,
-            'tests' => $tests,
-            'filters' => $filters,
-            'functions' => $functions,
-            'templates' => Lib::hackislyParseRegexTemplates($this->app['twig.loader']),
-            'templatechosen' => $this->app['log']->getValue('templatechosen'),
-            'templateerror' => $this->app['log']->getValue('templateerror')
+            'extensions'     => $extensions,
+            'tests'          => $tests,
+            'filters'        => $filters,
+            'functions'      => $functions,
+            'templates'      => Lib::parseTwigTemplates($this->app['twig.loader']),
+            'templatechosen' => $this->getTrackedValue('templatechosen'),
+            'templateerror'  => $this->getTrackedValue('templateerror')
         );
     }
 
     /**
-     * Get Twig Environment
+     * Get Twig Environment.
      *
      * @return \Twig_Environment
      */
@@ -115,7 +125,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Collects data on the twig templates rendered
+     * Collects data on the twig templates rendered.
      *
      * @param mixed $templateName The template name
      * @param array $parameters   The array of parameters passed to the template
@@ -127,7 +137,7 @@ class TwigDataCollector extends DataCollector
         if (is_array($parameters)) {
             foreach ($parameters as $name => $value) {
                 $collectedParameters[$name] = array(
-                    'type' => in_array(gettype($value), array('object', 'resource')) ? get_class($value) : gettype($value),
+                    'type'  => in_array(gettype($value), array('object', 'resource')) ? get_class($value) : gettype($value),
                     'value' => in_array(gettype($value), array('object', 'resource', 'array')) ? null : $value,
                 );
             }
@@ -140,7 +150,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the amount of Templates
+     * Returns the amount of Templates.
      *
      * @return int Amount of templates
      */
@@ -150,7 +160,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the Twig templates information
+     * Returns the Twig templates information.
      *
      * @return array Template information
      */
@@ -160,7 +170,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Getter for templatechosen
+     * Getter for templatechosen.
      *
      * @return string
      */
@@ -170,7 +180,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Getter for templateerror
+     * Getter for templateerror.
      *
      * @return string
      */
@@ -180,7 +190,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the amount of Extensions
+     * Returns the amount of Extensions.
      *
      * @return integer Amount of Extensions
      */
@@ -190,7 +200,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the Twig Extensions Information
+     * Returns the Twig Extensions Information.
      *
      * @return array Extension Information
      */
@@ -200,7 +210,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the amount of Filters
+     * Returns the amount of Filters.
      *
      * @return integer Amount of Filters
      */
@@ -210,7 +220,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the Filter Information
+     * Returns the Filter Information.
      *
      * @return array Filter Information
      */
@@ -220,7 +230,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the amount of Twig Tests
+     * Returns the amount of Twig Tests.
      *
      * @return integer Amount of Tests
      */
@@ -230,7 +240,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the Tests Information
+     * Returns the Tests Information.
      *
      * @return array Tests Information
      */
@@ -240,7 +250,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns the amount of Twig Functions
+     * Returns the amount of Twig Functions.
      *
      * @return integer Amount of Functions
      */
@@ -250,7 +260,7 @@ class TwigDataCollector extends DataCollector
     }
 
     /**
-     * Returns Twig Functions Information
+     * Returns Twig Functions Information.
      *
      * @return array Function Information
      */
@@ -270,5 +280,32 @@ class TwigDataCollector extends DataCollector
     public function getName()
     {
         return 'twig';
+    }
+
+    /**
+     * Setting a value for later use.
+     *
+     * @param string $key
+     * @param string $value
+     */
+    public function setTrackedValue($key, $value)
+    {
+        $this->trackedvalues[$key] = $value;
+    }
+
+    /**
+     * Getting a previously set value.
+     *
+     * @param string $key
+     *
+     * @return string
+     */
+    public function getTrackedValue($key)
+    {
+        if (isset($this->trackedvalues[$key])) {
+            return $this->trackedvalues[$key];
+        } else {
+            return false;
+        }
     }
 }

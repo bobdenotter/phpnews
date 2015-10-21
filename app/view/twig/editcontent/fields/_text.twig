@@ -4,31 +4,32 @@
     class:        field.class|default(''),
     label:        field.label|default(''),
     pattern:      field.pattern|default(''),
-    errortext:    field.error|default(''),
     placeholder:  field.placeholder|default(''),
     required:     field.required|default(false),
+    errortext:    field.error|default(''),
     readonly:     field.readonly|default(false),
     title:        field.title|default(''),
     variant:      field.variant|default(''),
     info:         field.info|default('')
-}%}
+} %}
 {# variant[inline] #}
 
 {#=== INIT ===========================================================================================================#}
 
 {% set attr_text = {
     class:          option.class,
-    name_id:        key,
+    name:           name,
+    id:             key,
     pattern:        (option.pattern and option.pattern not in ['url', 'email']) ? option.pattern : '',
-    data_errortext: option.errortext,
     maxlength:      255,
     placeholder:    option.placeholder,
     required:       option.required,
+    data_errortext: option.errortext,
     readonly:       option.readonly,
     title:          option.title,
     type:           (option.pattern in ['url', 'email']) ? option.pattern : 'text',
-    value:          context.content.get(key),
-}%}
+    value:          context.content.get(contentkey),
+} %}
 
 {#=== FIELDSET =======================================================================================================#}
 

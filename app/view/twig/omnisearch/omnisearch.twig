@@ -8,7 +8,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            <form action="" method="get">
+            <form method="get">
                 <div class="form-group">
                     <div class="input-group">
                     <input class="form-control" name="q" type="text" value="{{ context.query }}">
@@ -29,7 +29,8 @@
                             <tr>
                                 {% if item.record|default() %}
                                     {% set content = item.record %}
-                                    {% set editable = isallowed('edit', content) %}
+                                    {% set permissions = item.permissions %}
+                                    {% set modifiable = permissions.create or permissions.delete or permissions.publish or permissions.depublish %}
                                     {% include 'omnisearch/_result.twig' with {'excerptlength': 280, 'thumbsize': 54, 'compact': true} %}
                                 {% else %}
                                     <td colspan="4">
@@ -45,7 +46,7 @@
             {% endif %}
 
             {% if not has_results and context.query %}
-                <p>{{ __("No results found for '%search%'. Please try another search.", { '%search%': context.query|escape }) }}</p>
+                <p>{{ __("No results found for '%search%'. Please try another search.", {'%search%': context.query|escape}) }}</p>
             {% elseif not has_results %}
                 {# <p>Some default text here...</p> #}
             {% endif %}

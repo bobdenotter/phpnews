@@ -8,27 +8,27 @@ class Arr
      * Make a simple array consisting of key=>value pairs, that can be used
      * in select-boxes in forms.
      *
-     * @param  array  $array
-     * @param  string $key
-     * @param  string $value
+     * @param array  $array
+     * @param string $key
+     * @param string $value
+     *
      * @return array
      */
     public static function makeValuePairs($array, $key, $value)
     {
-        $temp_array = array();
+        $tempArray = array();
 
         if (is_array($array)) {
             foreach ($array as $item) {
                 if (empty($key)) {
-                    $temp_array[] = $item[$value];
+                    $tempArray[] = $item[$value];
                 } else {
-                    $temp_array[$item[$key]] = $item[$value];
+                    $tempArray[$item[$key]] = $item[$value];
                 }
-
             }
         }
 
-        return $temp_array;
+        return $tempArray;
     }
 
     /**
@@ -50,19 +50,21 @@ class Arr
      * Parameters are passed by reference, though only for performance reasons. They're not
      * altered by this function.
      *
-     * @param  array $array1
-     * @param  array $array2
+     * @param array $array1
+     * @param array $array2
+     *
      * @return array
+     *
      * @author Daniel <daniel (at) danielsmedegaardbuus (dot) dk>
      * @author Gabriel Sobrinho <gabriel (dot) sobrinho (at) gmail (dot) com>
-     * @author Bob for bolt-specific excludes
+     * @author Bob den Otter for Bolt-specific excludes
      */
     public static function mergeRecursiveDistinct(array &$array1, array &$array2)
     {
         $merged = $array1;
 
         foreach ($array2 as $key => &$value) {
-            // if $key = 'accept_file_types, don't merge..
+            // if $key = 'accept_file_types, don't merge.
             if ($key == 'accept_file_types') {
                 $merged[$key] = $array2[$key];
                 continue;
@@ -76,5 +78,23 @@ class Arr
         }
 
         return $merged;
+    }
+
+    /**
+     * Check if an array is indexed or associative.
+     *
+     * @param array $arr
+     *
+     * @return boolean True if indexed, false if associative
+     */
+    public static function isIndexedArray(array $arr)
+    {
+        foreach ($arr as $key => $val) {
+            if ($key !== (int) $key) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -1,6 +1,8 @@
 <?php
 namespace Bolt\Configuration;
 
+use Bolt\Exception\LowlevelException;
+
 /**
  * Inherits from default and adds some specific checks for composer installs.
  *
@@ -9,8 +11,7 @@ namespace Bolt\Configuration;
 
 class ComposerChecks extends LowlevelChecks
 {
-
-    public $composerSuffix = <<< EOM
+    public $composerSuffix = <<<HTML
     </strong></p><p>When using Bolt as a Composer package it will need to have access to the following folders:</p>
     <ol>
         <li class="status-%s">A writable config directory at: <code>%s</code></li>
@@ -21,15 +22,14 @@ class ComposerChecks extends LowlevelChecks
     </ol>
     <p>If any of the above are failing, create the folder and make it writable to the web server.</p>
     <strong>
-EOM;
-
+HTML;
 
     /**
      * The constructor requires a resource manager object to perform checks against.
-     * This should ideally be typehinted to Bolt\Configuration\ResourceManager
+     * This should ideally be typehinted to Bolt\Configuration\ResourceManager.
      *
-     * @return void
-     **/
+     * @param ResourceManager $config
+     */
     public function __construct($config = null)
     {
         parent::__construct($config);
@@ -37,8 +37,6 @@ EOM;
         $this->addCheck('database', true);
         $this->addCheck('config', true);
     }
-
-
 
     public function checkConfig()
     {
@@ -84,8 +82,7 @@ EOM;
         return call_user_func_array('sprintf', $status);
     }
 
-
-    protected function checkDir($location)
+    public function checkDir($location)
     {
         // As a last resort we can try to create the directory here:
         if (!is_dir($location)) {

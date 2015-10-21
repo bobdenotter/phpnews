@@ -1,40 +1,35 @@
 {% set sub = [
     {
         icon: 'fa:group',
-        label: __('Users'),
+        label: __('Users & Permissions'),
         link: path('users'),
         isallowed: 'users'
     }, {
         icon: 'fa:cog',
         label: __('Main configuration'),
-        link: path('fileedit', {'namespace': 'app', 'file': 'config/config.yml'}),
+        link: path('fileedit', {'namespace': 'config', 'file': 'config.yml'}),
         isallowed: 'files:config'
     }, {
         icon: 'fa:paint-brush',
         label: __('Contenttypes'),
-        link: path('fileedit', {'namespace': 'app', 'file': 'config/contenttypes.yml'}),
+        link: path('fileedit', {'namespace': 'config', 'file': 'contenttypes.yml'}),
         isallowed: 'files:config'
     }, {
         icon: 'fa:tags',
         label: __('Taxonomy'),
-        link: path('fileedit', {'namespace': 'app', 'file': 'config/taxonomy.yml'}),
-        isallowed: 'files:config'
-    }, {
-        icon: 'fa:sliders',
-        label: __('Permissions'),
-        link: path('fileedit', {'namespace': 'app', 'file': 'config/permissions.yml'}),
+        link: path('fileedit', {'namespace': 'config', 'file': 'taxonomy.yml'}),
         isallowed: 'files:config'
     },
     '-',
     {
         icon: 'fa:list',
         label: __('Menu setup'),
-        link: path('fileedit', {'namespace': 'app', 'file': 'config/menu.yml'}),
+        link: path('fileedit', {'namespace': 'config', 'file': 'menu.yml'}),
         isallowed: 'files:config'
     }, {
         icon: 'fa:random',
-        label: __('Routing setup'),
-        link: path('fileedit', {'namespace': 'app', 'file': 'config/routing.yml'}),
+        label: __('menu.configuration.routing'),
+        link: path('fileedit', {'namespace': 'config', 'file': 'routing.yml'}),
         isallowed: 'files:config'
     },
     '-',
@@ -50,9 +45,14 @@
         isallowed: 'clearcache'
     }, {
         icon: 'fa:archive',
-        label: __('Activity log'),
-        link: path('activitylog'),
-        isallowed: 'activitylog'
+        label: __('logs.change-log'),
+        link: path('changelog'),
+        isallowed: 'changelog'
+    }, {
+        icon: 'fa:archive',
+        label: __('logs.system-log'),
+        link: path('systemlog'),
+        isallowed: 'systemlog'
     }
 ] %}
 

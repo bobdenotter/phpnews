@@ -12,12 +12,11 @@ class TemplateChooserServiceProvider implements ServiceProviderInterface
     {
         $app['templatechooser'] = $app->share(
             function ($app) {
-                $omnisearch = new TemplateChooser($app);
+                $chooser = new TemplateChooser($app);
 
-                return $omnisearch;
+                return $chooser;
             }
         );
-
     }
 
     public function boot(Application $app)

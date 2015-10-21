@@ -5,9 +5,9 @@
     </a>
     <ul class="dropdown-menu">
     {% for contenttypeslug, contenttype in app.config.get('contenttypes') %}
-        {% if isallowed('contenttype:' ~ contenttypeslug ~ ':create') %}
+        {% if isallowed('contenttype:' ~ contenttypeslug ~ ':create') and isallowed('contenttype:' ~ contenttypeslug ~ ':view') %}
             <li>
-                <a href="{{ path('editcontent', { 'contenttypeslug': contenttypeslug, 'id': '' }) }}">
+                <a href="{{ path('editcontent', {'contenttypeslug': contenttypeslug}) }}">
                     <i class="fa fa-plus"></i>
                     {{ __('contenttypes.generic.new', {'%contenttype%': contenttypeslug}) }}
                 </a>

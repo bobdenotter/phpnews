@@ -15,14 +15,13 @@
     {% endif %}
 {% endblock page_title %}
 
-{% block page_subtitle context.content.title|default('') %}
+{% block page_subtitle context.content.title|default('')|striptags %}
 
 {# clear default messages, because we use them in a different spot, in this template #}
 {% block messages "" %}
 
 {% block page_main %}
-
-    {% set status_names = { "published": __("Published"), "held": __("Not published"), "timed": __("Timed publish"), "draft": __("Draft") } %}
+    {% set status_names = {"published": __("Published"), "held": __("Not published"), "timed": __("Timed publish"), "draft": __("Draft")} %}
 
     {% set dateChanged %}{{ macro.datetime(context.content.datechanged) }}{% endset %}
 
@@ -30,140 +29,99 @@
         savedon:        __('Saved on:') ~ ' <strong></strong> <small>(' ~ dateChanged ~ ')</small></p>',
         newRecord:      context.content.id != 0 ? false : true,
         msgNotSaved:    __('contenttypes.generic.saving-impossible', {'%contenttype%': context.contenttype.slug}),
-        pathsRoot:      paths.root,
-        msgSaving:      __('Saving …'),
-        hasGroups:      context.contenttype.groups|default is not empty,
+        hasGroups:      context.has.tabs,
         singularSlug:   context.contenttype.singular_slug,
-    }%}
+    } %}
 
     {% set attr_form = {
-        _bind:   ['editcontent', {
-                    savedon:        __('Saved on:') ~ ' <strong></strong> <small>(' ~ dateChanged ~ ')</small></p>',
-                    newRecord:      context.content.id != 0 ? false : true,
-                    msgNotSaved:    __('contenttypes.generic.saving-impossible', {'%contenttype%': context.contenttype.slug}),
-                    pathsRoot:      paths.root,
-                    msgSaving:      __('Saving …'),
-                    hasGroups:      context.contenttype.groups|default is not empty,
-                    singularSlug:   context.contenttype.singular_slug,
-                }],
-        class:   "form-horizontal",
-        enctype: "multipart/form-data",
-        id:      "editcontent",
-        method:  "post",
-        role:    "form",
-    }%}
+        _bind:   ['editcontent', bind_data],
+        class:   'form-horizontal' ~ (context.has.tabs ? ' tab-content' : ''),
+        enctype: 'multipart/form-data',
+        id:      'editcontent',
+        method:  'post',
+        role:    'form',
+    } %}
+
+    {% set alertbox %}
+        <div id="%NOTICE_ID%" class="alert alert-danger">
+            <button class="close" data-dismiss="alert">×</button>
+            <label for="%FIELD_ID%">{{ __('Field “%FIELD_NAME%”:') }}</label>
+            %MESSAGE%
+        </div>
+    {% endset %}
+
+    {{ data('validation', {
+        'alertbox':     alertbox|trim,
+        'generic_msg':  __('Is required or needs to match a pattern!'),
+    }) }}
+    {{ data('editcontent.msg', {
+        'change_quit': __('You have unfinished changes on this page. If you continue without saving, you will lose these changes.'),
+        'saving':      __('Saving …')
+    }) }}
 
     <div class="row">
         <div class="col-md-8">
 
             {% include '_sub/_messages.twig' %}
 
-            {# only if we have grouping tabs. #}
-            {% if context.contenttype.groups|default is not empty %}
+            {# Only if we have grouping tabs. #}
+            {% if context.has.tabs %}
                 <ul class="nav nav-tabs" id="filtertabs">
-
-                    {# Add an extra tab, if there are "ungrouped" fields #}
-                    {% set firstfield = context.contenttype.fields|first %}
-                    {% if firstfield.group is empty %}
-                        <li><a class="filter" data-filter="ungrouped">{{ __("Ungrouped") }}</a></li>
-                    {% endif %}
-
-                    {# Defined groups #}
-                    {% for groups in context.contenttype.groups %}
-                        <li><a class="filter" data-filter="{{ groups }}">{{ __(groups|capitalize) }}</a></li>
+                    {% for group in context.groups %}
+                        <li{{ group.is_active ? ' class="active"' : '' }}>
+                            <a href="#{{ group.id }}" data-toggle="tab">{{ group.label }}</a>
+                        </li>
                     {% endfor %}
-
-                    {# Relationships and/or Taxonomy #}
-                    {% if context.contenttype.relations is defined and context.contenttype.taxonomy is defined %}
-                        <li><a class="filter" data-filter="taxonomy">{{ __('Relationships') }} / {{ __('Taxonomy') }}</a></li>
-                    {% endif %}
-                    {% if context.contenttype.relations is defined and context.contenttype.taxonomy is not defined %}
-                        <li><a class="filter" data-filter="taxonomy">{{ __('Relationships') }}</a></li>
-                    {% endif %}
-                    {% if context.contenttype.relations is not defined and context.contenttype.taxonomy is defined %}
-                        <li><a class="filter" data-filter="taxonomy">{{ __('Taxonomy') }}</a></li>
-                    {% endif %}
-
-                    {# Finally, a tab for Meta #}
-                    <li><a class="filter" data-filter="meta">{{ __('Meta') }}</a></li>
-
                 </ul>
             {% endif %}
 
             <form{{ macro.attr(attr_form) }}>
                 {% include '_sub/_csrf_token.twig' %}
 
-                {% include 'editcontent/_fields.twig' %}
+                {% for group_name, group in context.groups %}
 
-                {% include 'editcontent/_relations.twig' %}
+                    {% if context.has.tabs %}
+                        <div class="tab-pane{{ group.is_active ? ' active' : '' }}" id="{{ group.id }}">
+                    {% endif %}
 
-                {% include 'editcontent/_taxonomies.twig' %}
+                    {% if group_name == 'relations' %}
+                        {% include 'editcontent/_relations.twig' %}
 
-                {% include 'editcontent/_meta.twig' %}
+                    {% elseif group_name == 'taxonomy' %}
+                        {% include 'editcontent/_taxonomies.twig' %}
 
-                <div class="form-group" style="margin-top: 40px;">
-                    <div class="col-sm-12">
+                    {% elseif group_name == 'meta' %}
+                        {% include 'editcontent/_meta.twig' %}
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-primary" id="savecontinuebutton">
-                                <i class="fa fa-flag"></i> {{  __('contenttypes.generic.save',{'%contenttype%': context.contenttype.slug}) }}
-                            </button>
-                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <button type="submit" class="btn btn-link" id="savebutton">
-                                        <i class="fa fa-flag"></i> {{ __('Save & return to overview') }}
-                                    </button>
-                                </li>
-                                <li>
-                                    <button type="submit" class="btn btn-link" id="savenewbutton">
-                                        <i class="fa fa-flag"></i> {{ __('Save & create new record') }}
-                                    </button>
-                                </li>
-                            </ul>
+                    {% elseif group_name == 'template' %}
+                        {% include 'editcontent/_templatefields.twig' %}
+
+                    {% else %}
+                        {% include 'editcontent/_fields.twig' %}
+                    {% endif %}
+
+                    {% if context.has.tabs %}
                         </div>
+                    {% endif %}
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default" id="previewbutton">
-                                <i class="fa fa-external-link-square"></i> {{ __('Preview') }}
-                            </button>
-                            {% if context.content.status == "published" and context.content.link is defined %}
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ context.content.link }}" target="_blank">
-                                            <i class="fa fa-external-link-square"></i> {{ __('View (saved version) on site') }}</a></li>
-                                    </a>
-                                    </li>
-                                </ul>
-                            {% endif %}
-                        </div>
+                {% endfor %}
 
-                        <p class="lastsaved" style="margin-top: 12px;">
-                            {% if context.content.id != 0 %}
-                                {{ __('Saved on:') }} <strong>{{ context.content.datechanged|localdate("%b %e, %H:%M") }}</strong> <small>({{ macro.datetime(context.content.datechanged) }})</small></p>
-                            {% else %}
-                                {{ __('contenttypes.generic.not-saved-yet', {'%contenttype%': context.contenttype.slug}) }}
-                            {% endif %}
-                        </p>
+                <input type="hidden" name="_live-editor-preview" value=""/>
 
-                    </div>
-
-                </div>
-
+                {% include 'editcontent/_buttons.twig' %}
             </form>
+
+            {% include 'editcontent/_includes-data.twig' %}
 
         </div>
 
-        <aside class="col-md-4 hidden-xs">
+        <aside class="col-md-4 hidden-sm">
             {% include 'editcontent/_aside.twig' %}
         </aside>
     </div>
 
 {% endblock page_main %}
+
+{% block page_main_extra_content %}
+    {% include 'editcontent/_live-editor.twig' %}
+{% endblock %}

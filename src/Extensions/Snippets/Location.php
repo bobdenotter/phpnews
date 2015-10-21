@@ -1,39 +1,46 @@
 <?php
-/**
- * Bolt Snippet Locations
- *
- * PHP Version 5.3
- *
- * @license   http://www.opensource.org/licenses/mit-license.php MIT
- * @link      http://bolt.cm
- */
+
 namespace Bolt\Extensions\Snippets;
 
 /**
+ * Bolt Snippet Locations
  * This class categorizes all possible snippet locations in constants.
- *
- * @license http://www.opensource.org/licenses/mit-license.php MIT
- * @link    http://bolt.cm
  */
 class Location
 {
+    // unpredictable
+    const BEFORE_CSS = "beforecss";
     const AFTER_CSS = "aftercss";
+    const BEFORE_JS = "beforejs";
     const AFTER_JS = "afterjs";
     const AFTER_META = "aftermeta";
+
+    // main structure
+    const START_OF_HEAD = "startofhead";
+    const END_OF_HEAD = "endofhead";
+    const START_OF_BODY = "startofbody";
+    const END_OF_BODY = "endofbody";
+    const END_OF_HTML = "endofhtml";
     const AFTER_HTML = "afterhtml";
 
-    const BEFORE_CSS = "beforecss";
-    const BEFORE_JS = "beforejs";
+    // substructure
+    const BEFORE_HEAD_META = "beforeheadmeta";
+    const AFTER_HEAD_META = "afterheadmeta";
 
-    const END_OF_BODY = "endofbody";
-    const END_OF_HEAD = "endofhead";
-    const END_OF_HTML = "endofhtml";
+    const BEFORE_HEAD_CSS = "beforeheadcss";
+    const AFTER_HEAD_CSS = "afterheadcss";
 
-    const START_OF_HEAD = "startofhead";
-    const START_OF_BODY = "startofbody";
+    const BEFORE_HEAD_JS = "beforeheadjs";
+    const AFTER_HEAD_JS = "afterheadjs";
+
+    const BEFORE_BODY_CSS = "beforebodycss";
+    const AFTER_BODY_CSS = "afterbodycss";
+
+    const BEFORE_BODY_JS = "beforebodyjs";
+    const AFTER_BODY_JS = "afterbodyjs";
 
     /**
-     * Returns all possible locations (which are constants)
+     * Returns all possible locations (which are constants).
      *
      * @return array
      */

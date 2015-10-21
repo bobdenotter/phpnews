@@ -2,14 +2,13 @@
 
 namespace Bolt\Provider;
 
+use Bolt\Library as Lib;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 use Symfony\Component\Translation\Loader as TranslationLoader;
-use Bolt\Library as Lib;
 
 class TranslationServiceProvider implements ServiceProviderInterface
 {
-
     public function register(Application $app)
     {
         return null;
@@ -21,34 +20,34 @@ class TranslationServiceProvider implements ServiceProviderInterface
      * This method is called after all services are registers
      * and should be used for "dynamic" configuration (whenever
      * a service must be requested).
+     *
+     * @param \Silex\Application $app
      */
     public function boot(Application $app)
     {
         if (isset($app['translator'])) {
             $app['translator']->addLoader('yml', new TranslationLoader\YamlFileLoader());
+            $app['translator']->addLoader('xlf', new TranslationLoader\XliffFileLoader());
 
-            $this->addResources($app, $app['locale']);
+            static::addResources($app, $app['locale']);
 
             // Load english fallbacks
             if ($app['locale'] != \Bolt\Application::DEFAULT_LOCALE) {
-                $this->addResources($app, \Bolt\Application::DEFAULT_LOCALE);
+                static::addResources($app, \Bolt\Application::DEFAULT_LOCALE);
             }
         }
     }
 
     /**
-     * Adds all resources that belong to a locale
+     * Adds all resources that belong to a locale.
      *
      * @param Application $app
-     * @param string $locale
-     * @param string $territory
+     * @param string      $locale
      */
-    private function addResources(Application $app, $locale)
+    public static function addResources(Application $app, $locale)
     {
-        $paths = $app['resources']->getPaths();
-
         // Directory to look for translation file(s)
-        $transDir = $paths['apppath'] . '/resources/translations/' . $locale;
+        $transDir = $app['resources']->getPath('app/resources/translations/' . $locale);
 
         if (is_dir($transDir)) {
             $iterator = new \DirectoryIterator($transDir);
@@ -56,14 +55,15 @@ class TranslationServiceProvider implements ServiceProviderInterface
              * @var \SplFileInfo $fileInfo
              */
             foreach ($iterator as $fileInfo) {
-                if ($fileInfo->isFile() && (Lib::getExtension($fileInfo->getFilename()) == 'yml')) {
-                    $fnameParts = explode('.', $fileInfo->getFilename());
-                    $domain = $fnameParts[0];
-                    $app['translator']->addResource('yml', $fileInfo->getRealPath(), $locale, $domain);
+                $ext = Lib::getExtension((string) $fileInfo);
+                if (!$fileInfo->isFile() || !in_array($ext, array('yml', 'xlf'))) {
+                    continue;
                 }
+                list($domain) = explode('.', $fileInfo->getFilename());
+                $app['translator']->addResource($ext, $fileInfo->getRealPath(), $locale, $domain);
             }
         } elseif (strlen($locale) == 5) {
-            $this->addResources($app, substr($locale, 0, 2));
+            static::addResources($app, substr($locale, 0, 2));
         }
     }
 }

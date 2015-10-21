@@ -1,20 +1,20 @@
 {# Empty array for submenu #}
 {% set sub = [] %}
 
-{% if isallowed('extensions') %}
+{% if isallowed('extensions||extensions:config') %}
 
     {# Add the "view" and "configure" options #}
     {% set sub = sub|merge([
         {
             icon: 'fa:cubes',
             label: __('View/install Extensions'),
-            link: url('extend', {}),
+            link: path('extend', {}),
             isallowed: 'extensions'
         },
         {
             icon: 'fa:cog',
             label: __('Configure Extensions'),
-            link: url('files', {'namespace': 'config', 'path': 'extensions'}),
+            link: path('files', {'namespace': 'config', 'path': 'extensions'}),
             isallowed: 'extensions:config'
         }
     ]) %}

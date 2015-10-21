@@ -2,16 +2,16 @@
 
 namespace Bolt\Provider;
 
+use Eloquent\Pathogen\FileSystem\Factory\PlatformFileSystemPathFactory;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
-use Eloquent\Pathogen\FileSystem\Factory\PlatformFileSystemPathFactory;
 
 class PathServiceProvider implements ServiceProviderInterface
 {
     public function register(Application $app)
     {
         $app['pathmanager'] = $app->share(
-            function ($app) {
+            function () {
                 $filesystempath = new PlatformFileSystemPathFactory();
 
                 return $filesystempath;

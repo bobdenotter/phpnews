@@ -81,8 +81,18 @@ pages:
         template:
             type: templateselect
             filter: '*.twig'
-    taxonomy: [ chapters ]
-    recordsperpage: 100
+        seotitle: &seotitle
+            prefix: '<hr><h3>SEO settings</h3>'
+            type: text
+            variant: inline
+            class: wide
+            postfix: "Will be used as the <tt>&lt;title&gt;</tt> and in search engines. Limit the length to 70 chars."
+        metadescription: &metadescription
+            type: textarea
+            height: "60px"
+            postfix: "Will be used as the <tt>&lt;meta name=\"description\"&gt;</tt>, and will show up in search engines. Limit the length to 156 chars."            
+            taxonomy: [ chapters ]
+            recordsperpage: 100
 
 
 # # Entries can be used for things like 'news' or 'blogpostings'. They have a 'teaser',

@@ -7,13 +7,16 @@
 
     <div class="panel-body">
         {% include 'editcontent/_aside-save.twig' %}
+        {% include 'editcontent/_aside-live-editor.twig' %}
         {% include 'editcontent/_aside-preview.twig' %}
         {% include 'editcontent/_aside-status.twig' %}
-
-
-
+        {% if isallowed('delete', context.content) and context.content.id is not empty %}
+            {% include 'editcontent/_aside-delete.twig' %}
+        {% endif %}
     </div>
 </div>
+
+{{ panels.changes(context.contenttype.slug, context.content.id|default(null)) }}
 
 {{ panels.lastmodified(context.contenttype.slug, context.content.id) }}
 

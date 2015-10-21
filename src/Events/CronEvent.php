@@ -1,29 +1,26 @@
 <?php
 namespace Bolt\Events;
 
-use Bolt\Application;
+use Silex\Application;
+use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Event class for system compulsory cron jobs
+ * Event class for system compulsory cron jobs.
  */
 class CronEvent extends Event
 {
     /**
-     * @var Application
+     * @var \Silex\Application
      */
     private $app;
 
     /**
-     * @var Symfony\Component\Console\Output\OutputInterface
+     * @var \Symfony\Component\Console\Output\OutputInterface
      */
     public $output;
 
-    /**
-     *
-     */
     public function __construct(Application $app, OutputInterface $output = null)
     {
         $this->app = $app;
@@ -59,14 +56,14 @@ class CronEvent extends Event
     }
 
     /**
-     * Hourly jobs
+     * Hourly jobs.
      */
     private function cronHourly()
     {
     }
 
     /**
-     * Daily jobs
+     * Daily jobs.
      */
     private function cronDaily()
     {
@@ -74,7 +71,7 @@ class CronEvent extends Event
     }
 
     /**
-     * Weekly jobs
+     * Weekly jobs.
      */
     private function cronWeekly()
     {
@@ -82,20 +79,24 @@ class CronEvent extends Event
         $this->app['cache']->clearCache();
         $this->notify("Clearing cache");
 
-        // Trim log files
-        $this->app['log']->trim();
+        // Trim system log files
+        $this->app['logger.manager']->trim('system');
+
+        // Trim change log files
+        $this->app['logger.manager']->trim('change');
+
         $this->notify("Trimming logs");
     }
 
     /**
-     * Monthly jobs
+     * Monthly jobs.
      */
     private function cronMonthly()
     {
     }
 
     /**
-     * Yearly jobs
+     * Yearly jobs.
      */
     private function cronYearly()
     {
@@ -103,11 +104,13 @@ class CronEvent extends Event
 
     /**
      * If we're passed an OutputInterface, we're called from Nut and can notify
-     * the end user
+     * the end user.
+     *
+     * @param string $msg
      */
     private function notify($msg)
     {
-        if ($this->output !== false) {
+        if ($this->output !== null) {
             $this->output->writeln("<comment>    {$msg}</comment>");
         }
     }

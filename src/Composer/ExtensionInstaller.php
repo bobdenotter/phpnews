@@ -1,12 +1,28 @@
 <?php
 namespace Bolt\Composer;
 
+use Composer\EventDispatcher\Event;
+use Composer\Installer\PackageEvent;
+use Composer\Script\Event as ScriptEvent;
+
 class ExtensionInstaller
 {
+    /**
+     * Event handler for composer package events
+     *
+     * @param \Composer\EventDispatcher\Event $event
+     */
     public static function handle($event)
     {
         try {
-            $installedPackage = $event->getOperation()->getPackage();
+            $operation = $event->getOperation();
+            if (method_exists($operation, 'getPackage')) {
+                $installedPackage = $operation->getPackage();
+            } elseif (method_exists($operation, 'getTargetPackage')) {
+                $installedPackage = $operation->getTargetPackage();
+            } else {
+                return;
+            }
         } catch (\Exception $e) {
             return;
         }
@@ -32,17 +48,18 @@ class ExtensionInstaller
     {
         @mkdir($dest, 0755, true);
 
-
         // We only want to do this if the two directories don't match
         if (realpath($source) === realpath($dest)) {
             return;
         }
 
+        /** @var $iterator \RecursiveIteratorIterator|\RecursiveDirectoryIterator */
         $iterator = new \RecursiveIteratorIterator(
             new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS),
             \RecursiveIteratorIterator::SELF_FIRST
         );
         foreach ($iterator as $item) {
+            /** @var $item \SplFileInfo */
             if ($item->isDir()) {
                 $new = $dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName();
                 if (!is_dir($new)) {

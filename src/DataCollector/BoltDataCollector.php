@@ -2,22 +2,22 @@
 
 namespace Bolt\DataCollector;
 
+use Bolt\Application;
+use Bolt\Library as Lib;
+use Bolt\Translation\Translator as Trans;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
-use Bolt\Library as Lib;
-use Bolt\Translation\Translator as Trans;
 
 /**
  * BoltDataCollector.
- *
  */
 class BoltDataCollector extends DataCollector
 {
     protected $app;
     protected $data;
 
-    public function __construct(\Bolt\Application $app)
+    public function __construct(Application $app)
     {
         $this->app = $app;
     }
@@ -37,14 +37,14 @@ class BoltDataCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->data = array(
-            'version' => $this->app['bolt_version'],
-            'name' => $this->app['bolt_name'],
-            'fullversion' => sprintf('%s %s %s', Trans::__('Version:'), $this->app['bolt_version'], $this->app['bolt_name']),
-            'payoff' => Trans::__('Sophisticated, lightweight & simple CMS'),
-            'aboutlink' => sprintf("<a href=\"%s\">%s</a>", Lib::path('about'), Trans::__('About')),
-            'branding' => null,
-            'editlink' => null,
-            'edittitle' => null
+            'version'     => $this->app->getVersion(false),
+            'name'        => $this->app['bolt_name'],
+            'fullversion' => 'Version: ' . $this->app->getVersion(true),
+            'payoff'      => 'Sophisticated, lightweight & simple CMS',
+            'aboutlink'   => sprintf("<a href=\"%s\">%s</a>", Lib::path('about'), 'About'),
+            'branding'    => null,
+            'editlink'    => null,
+            'edittitle'   => null
         );
 
         if ($this->app['config']->get('general/branding/provided_by/0')) {
@@ -63,7 +63,7 @@ class BoltDataCollector extends DataCollector
     }
 
     /**
-     * Getter for version
+     * Getter for version.
      *
      * @return string
      */
@@ -73,7 +73,7 @@ class BoltDataCollector extends DataCollector
     }
 
     /**
-     * Getter for fullversion
+     * Getter for fullversion.
      *
      * @return string
      */
@@ -83,7 +83,7 @@ class BoltDataCollector extends DataCollector
     }
 
     /**
-     * Getter for name
+     * Getter for name.
      *
      * @return string
      */
@@ -93,7 +93,7 @@ class BoltDataCollector extends DataCollector
     }
 
     /**
-     * Getter for branding
+     * Getter for branding.
      *
      * @return string
      */
@@ -103,7 +103,7 @@ class BoltDataCollector extends DataCollector
     }
 
     /**
-     * Getter for payoff
+     * Getter for payoff.
      *
      * @return string
      */
@@ -113,7 +113,7 @@ class BoltDataCollector extends DataCollector
     }
 
     /**
-     * Getter for aboutlink
+     * Getter for aboutlink.
      *
      * @return string
      */
@@ -123,7 +123,7 @@ class BoltDataCollector extends DataCollector
     }
 
     /**
-     * Getter for editlink
+     * Getter for editlink.
      *
      * @return string
      */
@@ -133,7 +133,7 @@ class BoltDataCollector extends DataCollector
     }
 
     /**
-     * Getter for aboutlink
+     * Getter for aboutlink.
      *
      * @return string
      */

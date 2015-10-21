@@ -276,3 +276,12 @@ hash_strength: 10
 grunt:
   livereload: false
   livereloadport: 35729
+
+# For the stability option, you can choose either 'dev' or 'stable'. Setting
+# this to 'dev' will allow you to install dev-master versions of extensions.
+extensions:
+    site: 'https://extensions.bolt.cm/'
+    stability: stable
+    enabled: true
+
+

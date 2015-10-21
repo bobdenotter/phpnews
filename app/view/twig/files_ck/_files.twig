@@ -1,13 +1,9 @@
-{% import '_macro/_macro.twig' as macro %}
-
-<table class="dashboardlisting"{{ macro.attr({_bind: ['ckfileselect']}) }}>
+<table class="dashboardlisting">
     <thead>
         <tr>
             <th>{{ __('page.ckeditor-browse-server.files') }}</th>
-            <th>{{ __('page.ckeditor-browse-server.size') }}</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-            {# <th>&nbsp;</th> #}
+            <th style="min-width: 102px;">{{ __('page.ckeditor-browse-server.size') }}</th>
+            <th style="min-width: 60px;">&nbsp;</th>
         </tr>
     </thead>
 
@@ -22,16 +18,18 @@
 
                         {% if file.readable %}
                             <a class="filebrowserCallbackLink" href="{{ file.url }}">
-                                <b>{{ file.filename|trimtext(40) }}</b>
+                                <b>{{ file.filename|excerpt(60)|shy }}</b>
                             </a>
                         {% else %}
-                            <b>{{ file.filename|trimtext(40) }} </b><i class="fa fa-lock"></i>
+                            <b>{{ file.filename|excerpt(60)|shy }} </b><i class="fa fa-lock"></i>
                         {% endif %}
                     </td>
-                    <td>{{ file.filesize }}.</td>
-                    <td>{% if file.imagesize is defined %}{{ file.imagesize }} {{ __('page.ckeditor-browse-server.pixel') }}{% endif %}</td>
-                    <td class="listthumb">
-                        {{file.newpath|showimage(54, 40, 'c')}}
+                    <td>
+                        {{ file.filesize }}.<br>
+                        {% if file.imagesize is defined %}{{ file.imagesize }} {{ __('page.ckeditor-browse-server.pixel') }}{% endif %}
+                    </td>
+                    <td>
+                        {{ file.newpath|showimage(54, 40, 'c') }}
                     </td>
                     {# <td>
                         <a href="{{ file.newpath|thumbnail(1000, 1000, 'r') }}" class="btn btn-mini magnifig" title="Image: {{ file.filename }}">{{ __('Preview') }}</a>

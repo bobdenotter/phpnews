@@ -11,8 +11,8 @@
             <tr>
                 <td>
                     <i class="fa fa-fw fa-folder-open-o"></i>
-                    <a href="{{ url('files', {'path': folder.newpath, 'namespace': context.namespace}) }}">
-                        <b>{{ folder.foldername }}/</b>
+                    <a href="{{ path('files', {'path': folder.newpath, 'namespace': context.namespace}) }}">
+                        <b>{{ folder.foldername|excerpt(60)|shy }}/</b>
                     </a>
                 </td>
                 <td>
@@ -21,6 +21,7 @@
                     </time>
                 </td>
                 <td class="actions">
+                {% if context.form != false %}
                     <div class="btn-group">
                     {% if folder.writable %}
 
@@ -33,26 +34,23 @@
                         <ul class="dropdown-menu pull-right">
                             <li>
                                 <a href="#"
-                                   data-action="bolt.folders.rename('{{__("Please enter a new folder name")}}',
-                                                                    '{{ context.namespace }}',
+                                   data-action="bolt.files.renameFolder('{{ context.namespace }}',
                                                                     '{{ context.pathsegments|keys|last }}',
                                                                     '{{ folder.foldername }}',
                                                                     this);">
 
                                     <i class="fa fa-keyboard-o"></i>
-                                    {{ __('Rename %foldername%', { '%foldername%': folder.foldername }) }}
+                                    {{ __('Rename %foldername%', {'%foldername%': folder.foldername}) }}
                                 </a>
                                 <a href="#"
                                    class="confirm"
-                                   data-confirm="{{ __("Do you really want to delete %foldername%?",
-                                                        {'%foldername%': folder.foldername }) }}"
-                                   data-action="bolt.folders.remove('{{ context.namespace }}',
+                                   data-action="bolt.files.deleteFolder('{{ context.namespace }}',
                                                                     '{{ context.pathsegments|keys|last }}',
                                                                     '{{ folder.foldername }}',
                                                                     this);">
 
                                     <i class="fa fa-ban"></i>
-                                    {{ __('Delete %foldername%', { '%foldername%': folder.foldername }) }}
+                                    {{ __('Delete %foldername%', {'%foldername%': folder.foldername}) }}
                                 </a>
                             </li>
                         </ul>
@@ -63,6 +61,7 @@
                         </a>
                     {% endif %}
                     </div>
+                {% endif %}
                 </td>
             </tr>
         {% endfor %}

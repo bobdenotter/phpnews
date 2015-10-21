@@ -53,11 +53,14 @@
             </div>
 
             {% block messages %}
-                {% include '_sub/_messages.twig' with { 'wrapper': true } %}
+                {% include '_sub/_messages.twig' with {'wrapper': true} %}
             {% endblock messages %}
 
             {% block page_main %}[PAGE_MAIN]{% endblock page_main %}
         </div>
+        
+        {% block page_main_extra_content %}
+        {% endblock %}
     </div>
 
     <footer id="bolt-footer" class="hidden-xs">
@@ -68,7 +71,7 @@
             </a> -
         {% endif %}
         <i class="fa fa-cog"></i> <b>Bolt {{ bolt_version }}</b>: {{ __('Sophisticated, lightweight & simple CMS') }} -
-        <i class="fa fa-heart"></i > <a href="{{ path('about') }}">{{ __('About') }}</a> &ndash;
+        <i class="fa fa-heart"></i > <a href="{{ path('about') }}">{{ __('general.about') }}</a> &ndash;
         <i class="fa fa-external-link-square"></i> <a href="http://bolt.cm" target="_blank">Bolt.cm</a>
     </footer>
 

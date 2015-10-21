@@ -2,8 +2,8 @@
 
 namespace Bolt;
 
-use Bolt\PermissionLexerException;
-use Bolt\PermissionParserException;
+use Bolt\Exception\PermissionLexerException;
+use Bolt\Exception\PermissionParserException;
 
 /**
  * Lexer and parser for permission query syntax.
@@ -35,27 +35,27 @@ class PermissionParser
     const T_UNDEFINED = 0;
 
     /**
-     * Opening parens: '('
+     * Opening parens: '('.
      */
     const T_OPEN_PARENS = 1;
 
     /**
-     * Closing parens: ')'
+     * Closing parens: ')'.
      */
     const T_CLOSE_PARENS = 2;
 
     /**
-     * 'OR' keyword or operator
+     * 'OR' keyword or operator.
      */
     const T_OR = 3;
 
     /**
-     * 'AND' keyword or operator
+     * 'AND' keyword or operator.
      */
     const T_AND = 4;
 
     /**
-     * A single query (a:b:c:...)
+     * A single query (a:b:c:...).
      */
     const T_QUERY = 5;
 
@@ -65,17 +65,21 @@ class PermissionParser
     const T_SPACE = 6;
 
     /**
-     * 'TRUE' keyword
+     * 'TRUE' keyword.
      */
     const T_TRUE = 7;
 
     /**
-     * 'FALSE' keyword
+     * 'FALSE' keyword.
      */
     const T_FALSE = 8;
 
     /**
      * Get the symbolic name of a lexer token type.
+     *
+     * @param int $tokenType
+     *
+     * @return string
      */
     public static function tokenName($tokenType)
     {
@@ -106,19 +110,19 @@ class PermissionParser
     // Parse tree node types
 
     /**
-     * A single permission check of the form a:b:c:...
+     * A single permission check of the form a:b:c:.
      */
     const P_SIMPLE = 0;
 
     /**
      * A list of child queries, combined with short-circuiting "OR" (i.e.,
-     * first sub-check to pass short-circuits)
+     * first sub-check to pass short-circuits).
      */
     const P_OR = 1;
 
     /**
      * A list of child queries, combined with short-circuiting "AND" (i.e.,
-     * first sub-check to fail short-circuits)
+     * first sub-check to fail short-circuits).
      */
     const P_AND = 2;
 
@@ -134,9 +138,12 @@ class PermissionParser
 
     /**
      * Lexes and parses the specified query string $what.
+     *
      * @param $what
+     *
+     * @throws Exception Parser or lexer errors are thrown as
+     *
      * @return array A parse tree.
-     * @throw Exception Parser or lexer errors are thrown as
      */
     public static function run($what)
     {
@@ -145,6 +152,12 @@ class PermissionParser
 
     /**
      * Lexes the given $query into lexer tokens.
+     *
+     * @param $query
+     *
+     * @throws \Bolt\Exception\PermissionLexerException
+     *
+     * @return array
      */
     public static function lex($query)
     {
@@ -175,9 +188,9 @@ class PermissionParser
             // Keywords: case-insensitive OR, AND, TRUE, FALSE.
             // Word-boundary assertions are required to avoid being overly
             // greedy.
-            '/^(?:\bor\b)/i' => self::T_OR,
-            '/^(?:\band\b)/i' => self::T_AND,
-            '/^(?:\btrue\b)/i' => self::T_TRUE,
+            '/^(?:\bor\b)/i'    => self::T_OR,
+            '/^(?:\band\b)/i'   => self::T_AND,
+            '/^(?:\btrue\b)/i'  => self::T_TRUE,
             '/^(?:\bfalse\b)/i' => self::T_FALSE,
 
             // A single permission query. We're using an explicit character
@@ -226,8 +239,9 @@ class PermissionParser
      * Assert that the given $token's 'type' key is in the list of $expected
      * token types.
      *
-     * @param  array                     $expected List of token types (T_XXXX constants).
-     * @param  array                     $token    A lexer token, associative array.
+     * @param array $expected List of token types (T_XXXX constants).
+     * @param array $token    A lexer token, associative array.
+     *
      * @throws PermissionParserException
      */
     private static function expect($expected, $token)
@@ -237,7 +251,7 @@ class PermissionParser
                 $expectedStr = self::tokenName($expected[0]);
             } else {
                 $last = array_pop($expected);
-                $expectedStr = 'one of ' . implode(', ', array_map(array(self, 'tokenName'), $expected)) . ' or ' . self::tokenName($last);
+                $expectedStr = 'one of ' . implode(', ', array_map(array('self', 'tokenName'), $expected)) . ' or ' . self::tokenName($last);
             }
             $actualStr = self::tokenName($token['type']);
             if ($token['match']) {
@@ -251,8 +265,9 @@ class PermissionParser
     /**
      * Parse a stream of lexer tokens ('lexemes') into a permission query AST.
      *
-     * @param  array $tokens An array or iterable of lexer tokens. The output of
-     *                       `lex()` is suitable here.
+     * @param array $tokens An array or iterable of lexer tokens. The output of
+     *                      `lex()` is suitable here.
+     *
      * @return array A nested associative array representing the resulting
      *               parse tree.
      */

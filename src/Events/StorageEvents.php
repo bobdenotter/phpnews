@@ -2,7 +2,9 @@
 namespace Bolt\Events;
 
 /**
- * Definitions for all possible StorageEvents
+ * Definitions for all possible StorageEvents.
+ *
+ *  * @codeCoverageIgnore
  */
 final class StorageEvents
 {
@@ -16,4 +18,7 @@ final class StorageEvents
 
     const PRE_DELETE    = 'preDelete';
     const POST_DELETE   = 'postDelete';
+
+    const TIMED_PUBLISH   = 'timed.publish';
+    const TIMED_DEPUBLISH = 'timed.depublish';
 }

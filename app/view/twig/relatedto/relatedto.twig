@@ -9,7 +9,7 @@
 
 {% block page_title __('Related content') %}
 
-{% block page_subtitle context.name ~ ' › '~ context.title %}
+{% block page_subtitle context.name ~ ' › ' ~ context.title %}
 
 {% block page_main %}
 
@@ -33,7 +33,7 @@
             <div class="col-md-9">
                 {% include 'relatedto/_toolbar.twig' %}
                 {# TODO: add order #}
-                {{ list(context.show_contenttype, context.related_content, '') }}
+                {{ list(context.show_contenttype, context.related_content, context.permissions, '') }}
             </div>
 
             <aside class="col-md-3">

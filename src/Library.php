@@ -3,78 +3,59 @@
 namespace Bolt;
 
 use Bolt\Configuration\ResourceManager;
+use Bolt\Exception\LowlevelException;
+use Bolt\Translation\Translator;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Class for Bolt's generic library functions
+ * Class for Bolt's generic library functions.
  *
  * @author Gawain Lynch <gawain.lynch@gmail.com>
  */
 class Library
 {
     /**
-     * Cleans up/fixes a relative paths.
+     * Format a filesize like '10.3 KiB' or '2.5 MiB'.
      *
-     * As an example '/site/pivotx/../index.php' becomes '/site/index.php'.
-     * In addition (non-leading) double slashes are removed.
+     * @param integer $size
      *
-     * @param  string $path
-     * @param  bool   $nodoubleleadingslashes
-     * @return string
-     */
-    public static function fixPath($path, $nodoubleleadingslashes = true)
-    {
-        $path = str_replace("\\", "/", rtrim($path, '/'));
-
-        // Handle double leading slash (that shouldn't be removed).
-        if (!$nodoubleleadingslashes && (strpos($path, '//') === 0)) {
-            $lead = '//';
-            $path = substr($path, 2);
-        } else {
-            $lead = '';
-        }
-
-        $patharray = explode('/', preg_replace('#/+#', '/', $path));
-        $new_path = array();
-
-        foreach ($patharray as $item) {
-            if ($item == '..') {
-                // remove the previous element
-                @array_pop($new_path);
-            } elseif ($item == 'http:') {
-                // Don't break for URLs with http:// scheme
-                $new_path[] = 'http:/';
-            } elseif ($item == 'https:') {
-                // Don't break for URLs with https:// scheme
-                $new_path[] = 'https:/';
-            } elseif (($item != '.')) {
-                $new_path[] = $item;
-            }
-        }
-
-        return $lead . implode('/', $new_path);
-    }
-
-    /**
-     * Format a filesize like '10.3 kb' or '2.5 mb'
-     *
-     * @param  integer $size
      * @return string
      */
     public static function formatFilesize($size)
     {
         if ($size > 1024 * 1024) {
-            return sprintf("%0.2f mb", ($size / 1024 / 1024));
+            return sprintf("%0.2f MiB", ($size / 1024 / 1024));
         } elseif ($size > 1024) {
-            return sprintf("%0.2f kb", ($size / 1024));
+            return sprintf("%0.2f KiB", ($size / 1024));
         } else {
-            return $size . ' b';
+            return $size . ' B';
+        }
+    }
+
+    /**
+     * Convert a size string, such as 5M to bytes.
+     *
+     * @param string $size
+     *
+     * @return integer
+     */
+    public static function filesizeToBytes($size)
+    {
+        $unit = preg_replace('/[^bkmgtpezy]/i', '', $size);
+        $size = preg_replace('/[^0-9\.]/', '', $size);
+
+        if ($unit) {
+            return round($size * pow(1024, stripos('bkmgtpezy', $unit[0])));
+        } else {
+            return round($size);
         }
     }
 
     /**
      * Gets the extension (if any) of a filename.
      *
-     * @param  string $filename
+     * @param string $filename
+     *
      * @return string
      */
     public static function getExtension($filename)
@@ -92,7 +73,8 @@ class Library
     /**
      * Encodes a filename, for use in thumbnails, magnific popup, etc.
      *
-     * @param  string $filename
+     * @param string $filename
+     *
      * @return string
      */
     public static function safeFilename($filename)
@@ -108,14 +90,27 @@ class Library
     }
 
     /**
+     * @param object $obj
+     *
+     * @return array
+     *
+     * @deprecated
+     */
+    public static function hackislyParseRegexTemplates($obj)
+    {
+        return self::parseTwigTemplates($obj);
+    }
+
+    /**
      * parse the used .twig templates from the Twig Loader object, using regular expressions.
      *
      * We use this for showing them in the debug toolbar.
      *
-     * @param  object $obj
+     * @param \Twig_LoaderInterface $obj
+     *
      * @return array
      */
-    public static function hackislyParseRegexTemplates($obj)
+    public static function parseTwigTemplates($obj)
     {
         $app = ResourceManager::getApp();
 
@@ -126,18 +121,19 @@ class Library
         $templates = array();
 
         foreach ($matches[1] as $match) {
-            $templates[] = str_replace($app['resources']->getPath('root') . DIRECTORY_SEPARATOR, '', $match);
+            $templates[] = str_replace($app['resources']->getPath('rootpath'), '', $match);
         }
 
         return $templates;
     }
 
     /**
-     * Simple wrapper for $app['url_generator']->generate()
+     * Simple wrapper for $app['url_generator']->generate().
      *
-     * @param  string $path
-     * @param  array  $param
-     * @param  string $add
+     * @param string $path
+     * @param array  $param
+     * @param string $add
+     *
      * @return string
      */
     public static function path($path, $param = array(), $add = '')
@@ -156,24 +152,30 @@ class Library
     }
 
     /**
-     * Simple wrapper for $app->redirect($app['url_generator']->generate());
+     * Simple wrapper for $app->redirect($app['url_generator']->generate());.
      *
-     * @param  string $path
-     * @param  array  $param
-     * @param  string $add
-     * @return string
+     * @param string $path
+     * @param array  $param
+     * @param string $add
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
     public static function redirect($path, $param = array(), $add = '')
     {
         $app = ResourceManager::getApp();
 
-        // Only set the 'retreat' when redirecting to 'login' but not FROM logout.
-        if (($path == 'login') && ($app['request']->get('_route') !== 'logout')) {
+        // If the user doesn't have access to the backend, redirect them to the frontend
+        if ($path === 'dashboard' && $app['users']->isValidSession() && !$app['users']->isAllowed('dashboard')) {
+            $app['session']->getFlashBag()->clear();
+            $path = 'homepage';
+        }
 
+        // Only set the 'retreat' when redirecting to 'login' but not FROM logout.
+        if (($path === 'login') && ($app['request']->get('_route') !== 'logout')) {
             $app['session']->set(
                 'retreat',
                 array(
-                    'route' => $app['request']->get('_route'),
+                    'route'  => $app['request']->get('_route'),
                     'params' => $app['request']->get('_route_params')
                 )
             );
@@ -185,12 +187,32 @@ class Library
     }
 
     /**
-     * Create a simple redirect to a page / path and die.
+     * Get an array of the query parameters
+     * 
+     * @internal
      *
-     * @param string  $path
-     * @param boolean $die
+     * @param string $url
+     *
+     * @return array
      */
-    public static function simpleredirect($path, $abort = true)
+    public static function getQueryParameters($url)
+    {
+        $parsedUrl = parse_url($url);
+        parse_str($parsedUrl['query'], $parameters);
+        $parameters = array_diff($parameters, array(''));
+
+        return $parameters;
+    }
+
+    /**
+     * Create a simple redirect to a page / path.
+     *
+     * @param string $path
+     * @param bool   $abort
+     *
+     * @return string
+     */
+    public static function simpleredirect($path, $abort = false)
     {
         $app = ResourceManager::getApp();
 
@@ -199,10 +221,12 @@ class Library
         }
         header("location: $path");
         echo "<p>Redirecting to <a href='$path'>$path</a>.</p>";
-        echo "<script>window.setTimeout(function(){ window.location='$path'; }, 500);</script>";
-        if ($abort) {
-            $app->abort(303, "Redirecting to '$path'.");
+        echo "<script>window.setTimeout(function () { window.location='$path'; }, 500);</script>";
+        if (!$abort) {
+            return $path;
         }
+
+        $app->abort(Response::HTTP_SEE_OTHER, "Redirecting to '$path'.");
     }
 
     /**
@@ -211,38 +235,38 @@ class Library
      * If the file isn't readable (or doesn't exist) or reading it fails,
      * false is returned.
      *
-     * @param  string  $filename
-     * @param  boolean $silent   Set to true if you want an visible error.
+     * @param string  $filename
+     * @param boolean $silent   Set to true if you want an visible error.
+     *
+     * @throws \Bolt\Exception\LowlevelException
+     *
      * @return mixed
      */
     public static function loadSerialize($filename, $silent = false)
     {
-        $filename = self::fixPath($filename);
-
         if (! is_readable($filename)) {
-
             if ($silent) {
                 return false;
             }
 
-            $part = self::__(
+            $part = Translator::__(
                 'Try logging in with your ftp-client and make the file readable. ' .
                 'Else try to go <a>back</a> to the last page.'
             );
-            $message = '<p>' . self::__('The following file could not be read:') . '</p>' .
+            $message = '<p>' . Translator::__('The following file could not be read:') . '</p>' .
                 '<pre>' . htmlspecialchars($filename) . '</pre>' .
                 '<p>' . str_replace('<a>', '<a href="javascript:history.go(-1)">', $part) . '</p>';
 
-            renderErrorpage(self::__('File is not readable!'), $message);
+            throw new LowlevelException(Translator::__('File is not readable!'), $message);
         }
 
-        $serialized_data = trim(implode("", file($filename)));
-        $serialized_data = str_replace("<?php /* bolt */ die(); ?" . ">", "", $serialized_data);
+        $serializedData = trim(implode('', file($filename)));
+        $serializedData = str_replace('<?php /* bolt */ die(); ?' . '>', '', $serializedData);
 
         // new-style JSON-encoded data; detect automatically
-        if (substr($serialized_data, 0, 5) === 'json:') {
-            $serialized_data = substr($serialized_data, 5);
-            $data = json_decode($serialized_data, true);
+        if (substr($serializedData, 0, 5) === 'json:') {
+            $serializedData = substr($serializedData, 5);
+            $data = json_decode($serializedData, true);
 
             return $data;
         }
@@ -250,54 +274,53 @@ class Library
         // old-style serialized data; to be phased out, but leaving intact for
         // backwards-compatibility. Up until Bolt 1.5, we used to serialize certain
         // fields, so reading in those old records will still use the code below.
-        @$data = unserialize($serialized_data);
-        if (is_array($data)) {
-            return $data;
-        } else {
-            $temp_serialized_data = preg_replace("/\r\n/", "\n", $serialized_data);
-            if (@$data = unserialize($temp_serialized_data)) {
+        try {
+            $data = unserialize($serializedData);
+            if (is_array($data)) {
                 return $data;
             } else {
-                $temp_serialized_data = preg_replace("/\n/", "\r\n", $serialized_data);
-                if (@$data = unserialize($temp_serialized_data)) {
+                $tempSerializedData = preg_replace("/\r\n/", "\n", $serializedData);
+                if ($data = unserialize($tempSerializedData)) {
                     return $data;
                 } else {
-                    return false;
+                    $tempSerializedData = preg_replace("/\n/", "\r\n", $serializedData);
+                    if ($data = unserialize($tempSerializedData)) {
+                        return $data;
+                    } else {
+                        return false;
+                    }
                 }
             }
+        } catch (\Exception $e) {
         }
-
     }
 
     /**
      * Serializes some data and then saves it.
      *
-     * @param  string  $filename
-     * @param  mixed   $data
-     * @return boolean
+     * @param string $filename
+     * @param mixed  $data
+     *
+     * @throws \Bolt\Exception\LowlevelException
+     *
+     * @return bool
      */
     public static function saveSerialize($filename, &$data)
     {
-        $app = ResourceManager::getApp();
-        $filename = self::fixPath($filename);
-
-        $ser_string = '<?php /* bolt */ die(); ?>json:' . json_encode($data);
+        $serString = '<?php /* bolt */ die(); ?>json:' . json_encode($data);
 
         // disallow user to interrupt
         ignore_user_abort(true);
 
-        $old_umask = umask(0111);
-
         // open the file and lock it.
         if ($fp = fopen($filename, 'a')) {
-
             if (flock($fp, LOCK_EX | LOCK_NB)) {
 
                 // Truncate the file (since we opened it for 'appending')
                 ftruncate($fp, 0);
 
                 // Write to our locked, empty file.
-                if (fwrite($fp, $ser_string)) {
+                if (fwrite($fp, $serString)) {
                     flock($fp, LOCK_UN);
                     fclose($fp);
                 } else {
@@ -309,7 +332,7 @@ class Library
                         'Try logging in with your ftp-client and check to see if it is chmodded to be readable by ' .
                         'the webuser (ie: 777 or 766, depending on the setup of your server). <br /><br />' .
                         'Current path: ' . getcwd() . '.';
-                    $app->abort(401, $message);
+                    throw new LowlevelException($message);
                 }
             } else {
                 fclose($fp);
@@ -319,19 +342,16 @@ class Library
                     'Try logging in with your ftp-client and check to see if it is chmodded to be readable by the ' .
                     'webuser (ie: 777 or 766, depending on the setup of your server). <br /><br />' .
                     'Current path: ' . getcwd() . '.';
-                $app->abort(401, $message);
+                throw new LowlevelException($message);
             }
         } else {
-
             $message = 'Error opening file<br/><br/>' .
                 'The file <b>' . $filename . '</b> could not be opened for writing! <br /><br />' .
                 'Try logging in with your ftp-client and check to see if it is chmodded to be readable by the ' .
                 'webuser (ie: 777 or 766, depending on the setup of your server). <br /><br />' .
                 'Current path: ' . getcwd() . '.';
-            debug_print_backtrace();
-            $app->abort(401, $message);
+            throw new LowlevelException($message);
         }
-        umask($old_umask);
 
         // reset the users ability to interrupt the script
         ignore_user_abort(false);
@@ -342,6 +362,11 @@ class Library
     /**
      * Leniently decode a serialized compound data structure, detecting whether
      * it's dealing with JSON-encoded data or a PHP-serialized string.
+     *
+     * @param string $str
+     * @param bool   $assoc
+     *
+     * @return mixed
      */
     public static function smartUnserialize($str, $assoc = true)
     {
@@ -350,9 +375,10 @@ class Library
             if ($data !== false) {
                 return $data;
             }
-        }
-        $data = unserialize($str);
+        } else {
+            $data = unserialize($str);
 
-        return $data;
+            return $data;
+        }
     }
 }

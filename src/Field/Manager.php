@@ -3,29 +3,24 @@
 namespace Bolt\Field;
 
 /**
- * Class to manage instances of fields and instantiate the defaults
+ * Class to manage instances of fields and instantiate the defaults.
  *
  * @author Ross Riley <riley.ross@gmail.com>
  **/
 
 class Manager
 {
-
     protected $fields = array();
 
     protected $defaults = array(
         'text', 'integer', 'float', 'geolocation', 'imagelist', 'image', 'file', 'filelist', 'video', 'html',
-        'textarea', 'datetime', 'date', 'select', 'templateselect', 'markdown', 'checkbox', 'slug'
+        'textarea', 'datetime', 'date', 'select', 'templateselect', 'markdown', 'checkbox', 'slug', 'hidden'
     );
 
     public function __construct()
     {
         foreach ($this->defaults as $default) {
-            if ($default == 'number') {
-                $field = new Base($default, 'editcontent/fields/_float.twig');
-            } else {
-                $field = new Base($default, 'editcontent/fields/_' . $default . '.twig');
-            }
+            $field = new Base($default, 'editcontent/fields/_' . $default . '.twig');
             $this->addField($field);
         }
     }
@@ -44,6 +39,8 @@ class Manager
     {
         if ($this->has($name)) {
             return $this->fields[$name];
+        } else {
+            return false;
         }
     }
 

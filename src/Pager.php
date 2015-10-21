@@ -3,7 +3,6 @@ namespace Bolt;
 
 class Pager extends \ArrayObject
 {
-
     public $for;
 
     public $count;
@@ -33,7 +32,7 @@ class Pager extends \ArrayObject
     }
 
     /**
-     * Used for calling from template to build up right paginated URL link
+     * Used for calling from template to build up right paginated URL link.
      *
      * @return string
      */
@@ -53,14 +52,9 @@ class Pager extends \ArrayObject
         } else {
             unset($parameters['page']);
         }
-        array_walk(
-            $parameters,
-            function (&$item, $key) {
-                $item = "$key=$item";
-            }
-        );
-        $parameters[] = $pageid . '=';
-        $link = '?' . implode('&', $parameters);
+
+        $parameters[$pageid] = '';
+        $link = '?' . http_build_query($parameters);
 
         return $link;
     }

@@ -4,17 +4,18 @@
     class:  field.class|default(''),
     label:  field.label|default(''),
     info:   field.info|default('')
-}%}
+} %}
 
 {#=== INIT ===========================================================================================================#}
 
 {% set attr_checkbox = {
-    checked:  context.content.get(key),
+    checked:  context.content.get(contentkey),
     class:    option.class,
-    name_id:  key,
+    name:     name,
+    id:       key,
     type:     'checkbox',
     value:    '1'
-}%}
+} %}
 
 {#=== FIELDSET =======================================================================================================#}
 
