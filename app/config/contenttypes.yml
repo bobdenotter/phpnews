@@ -1,0 +1,171 @@
+# This file defines the contenttypes on the website. See the documentation for
+# details: https://docs.bolt.cm/contenttypes-and-records#defining-contenttypes
+
+# Pages can be used for the more 'static' pages on your site. Things like
+# 'about us', 'contact' or a 'disclaimer'. This content-type has a 'templateselect'
+# field, which allows you to override the record_template setting for an
+# individual page.
+# The taxonomy for this contenttype is defined as 'groups', which is a so-called
+# "grouping taxonomy". This way you can easily group sets of pages that logically
+# belong together. If your site has a 'services' section, in which you'd like to
+# list the different types of services a company provides, you can group these
+# together.
+
+feeditems:
+    name: Feeditems
+    singular_name: Feeditem
+    description: "Crawled feed items. Do not change manually."
+    fields:
+        title:
+            type: text
+            class: large
+            group: content
+        slug:
+            type: slug
+            uses: title
+        itemid:
+            type: text
+            variant: inline
+        content:
+            type: html
+        raw:
+            type: textarea
+        source:
+            type: text
+            variant: inline
+        author:
+            type: text
+            variant: inline
+        image:
+            type: text
+            variant: inline
+        sitetitle:
+            type: text
+            variant: inline
+        sitesource:
+            type: text
+            variant: inline
+    taxonomy: [ tags, authors ]
+    record_template: feeditem.twig
+    listing_template: listing.twig
+    listing_records: 10
+    default_status: published
+    sort: -datepublish
+    recordsperpage: 10
+
+pages:
+    name: Pages
+    singular_name: Page
+    description: |
+      The **Pages** contentype can be used for the more 'static' pages on your site. Things like
+      _'about us'_, _'contact'_ or a _'disclaimer'_.
+      To change the fields that are in this contenttype, edit the file `contenttypes.yml` in the
+      folder `app/config/`, using the editor of your choice, or by going to 'Configuration' »
+      'Contenttypes' in the menu on the left.
+    fields:
+        title:
+            type: text
+            class: large
+            group: content
+        slug:
+            type: slug
+            uses: title
+        image:
+            type: image
+        teaser:
+            type: html
+        content:
+            type: html
+            height: 300px
+            allowtwig: true
+        template:
+            type: templateselect
+            filter: '*.twig'
+        seotitle: &seotitle
+            prefix: '<hr><h3>SEO settings</h3>'
+            type: text
+            variant: inline
+            class: wide
+            postfix: "Will be used as the <tt>&lt;title&gt;</tt> and in search engines. Limit the length to 70 chars."
+        metadescription: &metadescription
+            type: textarea
+            height: "60px"
+            postfix: "Will be used as the <tt>&lt;meta name=\"description\"&gt;</tt>, and will show up in search engines. Limit the length to 156 chars."
+            taxonomy: [ chapters ]
+            recordsperpage: 100
+
+# Possible field types:
+#
+# text - varchar(256) - input type text.
+# integer - integer - Input field for integer numbers.
+# float - double - Input field for floating numbers, stored as 'Double'.
+# geolocation - text (65kb) - Input field for geolocation. Enter an address, and the location is geocoded to latitude/longitude coordinates
+# imagelist - text (65kb) - Input type for imagelists. Add multiple images with a description. Useful for image sliders, galleries, etcetera.
+# image - varchar(256) - image select/upload widget, stored as filename.
+# file - varchar(256) - file select/upload widget, stored as filename.
+# filelist - text (65kb) - Input type for a list of files. Including a description.
+# video - varchar(256) - Video embed widget, stored as filename.
+# html - text (65kb) - wysiwyg element.
+# textarea - varchar(32768) - Simple, plain < textarea > field.
+# markdown - varchar(32768) - Simple, plain < textarea > field, which is parsed as Markdown text.
+# datetime - datetime - date and time selector widget.
+# date - datetime - date selector widget.
+# select - varchar(256) - select with predefined values
+# templateselect - varchar(256) - select with template filenames
+# checkbox - integer - checkbox-field which is 1 (checked) or 0 (unchecked)
+
+# Using YAML repeated nodes
+#
+# YAML allows the defining of "repeated nodes". These allow you to define a 'node'
+# with a 'key: &name' and referenced later with '<<: *name'
+#
+# Bolt allows you to define this with the special entry of '__nodes:' that itself
+# won't create a Contenttype, but will allow you to use it in actual contenttypes
+# to prevent repeating yourself.
+#
+# To achieve this, first create a key '__nodes:'
+#__nodes:
+#    field_defaults: &field_defaults
+#        title:
+#            type: text
+#            class: large
+#            group: main
+#        slug:
+#            type: slug
+#            uses: title
+#    template_defaults: &template_defaults
+#        template:
+#            type: templateselect
+#            filter: '*.twig'
+#            group: meta
+#
+# Then, as an example, you could create a Contenttype with default fields, with
+# an additional 'image' field.
+#
+#contenttype_abc:
+#    name: Contenttype Abc
+#    fields:
+#        <<: *field_defaults
+#        image:
+#            type: image
+#            attrib: title
+#            extensions: [ gif, jpg, png ]
+#        <<: *template_defaults
+#    taxonomy: [ chapters ]
+#    recordsperpage: 10
+#
+# Alternatively, or additionally, you then can then create a Contenttype with
+# default fields, and a 'select' field, and a different 'templateselect' option.
+#
+#contenttype_xyz:
+#    name: Contenttype Xyz
+#    fields:
+#        <<: *field_defaults
+#        selectfield:
+#            type: select
+#            values: [ none, foo, bar ]
+#        template:
+#            type: templateselect
+#            filter: '*_xyz.twig'
+#    taxonomy: [ tags ]
+#    recordsperpage: 20

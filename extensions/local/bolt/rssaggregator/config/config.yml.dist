@@ -1,0 +1,146 @@
+cacheMaxAge: 30
+itemAmount: 4
+
+# Set the key, to prevent people from trying to DDOS your server by triggering
+# /bolt/extends/rssaggregate a lot.
+key: aGhgdhTRV35FS
+
+feeds:
+    derekrethans:
+        name: "Derick Rethans"
+        title: "Derick Rethans' blog'"
+        url: "http://derickrethans.nl/"
+        feed: "http://derickrethans.nl/feed-php.xml"
+    paulmjones:
+        name: "Paul M. Jones"
+        title: "There are no solutions, only tradeoffs."
+        url: "http://paul-m-jones.com/"
+        feed: "http://paul-m-jones.com/feed"
+    mwop:
+        url: "https://mwop.net/blog"
+        title: "phly, boy, phly: matthew weier o'phinney"
+        name: "Matthew Weier o'Phinney"
+        feed: "https://mwop.net/blog/rss.xml"
+    brandonsavage:
+        name: "Brandon Savage"
+        url: "http://www.brandonsavage.net/blog/"
+        feed: "http://www.brandonsavage.net/feed/"
+        title: "Brandon Savage's blog"
+    erikaheidi:
+        url: "http://erikaheidi.com/"
+        title: "Erika Heidi's blog"
+        name: "Erika Heidi"
+        feed: "http://feeds.feedburner.com/erikaheidi/blog" # http://erikaheidi.com/entries/rss/feed.rss"
+    calevans:
+        name: "Cal Evans"
+        title: "Cal Evans - Postcards From My Life"
+        url: "http://blog.calevans.com/"
+        feed: "http://feeds.feedburner.com/PostcardsFromMyLife" # "http://blog.calevans.com/feed/"
+    chrishartjes:
+        name: "Chris Hartjes"
+        title: "@TheKeyboard"
+        url: "http://www.littlehart.net/atthekeyboard/"
+        feed: "http://www.littlehart.net/atthekeyboard/atom.xml"
+    lornajane:
+        name: "Lorna Jane"
+        title: "Lorna Jane's blog"
+        url: "http://www.lornajane.net/blog"
+        feed: "http://www.lornajane.net/feed"
+    ircmaxell:
+        name: "Ircmaxell"
+        title: "Ircmaxell's blog"
+        url: "http://blog.ircmaxell.com/"
+        feed: "http://blog.ircmaxell.com/feeds/posts/default?alt=rss"
+    philsturgeon:
+        name: "Phil Sturgeon"
+        title: "Phil Sturgeon's blog"
+        url: "https://philsturgeon.uk/blog"
+        feed: "https://philsturgeon.uk/feed.xml" # "http://philsturgeon.uk/blog/rss/all.rss"
+    skoop:
+        name: "Stefan Koopmanschap"
+        title: "Left on the web"
+        url: "http://leftontheweb.com/"
+        feed: "http://leftontheweb.com/atom.xml"
+    krakjoe:
+        name: "Krakjoe"
+        title: "Musings, ninja ones"
+        url: "http://blog.krakjoe.ninja/"
+        feed: "http://blog.krakjoe.ninja/feeds/posts/default"
+    rosstuck:
+        name: "Ross Tuck"
+        title: "Ross Tuck's weblog"
+        url: "http://rosstuck.com/"
+        feed: "http://rosstuck.com/feed.xml"
+    fabpot:
+        name: "Fabien Potencier"
+        title: "Fabien Potencier's blog"
+        url: "http://fabien.potencier.org/"
+        feed: "http://feeds.fabien.potencier.org/aidedecamp"
+    matthiasnoback:
+        name: "Matthias Noback"
+        title: "Matthias Noback's blog"
+        url: "http://php-and-symfony.matthiasnoback.nl/"
+        feed: "http://php-and-symfony.matthiasnoback.nl/atom.xml"
+    taylorotwell:
+        name: "Taylor Otwell"
+        title: "Taylor Otwell's blog"
+        url: "http://taylorotwell.com/"
+        feed: "http://taylorotwell.com/feed"
+    evertpot:
+        name: "Evert Pot"
+        title: "Het Bijstere Spoor"
+        url: "http://evertpot.com"
+        feed: "http://feeds.feedburner.com/bijsterespoor"
+    jordiboggiano:
+        name: "Jordi Boggiano"
+        title: "Jordi Boggiano's blog"
+        url: "http://seld.be/"
+        feed: "http://feeds.seld.be/blog-seld"
+    beberlei:
+        name: "Benjamin Eberlei"
+        title: "Benjamin Eberlei's weblog"
+        url: "http://www.whitewashing.de/"
+        feed: "http://www.whitewashing.de/rss.xml"
+    rdohms:
+        name: "Rafael Dohms"
+        title: "Rafael Dohms' blog"
+        url: "http://blog.doh.ms/"
+        feed: "http://blog.doh.ms/feed/"
+    sitepoint:
+        name: "Sitepoint"
+        title: "Sitepoint"
+        url: "http://www.sitepoint.com/"
+        feed: "http://www.sitepoint.com/php/feed/"
+    symfony:
+        name: "Symfony blog"
+        title: "The Symfony blog"
+        url: "http://symfony.com/blog/"
+        feed: "http://feeds.feedburner.com/symfony/blog"
+    annafilina:
+        name: "Anna Filina"
+        title: "Anna Filina's weblog"
+        url: "http://afilina.com/"
+        feed: "http://afilina.com/feed"
+    ericlbarnes:
+        name: "Eric L. Barnes"
+        title: "Eric L. Barnes' Weblog"
+        url: "http://ericlbarnes.com/"
+        feed: "http://ericlbarnes.com/feed/"
+    joshuathijssen:
+        name: "Joshua Thijssen"
+        title: "Joshua Thijssen's weblog"
+        url: "https://www.adayinthelifeof.nl/"
+        feed: "https://www.adayinthelifeof.nl/feed/"
+    mtdowling:
+        name: "Michael Dowling"
+        title: "Michael Dowling's blog"
+        url: "http://mtdowling.com/"
+        feed: "http://mtdowling.com/atom.xml"
+    davedevelopment:
+        name: "Dave Marshall"
+        title: "Dave Marshall's weblog"
+        feed: "http://davedevelopment.co.uk/atom.xml"
+        url: "http://davedevelopment.co.uk/"
+
+
+# http://www.brandonsavage.net/best-php-blogs-to-follow

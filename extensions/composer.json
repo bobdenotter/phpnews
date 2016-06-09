@@ -1,0 +1,45 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Bolt\\Composer\\EventListener\\": "../vendor/bolt/bolt/src/Composer/EventListener"
+        }
+    },
+    "config": {
+        "discard-changes": true,
+        "preferred-install": "dist"
+    },
+    "description": "Bolt extension installation interface",
+    "extra": {
+        "bolt-web-path": "../public_html",
+        "bolt-root-path": "..",
+        "merge-plugin": {
+            "include": [
+                "local/*/*/composer.json"
+            ]
+        }
+    },
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "name": "bolt/extensions",
+    "prefer-stable": true,
+    "provide": {
+        "bolt/bolt": "3.0.5"
+    },
+    "repositories": {
+        "packagist": false,
+        "bolt": {
+            "type": "composer",
+            "url": "https://extensions.bolt.cm/satis/"
+        }
+    },
+    "require": {
+        "bolt/disqus": "v2.0.1",
+        "bolt/sitemap": "2.0.0",
+        "wikimedia/composer-merge-plugin": "^1.3"
+    },
+    "scripts": {
+        "post-autoload-dump": "Bolt\\Composer\\EventListener\\PackageEventListener::dump",
+        "post-package-install": "Bolt\\Composer\\EventListener\\PackageEventListener::handle",
+        "post-package-update": "Bolt\\Composer\\EventListener\\PackageEventListener::handle"
+    }
+}
