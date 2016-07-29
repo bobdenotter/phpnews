@@ -6,7 +6,8 @@
 		"RSS", "Feed", "Feedreader", "aggregator", "aggregation"
 	],
     "require": {
-        "bolt/bolt": "^3.0"
+        "bolt/bolt": "^3.0",
+		"fguillot/picofeed": "@stable"
     },
 	"license" : "MIT",
 	"authors" : [{

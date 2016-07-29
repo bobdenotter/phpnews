@@ -36,45 +36,16 @@ class RSSAggregatorExtension extends SimpleExtension
         ];
     }
 
-    // /**
-    //  * Initialize RSS Aggregator
-    //  */
-    // public function initialize()
-    // {
-
-    //     $path = $app['config']->get('general/branding/path') . '/rssaggregate';
-    //     $app->match($path, array($this, "RSSAggregator"));
-
-    //     /*
-    //      * Frontend
-    //      */
-    //     if ($app['config']->getWhichEnd() == 'frontend') {
-    //         // // Add CSS file
-    //         // $this->addCSS("css/rssaggregator.css");
-
-    //         // // Initialize the Twig function
-    //         // $this->addTwigFunction('rss_aggregator', 'twigRssAggregator');
-
-    //         $app['twig']->addGlobal('rssfeeds', $config['feeds']);
-
-
-    //     }
-    // }
-
     public function RSSAggregator()
     {
         $config = $this->getConfig();
         $app = $this->getContainer();
 
-        dump($config);
+        $currentuser = $app['users']->currentuser;
 
-        if (!empty($config['key']) && ($config['key'] !== $_GET['key'])) {
+        if (!empty($config['key']) && ($config['key'] !== $_GET['key']) && (empty($currentuser['username']))) {
             return "Key not correct.";
         }
-
-        $cachedir = $app['resources']->getPath('cache') . '/rssaggregator/';
-
-        // dump($config['feeds']);
 
         foreach ($config['feeds'] as $author => $feed) {
             $this->parseFeed($author, $feed);
