@@ -4,9 +4,78 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "632b924c6a01f53e3efdc6a9be436b73",
-    "content-hash": "f3caeb5f0aedb8bcab84038e313fdfac",
+    "hash": "117f60ff6489f3eae54429126766b943",
+    "content-hash": "0d2b386febcc91cb777971bb7a85cf0d",
     "packages": [
+        {
+            "name": "bolt/boltforms",
+            "version": "v3.0.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bolt/boltforms.git",
+                "reference": "8a0e7b5a2e4e3ff36c7b0476fc5aa8b6138a96e6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bolt/boltforms/zipball/8a0e7b5a2e4e3ff36c7b0476fc5aa8b6138a96e6",
+                "reference": "8a0e7b5a2e4e3ff36c7b0476fc5aa8b6138a96e6",
+                "shasum": ""
+            },
+            "require": {
+                "bolt/bolt": "^3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.7"
+            },
+            "suggest": {
+                "rossriley/formeditor": "A UI editor for form configuration."
+            },
+            "type": "bolt-extension",
+            "extra": {
+                "bolt-assets": "web",
+                "bolt-class": "Bolt\\Extension\\Bolt\\BoltForms\\BoltFormsExtension",
+                "bolt-icon": "icon-boltforms.png",
+                "branch-alias": {
+                    "dev-master": "3.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bolt\\Extension\\Bolt\\BoltForms\\": [
+                        "src/"
+                    ],
+                    "ReCaptcha\\": "lib/ReCaptcha/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Bolt\\Extension\\Bolt\\BoltForms\\Tests\\": "tests/",
+                    "Bolt\\Tests\\": "vendor/bolt/bolt/tests/phpunit/unit/"
+                }
+            },
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Gawain Lynch",
+                    "email": "gawain.lynch@gmail.com"
+                }
+            ],
+            "description": "Symfony Forms API for bolt",
+            "keywords": [
+                "comments",
+                "contact",
+                "forms",
+                "reCaptcha",
+                "uploads"
+            ],
+            "support": {
+                "source": "https://github.com/bolt/boltforms/tree/v3.0.3",
+                "issues": "https://github.com/bolt/boltforms/issues"
+            },
+            "time": "2016-07-19 13:42:10"
+        },
         {
             "name": "bolt/disqus",
             "version": "v2.0.1",
@@ -57,16 +126,16 @@
         },
         {
             "name": "bolt/sitemap",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/Sitemap.git",
-                "reference": "9cf8008260989b68d85986156ecc681c56bd52c4"
+                "reference": "d321e61e04d2fe2e825352f1378b4ec12109b74d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/9cf8008260989b68d85986156ecc681c56bd52c4",
-                "reference": "9cf8008260989b68d85986156ecc681c56bd52c4",
+                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/d321e61e04d2fe2e825352f1378b4ec12109b74d",
+                "reference": "d321e61e04d2fe2e825352f1378b4ec12109b74d",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +177,7 @@
                 "source": "https://github.com/bolt/Sitemap/tree/master",
                 "issues": "https://github.com/bolt/Sitemap/issues"
             },
-            "time": "2016-05-28 11:47:51"
+            "time": "2016-08-01 10:19:10"
         },
         {
             "name": "wikimedia/composer-merge-plugin",
@@ -165,7 +234,7 @@
             ],
             "description": "Composer plugin to merge multiple composer.json files",
             "support": {
-                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/master",
+                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/v1.3.1",
                 "issues": "https://github.com/wikimedia/composer-merge-plugin/issues"
             },
             "time": "2016-03-08 17:11:37"

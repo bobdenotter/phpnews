@@ -23,7 +23,7 @@
     "name": "bolt/extensions",
     "prefer-stable": true,
     "provide": {
-        "bolt/bolt": "3.0.11"
+        "bolt/bolt": "3.2.0"
     },
     "repositories": {
         "packagist": false,
@@ -33,8 +33,9 @@
         }
     },
     "require": {
-        "bolt/disqus": "v2.0.1",
-        "bolt/sitemap": "2.0.0",
+        "bolt/boltforms": "^3.0",
+        "bolt/disqus": "^2.0",
+        "bolt/sitemap": "^2.0",
         "wikimedia/composer-merge-plugin": "^1.3"
     },
     "scripts": {

@@ -19,7 +19,7 @@ backgrounds:
   - bg7.jpg
 
 
-# Template filenames: 
+# Template filenames:
 maintenance_template: maintenance_default.twig
 homepage_template: index.twig
 record_template: entry.twig

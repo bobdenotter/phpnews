@@ -8,7 +8,7 @@ key: aGhgdhTRV35FS
 feeds:
     derekrethans:
         name: "Derick Rethans"
-        title: "Derick Rethans' blog'"
+        title: "Derick Rethans' blog"
         url: "http://derickrethans.nl/"
         feed: "http://derickrethans.nl/feed-php.xml"
     paulmjones:

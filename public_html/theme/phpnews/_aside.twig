@@ -43,9 +43,10 @@
 
       <ul>
 
+
       {% for author, feed in rssfeeds %}
       <li>
-        <a href="{{feed.url}}" target="_blank">{{ feed.title }}</a> 
+        <a href="{{feed.get('url') }}" target="_blank">{{ feed.get('title') }}</a>
         (<a href="/author/{{ author}}">Posts</a>)
       </li>
       {% endfor %}

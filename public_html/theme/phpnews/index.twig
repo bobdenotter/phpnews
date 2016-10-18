@@ -6,7 +6,7 @@
     <!-- Page Header -->
     <!-- Set your background image for this header on the line below. -->
     {% set headerimage = paths.theme ~ 'img/' ~ random(theme.backgrounds) %}
-    <header class="intro-header" style="background-image: url('{{ headerimage }}')">{# thumbnail(record.image, 1000, 700) #}    
+    <header class="intro-header" style="background-image: url('{{ headerimage }}')">{# thumbnail(record.image, 1000, 700) #}
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -26,13 +26,13 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-0 col-md-10 col-md-offset-1">
-               
+
 
             {% setcontent records = "feeditems/latest/6" allowpaging %}
                 {% for record in records %}
 
                     {% include '_listitem.twig' %}
-                
+
                 {% endfor %}
 
                 <!-- Pager -->
