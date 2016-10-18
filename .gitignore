@@ -1,7 +1,23 @@
-backup/
+# Don't put config.yml in git, unless you're absolutely sure that all sensitive
+# info (database credentials, mail settings) are _only_ in config_local.yml
+app/config/config.yml
+
+# Usually we don't put 'uploaded files' into git either.
+files/
+
+# -----------------------------------------------------------------------------
+
+# Config files with '_local' should *never* go into git
+app/config/*_local.yml
+
+# SQLite databases should not go into git
+app/database/
+/bolt-public/
+
 cache/
 thumbs/
 vendor/
+public_html/bolt-public/
 
 # NPM, Gulp and Grunt stuff
 node_modules
@@ -10,18 +26,23 @@ npm-debug.log
 .sass-cache
 
 # File-system cruft and temporary files
-scrutinizer.phar
-php-cs-fixer.phar
-.DS_Store
-.idea
-__*
-._*
-Vagrantfile
-.vagrant*
+*.gz
 *.sublime-*
-/tags
+*.zip
 .*.swp
-.swp
+._*
 .buildpath
+.DS_Store
+.idea/
 .project
+.swp
+.Trashes
+.vagrant*
 /bolt.log
+/tags
+__*
+php-cs-fixer.phar
+scrutinizer.phar
+Thumbs.db
+Vagrantfile
+
