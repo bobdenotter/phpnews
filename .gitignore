@@ -4,6 +4,7 @@ app/config/config.yml
 
 # Usually we don't put 'uploaded files' into git either.
 files/
+composer.phar
 
 # -----------------------------------------------------------------------------
 

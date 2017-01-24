@@ -4,21 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "117f60ff6489f3eae54429126766b943",
-    "content-hash": "0d2b386febcc91cb777971bb7a85cf0d",
+    "content-hash": "d02e375d13152556931d734124accdd2",
     "packages": [
         {
             "name": "bolt/boltforms",
-            "version": "v3.0.3",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/boltforms.git",
-                "reference": "8a0e7b5a2e4e3ff36c7b0476fc5aa8b6138a96e6"
+                "reference": "3d7edfe2356fd71146227211ad790a3bde20ae17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/boltforms/zipball/8a0e7b5a2e4e3ff36c7b0476fc5aa8b6138a96e6",
-                "reference": "8a0e7b5a2e4e3ff36c7b0476fc5aa8b6138a96e6",
+                "url": "https://api.github.com/repos/bolt/boltforms/zipball/3d7edfe2356fd71146227211ad790a3bde20ae17",
+                "reference": "3d7edfe2356fd71146227211ad790a3bde20ae17",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +53,8 @@
                 }
             },
             "license": [
-                "GPL-3.0+"
+                "GPL-3.0+",
+                "LGPL-3.0+"
             ],
             "authors": [
                 {
@@ -71,10 +71,10 @@
                 "uploads"
             ],
             "support": {
-                "source": "https://github.com/bolt/boltforms/tree/v3.0.3",
+                "source": "https://github.com/bolt/boltforms/tree/3.1",
                 "issues": "https://github.com/bolt/boltforms/issues"
             },
-            "time": "2016-07-19 13:42:10"
+            "time": "2016-10-31T11:22:11+00:00"
         },
         {
             "name": "bolt/disqus",
@@ -122,7 +122,7 @@
                 "source": "https://github.com/bolt/Disqus/tree/v2.0.1",
                 "issues": "https://github.com/bolt/Disqus/issues"
             },
-            "time": "2016-05-28 12:06:15"
+            "time": "2016-05-28T12:06:15+00:00"
         },
         {
             "name": "bolt/sitemap",
@@ -177,7 +177,7 @@
                 "source": "https://github.com/bolt/Sitemap/tree/master",
                 "issues": "https://github.com/bolt/Sitemap/issues"
             },
-            "time": "2016-08-01 10:19:10"
+            "time": "2016-08-01T10:19:10+00:00"
         },
         {
             "name": "wikimedia/composer-merge-plugin",
@@ -237,7 +237,7 @@
                 "source": "https://github.com/wikimedia/composer-merge-plugin/tree/v1.3.1",
                 "issues": "https://github.com/wikimedia/composer-merge-plugin/issues"
             },
-            "time": "2016-03-08 17:11:37"
+            "time": "2016-03-08T17:11:37+00:00"
         }
     ],
     "packages-dev": [],
