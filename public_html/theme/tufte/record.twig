@@ -1,0 +1,41 @@
+{% extends '_base.twig' %}
+
+{% import '_macro.twig' as macros %}
+
+{% block pagename %}
+    <a href='{{ record.link }}'>{{ record.title|excerpt(38) }}</a>
+{% endblock %}
+
+{% block title %}
+    {{ record.title }}
+{% endblock %}
+
+{% block content %}
+
+    <section>
+
+    {% include '_recordfooter.twig' with {record: record} %}
+
+    {{ record.content }}
+
+    <p class="meta">
+        {% set previous = record.previous('id') %}
+        {% if previous %}
+            <a href="{{ previous.link }}">&laquo; {{ previous.title|excerpt(40) }}</a> -
+            {% set a = '' ~ previous.author %}
+            {{ attribute(rssfeeds, a).name }}
+        {% endif %}
+    </p>
+    <p class="meta" style="text-align: right;">
+        {% set next = record.next('id') %}
+        {% if next %}
+            {% set a = '' ~ next.author %}
+            {{ attribute(rssfeeds, a).name }}
+            - <a href="{{ next.link }}">{{ next.title|excerpt(40) }} &raquo;</a>
+        {% endif %}
+    </p>
+
+
+    </section>
+
+{% endblock %}

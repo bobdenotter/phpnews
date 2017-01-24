@@ -18,7 +18,8 @@ payoff: The best new articles on PHP, aggregated on one site.
 # The theme to use. Be sure to copy the {theme_path}/base-2014 folder, and change the
 # name here accordingly. Don't edit the templates in theme/base-2014, because
 # they _will_ get updated in next releases
-theme: phpnews
+# theme: phpnews
+theme: tufte
 
 # The locale that'll be used by the application. If no locale is set the
 # fallback locale is 'en_GB'. For available options, see:
