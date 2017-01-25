@@ -857,7 +857,11 @@ article figure.fullwidth figcaption {
     padding-right: 2rem; } }
 
 aside {
-  padding-top: 0.8rem; }
+  padding-top: 0.8rem;
+  color: #6f6f6f; }
+  aside p, aside ol, aside ul {
+    font-size: 1.15rem;
+    line-height: 1.7rem; }
   aside a {
     color: #898eb0;
     text-decoration: none;

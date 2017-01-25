@@ -273,6 +273,13 @@ article {
 
 aside {
   padding-top: 0.8rem;
+    color: lighten(desaturate($color-text-body, 50), 20);
+
+
+  p, ol, ul {
+    font-size: 1.15rem;
+    line-height: 1.7rem;
+  }
 
   a {
     $color: lighten(desaturate($color-accent, 80), 30);

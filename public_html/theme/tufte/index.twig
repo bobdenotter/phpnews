@@ -4,18 +4,18 @@
 
 {% block content %}
 
-    {% setcontent records = 'feeditems/latest/6' allowpaging %}
+    {# {% setcontent records = 'feeditems/latest/6' allowpaging %} #}
     {% for record in records %}
 
-        {% if record.image!='' and not loop.first %}
+{#         {% if record.image!='' and not loop.first %}
             {{ macros.image(record.image, record, 'sidebar') }}
-        {% endif %}
+        {% endif %} #}
 
         <h2><a href='{{ record.link() }}'>{{ record.title }}</a></h2>
 
         {% include '_recordfooter.twig' with {'compact': true } %}
 
-        {% if record.image!='' and loop.first %}
+        {% if record.image!='' %}
             {{ macros.image(record.image, record, 'main') }}
         {% endif %}
 
