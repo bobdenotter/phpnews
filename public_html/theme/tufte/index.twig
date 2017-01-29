@@ -64,13 +64,19 @@
 
       <h3>Aggregated feeds</h3>
 
-      {# { dump(rssfeeds)} #}
+---
+      {% set authors = feedListing() %}
+      {{ dump(rssfeeds) }}
+---
 
       <ul class="feeds">
-        {% for author, feed in rssfeeds %}
+        {% for author, lastupdated in authors %}
+          {% set feed = attribute(rssfeeds, author) %}
+          {{ dump(feed) }}
         <li>
+
           <a href="{{feed.get('url') }}" target="_blank">{{ feed.get('title') }}</a>
-          (<a href="/author/{{ author}}">Posts</a>)
+          (<a href="/author/{{ author}}">Posts</a>, <span title="Last updated {{ lastupdated }}">{{ lastupdated }}</span>)
         </li>
         {% endfor %}
       </ul>

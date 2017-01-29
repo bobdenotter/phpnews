@@ -5,9 +5,10 @@
     "license": "MIT",
     "require": {
         "php": "^5.5.9 || ^7.0",
-        "bolt/bolt": "^3.2@beta",
+        "bolt/bolt": "3.3.x@dev",
         "PasswordLib/PasswordLib": "^1.0@beta",
-        "fguillot/picofeed": "@stable"
+        "fguillot/picofeed": "@stable",
+        "bolt/configuration-notices": "^1.0@dev"
     },
     "minimum-stability": "beta",
     "prefer-stable": true,
@@ -26,7 +27,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master" : "3.2.x-dev"
+            "dev-master" : "3.3.x-dev"
         }
     }
 }

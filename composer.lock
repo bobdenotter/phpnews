@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9f877125abe2a823af3ece117f37ace",
+    "content-hash": "e270391c16ab1343e3c53a48f2d79685",
     "packages": [
         {
             "name": "bolt/bolt",
-            "version": "v3.2.6",
+            "version": "dev-release/3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/bolt.git",
-                "reference": "b1a30c5e8e9ea15332f6f80955925e15c072cede"
+                "reference": "b9f96c33ea690797d3ebf2ff1f3a26df0d28c453"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/bolt/zipball/b1a30c5e8e9ea15332f6f80955925e15c072cede",
-                "reference": "b1a30c5e8e9ea15332f6f80955925e15c072cede",
+                "url": "https://api.github.com/repos/bolt/bolt/zipball/b9f96c33ea690797d3ebf2ff1f3a26df0d28c453",
+                "reference": "b9f96c33ea690797d3ebf2ff1f3a26df0d28c453",
                 "shasum": ""
             },
             "require": {
@@ -72,7 +72,7 @@
                 "symfony/web-profiler-bundle": "^2.8",
                 "symfony/yaml": "^2.8",
                 "tdammers/htmlmaid": "~0.7",
-                "twig/twig": "^1.27",
+                "twig/twig": "^1.28",
                 "ua-parser/uap-php": "^3.4"
             },
             "conflict": {
@@ -81,6 +81,7 @@
             "require-dev": {
                 "bolt/codingstyle": "^1.0",
                 "codeception/codeception": "2.2.1",
+                "league/flysystem-memory": "^1.0",
                 "lstrojny/phpunit-function-mocker": "0.3.0",
                 "phpmd/phpmd": "^2.2",
                 "phpunit/dbunit": "^1.3",
@@ -96,7 +97,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-release/3.2": "3.2.x-dev"
+                    "dev-release/3.3": "3.3.x-dev"
                 }
             },
             "autoload": {
@@ -119,7 +120,56 @@
                 "silex",
                 "symfony"
             ],
-            "time": "2017-01-21T20:00:52+00:00"
+            "time": "2017-01-28 15:39:47"
+        },
+        {
+            "name": "bolt/configuration-notices",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bolt/configuration-notices.git",
+                "reference": "81c7fbe929955c87e2ecdbf0ca0b011732124272"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/81c7fbe929955c87e2ecdbf0ca0b011732124272",
+                "reference": "81c7fbe929955c87e2ecdbf0ca0b011732124272",
+                "shasum": ""
+            },
+            "require": {
+                "bolt/bolt": "^3.3"
+            },
+            "type": "project",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bolt\\ConfigurationNotices\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gawain Lynch",
+                    "email": "gawain.lynch@gmail.com"
+                }
+            ],
+            "description": "Helper library to provide some helpful functionality to people, mostly by warning the user for common pitfalls and oversights in the basic configuration.",
+            "homepage": "http://bolt.cm",
+            "keywords": [
+                "bolt",
+                "configuration",
+                "extension",
+                "helper",
+                "notices"
+            ],
+            "time": "2017-01-08 14:53:13"
         },
         {
             "name": "bolt/filesystem",
@@ -5009,9 +5059,10 @@
     "aliases": [],
     "minimum-stability": "beta",
     "stability-flags": {
-        "bolt/bolt": 10,
+        "bolt/bolt": 20,
         "passwordlib/passwordlib": 10,
-        "fguillot/picofeed": 0
+        "fguillot/picofeed": 0,
+        "bolt/configuration-notices": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

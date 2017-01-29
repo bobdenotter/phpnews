@@ -1,7 +1,8 @@
 {
     "autoload": {
         "psr-4": {
-            "Bolt\\Composer\\EventListener\\": "../vendor/bolt/bolt/src/Composer/EventListener"
+            "Bolt\\Composer\\EventListener\\": "../vendor/bolt/bolt/src/Composer/EventListener",
+            "": "local"
         }
     },
     "config": {
@@ -23,7 +24,7 @@
     "name": "bolt/extensions",
     "prefer-stable": true,
     "provide": {
-        "bolt/bolt": "3.2.6"
+        "bolt/bolt": "3.3.0"
     },
     "repositories": {
         "packagist": false,

@@ -6,3 +6,6 @@ paths:
     themebase: public_html/theme
     files: public_html/files
     view: public_html/bolt-public/view
+
+extensions:
+    - RSSAggregator\RssAggregatorExtension

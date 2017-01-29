@@ -6,6 +6,10 @@
 /** @var Silex\Application|false $app */
 $app = require dirname(__FILE__) . '/../vendor/bolt/bolt/app/web.php';
 
+$app['extensions']->add(new \RSSAggregator\RssAggregatorExtension());
+$app['extensions']->add(new \FeedListing\FeedListingExtension());
+
+
 // If web.php returns false, meaning the path is a file, pass it along.
 if ($app === false) {
     return false;

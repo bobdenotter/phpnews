@@ -1,0 +1,2 @@
+# Changelog for RSS Aggregator
+

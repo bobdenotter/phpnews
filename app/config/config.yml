@@ -251,13 +251,15 @@ accept_file_types: [ twig, html, js, css, scss, gif, jpg, jpeg, png, ico, zip, t
 # the debugbar is only shown to logged-in users. Use the 'debug_show_loggedoff'
 # option to show it to all users. You probably do not want to use this in a
 # production environment.
-debug: true
-developer_notices: false
+debug: false
 debug_show_loggedoff: false
 debug_permission_audit_mode: false
-debug_error_level: 8181 # equivalent to E_ALL &~ E_NOTICE &~ E_DEPRECATED &~ E_USER_DEPRECATED &~ E_WARNING
-# debug_error_level: 30719 # equivalent to E_ALL
-debug_enable_whoops: true # change this to false to use PHP's built-in error handling instead of Whoops
+# debug_error_level: 8181           # equivalent to E_ALL &~ E_NOTICE &~ E_DEPRECATED &~ E_USER_DEPRECATED &~ E_WARNING
+debug_error_level: -1               # equivalent to E_ALL
+debug_error_use_symfony: false      # When set to true, Symfony Profiler will be used for exception display when possible
+
+# error level when debug is disabled
+#production_error_level: 8181 # = E_ALL &~ E_NOTICE &~ E_WARNING &~ E_DEPRECATED &~ E_USER_DEPRECATED
 
 # System debug logging
 # This will enable intensive logging of Silex functions and will be very hard on
