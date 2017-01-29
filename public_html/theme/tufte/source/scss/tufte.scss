@@ -572,7 +572,7 @@ nav#mainnav {
     background:#ddd
   }
 
-  ul li:hover {
+  ul li:not(:last-of-type):hover {
     background:#f6f6f6
   }
 
@@ -597,6 +597,16 @@ nav#mainnav {
 
   ul li:hover > ul {
     display:block
+  }
+
+  form {
+    margin-top: 0.4em;
+
+    input {
+      font-size: 18px;
+      background-color: rgba(255, 255, 255, 0.5);
+      width: 10em;
+    }
   }
 
 }

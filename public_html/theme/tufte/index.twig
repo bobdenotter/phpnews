@@ -15,8 +15,8 @@
 
         {% include '_recordfooter.twig' with {'compact': true } %}
 
-        {% if record.image!='' %}
-            {{ macros.image(record.image, record, 'main') }}
+        {% if record.image != '' and 'avatar' not in ('' ~ record.image) %}
+          {{ macros.image(record.image, record, 'main') }}
         {% endif %}
 
         <p>

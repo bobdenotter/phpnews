@@ -1078,7 +1078,7 @@ nav#mainnav {
     padding: 0; }
   #mainmenu ul li.current-menu-item {
     background: #ddd; }
-  #mainmenu ul li:hover {
+  #mainmenu ul li:not(:last-of-type):hover {
     background: #f6f6f6; }
   #mainmenu ul ul {
     display: none;
@@ -1095,6 +1095,12 @@ nav#mainnav {
     left: 100%; }
   #mainmenu ul li:hover > ul {
     display: block; }
+  #mainmenu form {
+    margin-top: 0.4em; }
+    #mainmenu form input {
+      font-size: 18px;
+      background-color: rgba(255, 255, 255, 0.5);
+      width: 10em; }
 
 /* Slicknav tweaks */
 .slicknav_menu {
