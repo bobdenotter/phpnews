@@ -79,7 +79,7 @@ class RssAggregatorExtension extends SimpleExtension
         $config = $this->getConfig();
         $app = $this->getContainer();
 
-        dump($this->getConfig());
+        // dump($this->getConfig());
 
         $currentUser = $app['users']->getCurrentUser();
 
