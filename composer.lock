@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/bolt.git",
-                "reference": "b9f96c33ea690797d3ebf2ff1f3a26df0d28c453"
+                "reference": "99f80bc554504ca3f98d19da375a70208ad0c0fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/bolt/zipball/b9f96c33ea690797d3ebf2ff1f3a26df0d28c453",
-                "reference": "b9f96c33ea690797d3ebf2ff1f3a26df0d28c453",
+                "url": "https://api.github.com/repos/bolt/bolt/zipball/99f80bc554504ca3f98d19da375a70208ad0c0fd",
+                "reference": "99f80bc554504ca3f98d19da375a70208ad0c0fd",
                 "shasum": ""
             },
             "require": {
@@ -120,7 +120,7 @@
                 "silex",
                 "symfony"
             ],
-            "time": "2017-01-28 15:39:47"
+            "time": "2017-01-31 17:37:49"
         },
         {
             "name": "bolt/configuration-notices",
@@ -1802,16 +1802,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.33",
+            "version": "1.0.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "5c7f98498b12d47f9de90ec9186a90000125777c"
+                "reference": "469ad53c13ea19a0e54e3e5d70f61227ddcc0299"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/5c7f98498b12d47f9de90ec9186a90000125777c",
-                "reference": "5c7f98498b12d47f9de90ec9186a90000125777c",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/469ad53c13ea19a0e54e3e5d70f61227ddcc0299",
+                "reference": "469ad53c13ea19a0e54e3e5d70f61227ddcc0299",
                 "shasum": ""
             },
             "require": {
@@ -1881,7 +1881,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2017-01-23T10:32:09+00:00"
+            "time": "2017-01-30T17:41:17+00:00"
         },
         {
             "name": "miljar/php-exif",

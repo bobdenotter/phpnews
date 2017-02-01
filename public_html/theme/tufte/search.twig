@@ -2,6 +2,10 @@
 
 {% import '_macro.twig' as macros %}
 
+{% block title %}
+    Search <em>"{{ app.request.get('search') }}"</em>
+{% endblock %}
+
 {% block content %}
 
     {# {% setcontent records = 'feeditems/latest/6' allowpaging %} #}
