@@ -1,6 +1,6 @@
 <?php
 
-namespace RSSAggregator;
+namespace Local\RSSAggregator;
 
 use Bolt\Extension\SimpleExtension;
 use Bolt\Legacy\Content;
@@ -106,11 +106,6 @@ class RssAggregatorExtension extends SimpleExtension
             return $this->config;
         }
         $raw = parent::getConfig();
-
-        // Until https://github.com/bolt/bolt/issues/6319 is fixed.
-        $yaml = new Parser();
-        $raw = $yaml->parse(file_get_contents(dirname(dirname(dirname(__DIR__))) . '/app/config/extensions/rssaggregator.bobdenotter.yml'));
-        // End.
 
         $config = new ParameterBag($raw);
         $feeds = $raw['feeds'];

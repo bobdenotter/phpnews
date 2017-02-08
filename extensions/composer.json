@@ -2,7 +2,8 @@
     "autoload": {
         "psr-4": {
             "Bolt\\Composer\\EventListener\\": "../vendor/bolt/bolt/src/Composer/EventListener",
-            "": "local"
+            "Local\\FeedListing\\": "local/FeedListing/src",
+            "Local\\RSSAggregator\\": "local/RSSAggregator/src"
         }
     },
     "config": {

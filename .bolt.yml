@@ -8,4 +8,5 @@ paths:
     view: public_html/bolt-public/view
 
 extensions:
-    - RSSAggregator\RssAggregatorExtension
+    - Local\RSSAggregator\RssAggregatorExtension
+    - Local\FeedListing\FeedListingExtension
