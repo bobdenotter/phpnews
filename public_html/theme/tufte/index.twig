@@ -65,11 +65,12 @@
       <ul class="feeds">
         {% for author, lastupdated in authors %}
           {% set feed = attribute(rssfeeds, author) %}
-        <li>
-
-          <a href="/author/{{ author}}" target="_blank">{{ feed.get('title') }}</a>
-          <small><em>(<a href="{{feed.get('url') }}">Link</a>, <span title="Last updated {{ lastupdated }}">{{ lastupdated|localedatetime("%e %b '%y") }}</span>)</em></small>
-        </li>
+            {% if feed is not empty %}
+            <li>
+              <a href="/author/{{ author}}" target="_blank">{{ feed.get('title') }}</a>
+              <small><em>(<a href="{{feed.get('url') }}">Link</a>, <span title="Last updated {{ lastupdated }}">{{ lastupdated|localedatetime("%e %b '%y") }}</span>)</em></small>
+            </li>
+          {% endif %}
         {% endfor %}
       </ul>
 
