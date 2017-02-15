@@ -141,6 +141,16 @@ feeds:
         title: "Dave Marshall's weblog"
         feed: "http://davedevelopment.co.uk/atom.xml"
         url: "http://davedevelopment.co.uk/"
+    roballen:
+        name: "Rob Allen"
+        title: "Rob Allen's DevNotes"
+        feed: "https://akrabat.com/feed/"
+        url: "https://akrabat.com/"
+    gabrielaio:
+        name: "Gabriela D'Ávila"
+        title: "gabriela.IO"
+        feed: "https://blog.gabriela.io/feed/"
+        url: "https://blog.gabriela.io/"
 
 
 # http://www.brandonsavage.net/best-php-blogs-to-follow
