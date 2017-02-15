@@ -19,7 +19,7 @@ fi
 if [[ $1 = "update" ]] ; then
     COMPOSERCOMMAND="update --ignore-platform-reqs --no-dev"
 else
-    COMPOSERCOMMAND="install --no-dev"
+    COMPOSERCOMMAND="install --ignore-platform-reqs --no-dev"
 fi
 
 if [[ $1 = "selfupdate" ]] ; then
