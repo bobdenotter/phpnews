@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bolt/bolt",
-            "version": "dev-release/3.3",
+            "version": "v3.3.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/bolt.git",
-                "reference": "59702ddb61293db8af792259290896d13c146483"
+                "reference": "46dcc9a25cd532c19599a5ded72000082feb0bec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/bolt/zipball/59702ddb61293db8af792259290896d13c146483",
-                "reference": "59702ddb61293db8af792259290896d13c146483",
+                "url": "https://api.github.com/repos/bolt/bolt/zipball/46dcc9a25cd532c19599a5ded72000082feb0bec",
+                "reference": "46dcc9a25cd532c19599a5ded72000082feb0bec",
                 "shasum": ""
             },
             "require": {
@@ -88,6 +88,7 @@
                 "phpunit/php-code-coverage": "^2.0",
                 "phpunit/phpunit": "^4.8",
                 "sebastian/phpcpd": "^2.0",
+                "sorien/silex-pimple-dumper": "^1.0",
                 "squizlabs/php_codesniffer": "^2.0",
                 "symfony/phpunit-bridge": "^2.8"
             },
@@ -120,7 +121,7 @@
                 "silex",
                 "symfony"
             ],
-            "time": "2017-02-13 21:15:06"
+            "time": "2017-02-22T19:46:37+00:00"
         },
         {
             "name": "bolt/configuration-notices",
@@ -128,12 +129,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/configuration-notices.git",
-                "reference": "a633a58023768a2fcee3d8b2b4b0e8a440952c7b"
+                "reference": "ba1f488ad8216a091d026252859e377f135c2432"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/a633a58023768a2fcee3d8b2b4b0e8a440952c7b",
-                "reference": "a633a58023768a2fcee3d8b2b4b0e8a440952c7b",
+                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/ba1f488ad8216a091d026252859e377f135c2432",
+                "reference": "ba1f488ad8216a091d026252859e377f135c2432",
                 "shasum": ""
             },
             "require": {
@@ -169,7 +170,7 @@
                 "helper",
                 "notices"
             ],
-            "time": "2017-02-01 17:01:19"
+            "time": "2017-02-19 20:17:25"
         },
         {
             "name": "bolt/filesystem",
@@ -1370,16 +1371,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.1.5",
+            "version": "2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "2abce9d956589122c6443d6265f01cf7e9388e3c"
+                "reference": "92bdc6800ac6e233c9e161a1768e082389a73530"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/2abce9d956589122c6443d6265f01cf7e9388e3c",
-                "reference": "2abce9d956589122c6443d6265f01cf7e9388e3c",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/92bdc6800ac6e233c9e161a1768e082389a73530",
+                "reference": "92bdc6800ac6e233c9e161a1768e082389a73530",
                 "shasum": ""
             },
             "require": {
@@ -1426,7 +1427,7 @@
                 "whoops",
                 "zf2"
             ],
-            "time": "2016-12-26T16:13:31+00:00"
+            "time": "2017-02-18T14:22:27+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1543,16 +1544,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.3.1",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b"
+                "reference": "04a6d1a00ea5da0727ee94309a9f0d3dbaecb569"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
-                "reference": "5c6447c9df362e8f8093bda8f5d8873fe5c7f65b",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/04a6d1a00ea5da0727ee94309a9f0d3dbaecb569",
+                "reference": "04a6d1a00ea5da0727ee94309a9f0d3dbaecb569",
                 "shasum": ""
             },
             "require": {
@@ -1588,16 +1589,23 @@
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
+                },
+                {
+                    "name": "Tobias Schultze",
+                    "homepage": "https://github.com/Tobion"
                 }
             ],
-            "description": "PSR-7 message implementation",
+            "description": "PSR-7 message implementation that also provides common utility methods",
             "keywords": [
                 "http",
                 "message",
+                "request",
+                "response",
                 "stream",
-                "uri"
+                "uri",
+                "url"
             ],
-            "time": "2016-06-24T23:00:38+00:00"
+            "time": "2017-02-21T01:20:32+00:00"
         },
         {
             "name": "imagine/imagine",

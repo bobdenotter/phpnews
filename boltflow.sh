@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 PUBLICFOLDER=""
 
@@ -17,13 +17,15 @@ elif [[ $PUBLICFOLDER = "" ]] ; then
 fi
 
 if [[ $1 = "update" ]] ; then
-    COMPOSERCOMMAND="update --ignore-platform-reqs --no-dev"
+    COMPOSERCOMMAND="update"
 else
-    COMPOSERCOMMAND="install --ignore-platform-reqs --no-dev"
+    COMPOSERCOMMAND="install"
 fi
 
 if [[ $1 = "selfupdate" ]] ; then
     curl -O https://raw.githubusercontent.com/bobdenotter/boltflow/master/files/boltflow.sh
+    chmod a+x ./boltflow.sh
+    echo "Updated 'boltflow.sh' to the latest version."
     exit 1
 fi
 
@@ -52,6 +54,8 @@ if [[ ! -f "$WD/composer.json" ]] ; then
     mv $WD/composer.json.dist $WD/composer.json
 fi
 
+git config core.fileMode false
+
 if ! (git pull) then
     echo "\n\nGit pull was not successful. Fix what went wrong, and run this script again.\n\n"
     exit 1
@@ -64,15 +68,14 @@ fi
 mkdir -p app/database app/cache extensions/ $PUBLICFOLDER/files/ $PUBLICFOLDER/thumbs/
 chmod -Rf 777 $PUBLICFOLDER/files/ $PUBLICFOLDER/theme/ $PUBLICFOLDER/thumbs/
 chmod -Rf 777 app/database/ app/cache/ app/config/ extensions/
-git config core.fileMode false
 
 if [[ ! -f "$WD/composer.phar" ]] ; then
     curl -sS https://getcomposer.org/installer | php
 fi
 
-php composer.phar $COMPOSERCOMMAND --no-dev
+php composer.phar $COMPOSERCOMMAND --ignore-platform-reqs --no-dev
 
 if [[ -f "$WD/extensions/composer.json" ]] ; then
     cd extensions
-    php ../composer.phar $COMPOSERCOMMAND --no-dev
+    php ../composer.phar $COMPOSERCOMMAND --ignore-platform-reqs --no-dev
 fi
