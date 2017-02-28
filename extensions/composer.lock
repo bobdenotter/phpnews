@@ -169,16 +169,16 @@
         },
         {
             "name": "bolt/sitemap",
-            "version": "2.0.1",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/Sitemap.git",
-                "reference": "d321e61e04d2fe2e825352f1378b4ec12109b74d"
+                "reference": "5867c9a0d86ea0de21e2c910b5f0fe40c1db15e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/d321e61e04d2fe2e825352f1378b4ec12109b74d",
-                "reference": "d321e61e04d2fe2e825352f1378b4ec12109b74d",
+                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/5867c9a0d86ea0de21e2c910b5f0fe40c1db15e1",
+                "reference": "5867c9a0d86ea0de21e2c910b5f0fe40c1db15e1",
                 "shasum": ""
             },
             "require": {
@@ -220,7 +220,7 @@
                 "source": "https://github.com/bolt/Sitemap/tree/master",
                 "issues": "https://github.com/bolt/Sitemap/issues"
             },
-            "time": "2016-08-01T10:19:10+00:00"
+            "time": "2017-02-26T13:59:52+00:00"
         },
         {
             "name": "wikimedia/composer-merge-plugin",

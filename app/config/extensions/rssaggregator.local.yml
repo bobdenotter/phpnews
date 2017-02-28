@@ -151,6 +151,10 @@ feeds:
         title: "gabriela.IO"
         feed: "https://blog.gabriela.io/feed/"
         url: "https://blog.gabriela.io/"
-
+    frankdejonge:
+        name: "Frank de Jonge"
+        title: "Frank de Jonge's Blog"
+        feed: "https://blog.frankdejonge.nl/rss/"
+        url: "https://blog.frankdejonge.nl/"
 
 # http://www.brandonsavage.net/best-php-blogs-to-follow
