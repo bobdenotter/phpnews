@@ -85,7 +85,7 @@ feeds:
         name: "Taylor Otwell"
         title: "Taylor Otwell's blog"
         url: "http://taylorotwell.com/"
-        feed: "http://taylorotwell.com/feed"
+        feed: "https://medium.com/feed/@taylorotwell"
     evertpot:
         name: "Evert Pot"
         title: "Het Bijstere Spoor"
@@ -135,7 +135,7 @@ feeds:
         name: "Michael Dowling"
         title: "Michael Dowling's blog"
         url: "http://mtdowling.com/"
-        feed: "http://mtdowling.com/atom.xml"
+        feed: "http://mtdowling.com/index.xml"
     davedevelopment:
         name: "Dave Marshall"
         title: "Dave Marshall's weblog"

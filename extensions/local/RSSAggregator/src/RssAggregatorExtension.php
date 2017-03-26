@@ -346,6 +346,10 @@ class RssAggregatorExtension extends SimpleExtension
             if (strpos($tag->getAttribute('src'), 'flattr.com') > 0) {
                 continue;
             }
+            // Medium tracking pixels.
+            if (strpos($tag->getAttribute('src'), 'stat?event') > 0) {
+                continue;
+            }
 
             $image = $tag->getAttribute('src');
 

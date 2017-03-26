@@ -25,9 +25,9 @@
     "magnific-popup": "~1.1.0",
     "responsive": "~4.1.3",
     "slicknav": "~1.0.10",
-    "jquery": "^3.1.1"
+    "jquery": "^3.2.1"
   },
   "resolutions": {
-    "jquery": "^3.1.1"
+    "jquery": "^3.2.1"
   }
 }

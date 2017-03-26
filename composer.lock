@@ -142,12 +142,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/configuration-notices.git",
-                "reference": "ba1f488ad8216a091d026252859e377f135c2432"
+                "reference": "031f7603f6df1104c62dd8fb4551c3e2d88d29c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/ba1f488ad8216a091d026252859e377f135c2432",
-                "reference": "ba1f488ad8216a091d026252859e377f135c2432",
+                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/031f7603f6df1104c62dd8fb4551c3e2d88d29c6",
+                "reference": "031f7603f6df1104c62dd8fb4551c3e2d88d29c6",
                 "shasum": ""
             },
             "require": {
@@ -183,7 +183,7 @@
                 "helper",
                 "notices"
             ],
-            "time": "2017-02-19 20:17:25"
+            "time": "2017-03-25 13:48:20"
         },
         {
             "name": "bolt/filesystem",

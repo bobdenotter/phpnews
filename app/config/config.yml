@@ -123,7 +123,7 @@ listing_sort: datepublish DESC
 # Because of limitations on how the underlying database queries work, there are
 # only two options for sorting on taxonomies. 'ASC' for roughly "oldest first"
 # and 'DESC' for roughly 'newest first'.
-taxonomy_sort: ASC
+taxonomy_sort: DESC
 
 # Template for showing the search results. If not defined, uses the settings for
 # listing_template and listing_records.
