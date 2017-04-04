@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bolt/bolt",
-            "version": "v3.3.0-beta4",
+            "version": "v3.3.0-beta5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/bolt.git",
-                "reference": "f621476895e56a510e2d8900fd9fed641e58ef00"
+                "reference": "b1e410b6ff21e196bab938cf882ac60aee04ad9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/bolt/zipball/f621476895e56a510e2d8900fd9fed641e58ef00",
-                "reference": "f621476895e56a510e2d8900fd9fed641e58ef00",
+                "url": "https://api.github.com/repos/bolt/bolt/zipball/b1e410b6ff21e196bab938cf882ac60aee04ad9f",
+                "reference": "b1e410b6ff21e196bab938cf882ac60aee04ad9f",
                 "shasum": ""
             },
             "require": {
@@ -134,7 +134,7 @@
                 "silex",
                 "symfony"
             ],
-            "time": "2017-03-22T20:23:40+00:00"
+            "time": "2017-04-04T06:05:29+00:00"
         },
         {
             "name": "bolt/configuration-notices",
@@ -142,12 +142,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/configuration-notices.git",
-                "reference": "031f7603f6df1104c62dd8fb4551c3e2d88d29c6"
+                "reference": "d45bd274371c6426abd33c02b51eb7375f8e8491"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/031f7603f6df1104c62dd8fb4551c3e2d88d29c6",
-                "reference": "031f7603f6df1104c62dd8fb4551c3e2d88d29c6",
+                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/d45bd274371c6426abd33c02b51eb7375f8e8491",
+                "reference": "d45bd274371c6426abd33c02b51eb7375f8e8491",
                 "shasum": ""
             },
             "require": {
@@ -183,20 +183,20 @@
                 "helper",
                 "notices"
             ],
-            "time": "2017-03-25 13:48:20"
+            "time": "2017-03-29 14:43:10"
         },
         {
             "name": "bolt/filesystem",
-            "version": "2.2.0",
+            "version": "2.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/filesystem.git",
-                "reference": "050580b75f8d68e390f1d6c2582f54c986be97cb"
+                "reference": "0ae56076d13445da913ca31f8a78d578d721d16d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/filesystem/zipball/050580b75f8d68e390f1d6c2582f54c986be97cb",
-                "reference": "050580b75f8d68e390f1d6c2582f54c986be97cb",
+                "url": "https://api.github.com/repos/bolt/filesystem/zipball/0ae56076d13445da913ca31f8a78d578d721d16d",
+                "reference": "0ae56076d13445da913ca31f8a78d578d721d16d",
                 "shasum": ""
             },
             "require": {
@@ -247,7 +247,7 @@
                 }
             ],
             "description": "Bolt's filesystem abstraction layer",
-            "time": "2017-02-27T23:04:05+00:00"
+            "time": "2017-03-27T15:23:46+00:00"
         },
         {
             "name": "bolt/pathogen",
@@ -666,16 +666,16 @@
         },
         {
             "name": "composer/spdx-licenses",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/spdx-licenses.git",
-                "reference": "96c6a07b05b716e89a44529d060bc7f5c263cb13"
+                "reference": "2603a0d7ddc00a015deb576fa5297ca43dee6b1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/spdx-licenses/zipball/96c6a07b05b716e89a44529d060bc7f5c263cb13",
-                "reference": "96c6a07b05b716e89a44529d060bc7f5c263cb13",
+                "url": "https://api.github.com/repos/composer/spdx-licenses/zipball/2603a0d7ddc00a015deb576fa5297ca43dee6b1c",
+                "reference": "2603a0d7ddc00a015deb576fa5297ca43dee6b1c",
                 "shasum": ""
             },
             "require": {
@@ -723,7 +723,7 @@
                 "spdx",
                 "validator"
             ],
-            "time": "2016-09-28T07:17:45+00:00"
+            "time": "2017-04-03T19:08:52+00:00"
         },
         {
             "name": "contao/imagine-svg",
@@ -1246,16 +1246,16 @@
         },
         {
             "name": "erusev/parsedown",
-            "version": "1.6.1",
+            "version": "1.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/erusev/parsedown.git",
-                "reference": "20ff8bbb57205368b4b42d094642a3e52dac85fb"
+                "reference": "1bf24f7334fe16c88bf9d467863309ceaf285b01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/erusev/parsedown/zipball/20ff8bbb57205368b4b42d094642a3e52dac85fb",
-                "reference": "20ff8bbb57205368b4b42d094642a3e52dac85fb",
+                "url": "https://api.github.com/repos/erusev/parsedown/zipball/1bf24f7334fe16c88bf9d467863309ceaf285b01",
+                "reference": "1bf24f7334fe16c88bf9d467863309ceaf285b01",
                 "shasum": ""
             },
             "require": {
@@ -1284,7 +1284,7 @@
                 "markdown",
                 "parser"
             ],
-            "time": "2016-11-02T15:56:58+00:00"
+            "time": "2017-03-29T16:04:15+00:00"
         },
         {
             "name": "erusev/parsedown-extra",
