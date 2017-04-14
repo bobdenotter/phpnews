@@ -144,16 +144,17 @@ class RssAggregatorExtension extends SimpleExtension
         echo "<small>" . $feedParams->get('feed') . "</small><br>";
 
         try {
-            $resource = $reader->download($feedParams->get('feed'));
+            if ($app['cache']->contains($author)) {
+                $result = $app['cache']->fetch($author);
+            } else {
+                $resource = $reader->download($feedParams->get('feed'));
+                $content = $resource->getContent();
+                $content = str_replace('content:encoded', 'contentEncoded', $content);
+                $result = [ 'url' => $resource->getUrl(), 'content' => $content, 'encoding' => $resource->getEncoding() ];
+                $app['cache']->save($author, $result, 3600);
+            }
 
-            $content = $resource->getContent();
-            $content = str_replace('content:encoded', 'contentEncoded', $content);
-
-            $parser = $reader->getParser(
-                $resource->getUrl(),
-                $content,
-                $resource->getEncoding()
-            );
+            $parser = $reader->getParser($result['url'], $result['content'], $result['encoding']);
             $parsedfeed = $parser->execute();
 
             /** @var Item[] $items */
@@ -161,6 +162,7 @@ class RssAggregatorExtension extends SimpleExtension
         } catch (PicoFeedException $e) {
             echo '<p><b>ERROR IN: ' . $feedParams->get('feed') . '</b></p>';
             $items = [];
+            $app['cache']->delete($author, $content);
         }
 
         /** @var Item $article */
@@ -269,9 +271,8 @@ class RssAggregatorExtension extends SimpleExtension
             echo $values['sitetitle'] . ' - ' . $values['title'] . ' - ' . $values['datepublish'] . ' - ' . $id;
         }
 
-
         echo "<hr>";
-
+        flush();
     }
 
     /**

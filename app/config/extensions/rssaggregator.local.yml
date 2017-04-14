@@ -156,5 +156,565 @@ feeds:
         title: "Frank de Jonge's Blog"
         feed: "https://blog.frankdejonge.nl/rss/"
         url: "https://blog.frankdejonge.nl/"
+    nikic:
+        name: Nikita Popov
+        title: "Blog by nikic"
+        feed: https://nikic.github.io/rss.xml
+        url: https://nikic.github.io/
 
 # http://www.brandonsavage.net/best-php-blogs-to-follow
+# https://gist.github.com/freekmurze/b7f78708697266d507311a6e800eaeae
+
+to-research:
+    mattallan:
+        url: http://mattallan.org
+        name: mattallan.org
+        feed: http://mattallan.org/feed.xml
+        title: mattallan.org
+    asked:
+        name: asked.io
+        feed: https://asked.io/rss
+        title: asked.io
+
+    ocramius:
+        url: https://ocramius.github.io/
+        name: ocramius.github.io
+        feed: https://ocramius.github.io/atom.xml
+        title: ocramius.github.io
+
+    codeanchor:
+        url: http://www.codeanchor.net
+        name: A Laravel Journey
+        feed: http://www.codeanchor.net/feed/
+        title: A Laravel Journey
+    alfrednutile:
+        url: https://www.alfrednutile.info/
+        name: Alfred Nutile RSS
+        feed: https://alfrednutile.info/rss_full
+        title: Alfred Nutile RSS
+    andreasartori:
+        url: http://blog.andreasartori.me
+        name: Andrea Sartori's Blog » Languages » English
+        feed: http://blog.andreasartori.me/en/feed/
+        title: Andrea Sartori's Blog » Languages » English
+    anttih:
+        url: http://anttih.com/
+        name: Antti Holvikari
+        feed: http://feeds.feedburner.com/anttih
+        title: Antti Holvikari
+    appstract:
+        url: https://medium.com/appstract?source=rss----b9b9a2ab2f0e---4
+        name: Appstract - Medium
+        feed: https://medium.com/feed/appstract
+        title: Appstract - Medium
+    archybold:
+        url: http://www.archybold.com
+        name: Archyblog
+        feed: http://www.archybold.com/rss.xml
+        title: Archyblog
+    blackfire:
+        url: https://blog.blackfire.io
+        name: Blackfire
+        feed: http://blog.blackfire.io/feed/atom.xml
+        title: Blackfire
+    madewithlove:
+        url: https://blog.madewithlove.be/
+        name: blog
+        feed: http://blog.madewithlove.be/feed.xml
+        title: blog
+    kuzmanov:
+        url: http://boris.kuzmanov.ninja
+        name: Boris Kuzmanov
+        feed: http://boris.kuzmanov.ninja/feed/
+        title: Boris Kuzmanov
+    bosnadev:
+        url: https://bosnadev.com
+        name: Bosnadev – Code Factory
+        feed: https://bosnadev.com/feed/
+        title: Bosnadev – Code Factory
+    bram:
+        url: https://www.bram.us
+        name: Bram.us
+        feed: http://www.bram.us/feed/
+        title: Bram.us
+
+    catswhocode:
+        url: http://www.catswhocode.com/blog
+        name: CatsWhoCode.com
+        feed: http://feeds2.feedburner.com/Catswhocode
+        title: CatsWhoCode.com
+    wyrihaximus:
+        url: https://blog.wyrihaximus.net/
+        name: Cees-Jan Kiewiet's blog
+        feed: http://blog.wyrihaximus.net/atom.xml
+        title: Cees-Jan Kiewiet's blog
+    christoph:
+        url: http://christoph-rumpel.com
+        name: christoph-rumpel.com
+        feed: http://christoph-rumpel.com/feed.xml
+        title: christoph-rumpel.com
+    codediesel:
+        url: http://www.codediesel.com
+        name: code-diesel
+        feed: http://www.codediesel.com/feed/
+        title: code-diesel
+    colinodell:
+        url: https://www.colinodell.com/blog/rss.xml
+        name: colinodell.com - Blog
+        feed: https://www.colinodell.com/blog/rss.xml
+        title: colinodell.com - Blog
+    coolblue:
+        url: http://devblog.coolblue.nl
+        name: Coolblue Development
+        feed: http://devblog.coolblue.nl/feed/
+        title: Coolblue Development
+    csiphp:
+        url: http://csiphp.com/
+        name: CSI: PHP
+        feed: http://csiphp.com/atom.xml
+        title: CSI: PHP
+
+    dailyjs:
+        url: http://dailyjs.com/
+        name: DailyJS
+        feed: http://feeds.feedburner.com/dailyjs
+        title: DailyJS
+    nucleus:
+        url: http://blog.nucleus.be/
+        name: De kern @ Nucleus
+        feed: http://blog.nucleus.be/xml-rss2.php
+        title: De kern @ Nucleus
+
+    derickbailey:
+        url: https://derickbailey.com
+        name: DerickBailey.com
+        feed: http://derickbailey.com/feed/
+        title: DerickBailey.com
+    dev-metal:
+        url: https://www.dev-metal.com
+        name: Dev Metal
+        feed: http://www.dev-metal.com/feed/
+        title: Dev Metal
+    enge:
+        url: http://blog.enge.me
+        name: Developing in Laravel
+        feed: http://blog.enge.me/feed.rss
+        title: Developing in Laravel
+    labnol:
+        url: https://www.labnol.org
+        name: Digital Inspiration Technology Blog
+        feed: http://feeds.labnol.org/labnol
+        title: Digital Inspiration Technology Blog
+    dracony:
+        url: https://dracony.org
+        name: Dracony
+        feed: http://dracony.org/feed/
+        title: Dracony
+    dragonbe:
+        url: http://www.dragonbe.com/
+        name: DragonBe's PHP blog
+        feed: http://feeds.feedburner.com/dragonbe
+        title: DragonBe's PHP blog
+    driesvints:
+        url: http://driesvints.com
+        name: Dries Vints
+        feed: http://driesvints.com/feed/
+        title: Dries Vints
+    zimuel:
+        url: http://www.zimuel.it/encrypt-php-session-data/
+        name: Enrico Zimuel
+        feed: http://www.zimuel.it/en/feed/
+        title: Enrico Zimuel
+
+    evaldojunior:
+        url: http://blog.evaldojunior.com
+        name: Evaldo Junior (InFog)
+        feed: http://blog.evaldojunior.com/feed.xml
+        title: Evaldo Junior (InFog)
+    everzet:
+        url: http://everzet.com/
+        name: everzet's blog
+        feed: http://everzet.com/rss
+        title: everzet's blog
+    facebook:
+        url: https://code.facebook.com/
+        name: Facebook Code
+        feed: https://code.facebook.com/posts/rss
+        title: Facebook Code
+    ferd:
+        url: http://ferd.ca/
+        name: Ferd.ca
+        feed: http://ferd.ca/feed.rss
+        title: Ferd.ca
+    fideloper:
+        url: http://fideloper.com
+        name: Fideloper
+        feed: http://fideloper.com/feed
+        title: Fideloper
+
+    geeh:
+        url: http://blog.hock.in
+        name: Gary Hockin @GeeH
+        feed: http://blog.hock.in/feed/
+        title: Gary Hockin @GeeH
+
+    googleblog:
+        url: http://security.googleblog.com/
+        name: Google Online Security Blog
+        feed: http://googleonlinesecurity.blogspot.com/feeds/posts/default
+        title: Google Online Security Blog
+    hannesvdvreken:
+        url: https://hannesvdvreken.com/
+        name: Hannes Van De Vreken
+        feed: http://hannesvdvreken.com/feed
+        title: Hannes Van De Vreken
+    harrieverveer:
+        url: http://harrieverveer.nl/
+        name: Harrie Verveer
+        feed: http://harrieverveer.nl/rss/feed.xml
+        title: Harrie Verveer
+    prosperotemuyiwa:
+        url: http://prosperotemuyiwa.com
+        name: HOME OF UNICODEVELOPER
+        feed: http://prosperotemuyiwa.com/feed/
+        title: HOME OF UNICODEVELOPER
+    ieblog:
+        url: https://blogs.msdn.microsoft.com/ie
+        name: IEBlog
+        feed: http://blogs.msdn.com/b/ie/rss.aspx
+        title: IEBlog
+    ignorethecode:
+        url: http://ignorethecode.net
+        name: ignorethecode.net
+        feed: http://feeds.feedburner.com/IgnoreTheCode
+        title: ignorethecode.net
+    igor:
+        url: https://igor.io/
+        name: igorw
+        feed: https://igor.io/index.atom
+        title: igorw
+    intracto:
+        url: https://www.intracto.com/nl/blog/archief
+        name: Intracto
+        feed: http://www.intracto.com/feed
+        title: Intracto
+
+    jasonlewis:
+        url: http://jasonlewis.me
+        name: Jason Lewis
+        feed: http://jasonlewis.me/rss
+        title: Jason Lewis
+    JasonMcCreary:
+        url: http://jason.pureconcepts.net/
+        name: Jason McCreary
+        feed: http://jason.pureconcepts.net/feed.xml
+        title: Jason McCreary
+    jefclaes:
+        url: http://www.jefclaes.be/
+        name: Jef Claes on software and life
+        feed: http://feed.jefclaes.be/jefclaes
+        title: Jef Claes on software and life
+    jenssegers:
+        url: http://jenssegers.com
+        name: jenssegers.be
+        feed: http://jenssegers.be/rss
+        title: jenssegers.be
+    joeferguson:
+        url: https://www.joeferguson.me
+        name: Joe Ferguson
+        feed: http://www.joeferguson.me/feed/
+        title: Joe Ferguson
+    keithcirkel:
+        url: https://www.keithcirkel.co.uk/
+        name: Keith Cirkel
+        feed: http://blog.keithcirkel.co.uk/rss/
+        title: Keith Cirkel
+    laracasts:
+        url: http://laracasts.com/feed
+        name: Laracasts
+        feed: https://laracasts.com/feed
+        title: Laracasts
+    laravelexpert:
+        url: http://laravel.expert
+        name: Laravel Expert
+        feed: http://laravel.expert/feed/
+        title: Laravel Expert
+    laravelnews:
+        url: https://laravel-news.com
+        name: Laravel News
+        feed: https://feed.laravel-news.com/
+        title: Laravel News
+
+    markvaneijk:
+        url: http://markvaneijk.com
+        name: Mark van Eijk
+        feed: http://markvaneijk.com/rss.xml
+        title: Mark van Eijk
+    verraes:
+        url: http://verraes.net/
+        name: Mathias Verraes
+        feed: http://verraes.net/feed.atom
+        title: Mathias Verraes
+    mattbriggs:
+        url: http://mattbriggs.net/
+        name: Matt Briggs
+        feed: http://mattbriggs.net/atom.xml
+        title: Matt Briggs
+    matthewsetter:
+        url: http://www.matthewsetter.com
+        name: Matthew Setter
+        feed: http://www.matthewsetter.com/feed/
+        title: Matthew Setter
+    mattstauffer:
+        url: https://mattstauffer.co/
+        name: MattStauffer.co
+        feed: http://mattstauffer.co/blog/feed.atom
+        title: MattStauffer.co
+    michaelbrooks:
+        url: http://michaelbrooks.co.uk
+        name: Michael Brooks - RSS Feed
+        feed: https://michaelbrooks.co.uk/rss.xml
+        title: Michael Brooks - RSS Feed
+    dyrynda:
+        url: https://dyrynda.com.au/blog/feed
+        name: Michael Dyrynda | Laravel, PHP, DevOps
+        feed: https://dyrynda.com.au/blog/feed
+        title: Michael Dyrynda | Laravel, PHP, DevOps
+    murze:
+        url: https://murze.be
+        name: murze.be
+        feed: https://murze.be/feed/
+        title: murze.be
+
+    pascalbaljetmedia:
+        url: https://pascalbaljetmedia.com/rss
+        name: Pascal Baljet Media - Blog
+        feed: https://pascalbaljetmedia.com/rss
+        title: Pascal Baljet Media - Blog
+    php100:
+        url: https://php100.wordpress.com
+        name: PHP 10.0 Blog
+        feed: http://php100.wordpress.com/feed/
+        title: PHP 10.0 Blog
+    phparch:
+        url: https://www.phparch.com
+        name: php[architect] - The site for PHP professionals
+        feed: http://www.phparch.com/feed/
+        title: php[architect] - The site for PHP professionals
+
+    phpriot:
+        url: http://www.phpriot.com/articles
+        name: PhpRiot Latest Articles
+        feed: http://feeds.feedburner.com/PhpRiotLatestArticles
+        title: PhpRiot Latest Articles
+    purplebooth:
+        url: https://purplebooth.co.uk/
+        name: Purple Booth
+        feed: https://purplebooth.co.uk/index.xml
+        title: Purple Booth
+
+    richardbagshaw:
+        url: http://www.richardbagshaw.co.uk/
+        name: Richard Bagshaw
+        feed: http://blog.richardbagshaw.co.uk/rss/
+        title: Richard Bagshaw
+    openminds:
+        url: https://www.openminds.be/nl/blog?utm_source=feed&amp;utm_medium=rss&amp;utm_campaign=rss
+        name: openminds
+        feed: http://www.openminds.be/nl/blog/rss
+        title: openminds
+    samanthageitz:
+        url: http://blog.samanthageitz.com/
+        name: Samantha Geitz
+        feed: http://blog.samanthageitz.com/rss/
+        title: Samantha Geitz
+
+        url: http://www.scriptorama.nl
+        name: Scriptorama.nl
+        feed: http://feeds2.feedburner.com/scriptorama
+        title: Scriptorama.nl
+
+        url: https://sebastiandedeyne.com/feed
+        name: Sebastian De Deyne
+        feed: https://sebastiandedeyne.com/feed
+        title: Sebastian De Deyne
+
+        url: https://serversforhackers.com
+        name: Servers for Hackers
+        feed: http://serversforhackers.com/feed.xml
+        title: Servers for Hackers
+
+        url: https://m.signalvnoise.com?source=rss----668e14b18fb1---4
+        name: Signal vs. Noise
+        feed: https://signalvnoise.com/posts.rss
+        title: Signal vs. Noise
+
+        url: https://simonecarletti.com/
+        name: Simone Carletti
+        feed: https://simonecarletti.com/blog/feed.xml
+        title: Simone Carletti
+
+        url: https://softonsofa.com
+        name: SOFTonSOFA
+        feed: https://softonsofa.com/feed/
+        title: SOFTonSOFA
+
+        url: http://stevenf.com
+        name: stevenf.com
+        feed: http://stevenf.com/feed/
+        title: stevenf.com
+
+        url: https://medium.com/@barryvdh?source=rss-bd3cf5d0850------2
+        name: Stories by Barry vd. Heuvel on Medium
+        feed: http://barryvdh.nl/feed.xml
+        title: Stories by Barry vd. Heuvel on Medium
+
+        url: https://medium.com/@ericlbarnes?source=rss-ddd08a1413ea------2
+        name: Stories by Eric L. Barnes on Medium
+        feed: https://medium.com/feed/@ericlbarnes
+        title: Stories by Eric L. Barnes on Medium
+
+        url: http://blog.stuartherbert.com/multifeed
+        name: Stuart Herbert - Blog
+        feed: http://blog.stuartherbert.com/rss2.xml
+        title: Stuart Herbert - Blog
+
+        url: http://tech.sym.bid/
+        name: Symbid Technology Blog
+        feed: http://tech.sym.bid/atom.xml
+        title: Symbid Technology Blog
+
+        url: http://taylorotwell.com
+        name: Taylor Otwell
+        feed: http://taylorotwell.com/feed/
+        title: Taylor Otwell
+
+        url: http://dailynerd.nl
+        name: The Daily Nerd
+        feed: http://dailynerd.nl/feed/
+        title: The Daily Nerd
+
+        url: http://new-aesthetic.tumblr.com/
+        name: The New Aesthetic
+        feed: http://new-aesthetic.tumblr.com/rss
+        title: The New Aesthetic
+
+        url: http://stakeholderwhisperer.com/
+        name: The Stakeholder Whisperer
+        feed: http://stakeholderwhisperer.com/?format=rss
+        title: The Stakeholder Whisperer
+
+        url: https://blog.feryn.eu
+        name: Thijs Feryn's blog
+        feed: http://blog.feryn.eu/feed/
+        title: Thijs Feryn's blog
+
+        url: http://blog.tschuermans.be/
+        name: Tom Schuermans
+        feed: http://blog.tschuermans.be/atom.xml
+        title: Tom Schuermans
+
+        url: http://tutorialzine.com
+        name: Tutorialzine
+        feed: http://feeds.feedburner.com/Tutorialzine
+        title: Tutorialzine
+
+        url: http://uxmyths.com/
+        name: UX Myths
+        feed: http://feeds.feedburner.com/uxmyths
+        title: UX Myths
+
+        url: http://vinkla.com/
+        name: vinkla/xml
+        feed: https://vinkla.com/feed.xml
+        title: vinkla/xml
+
+        url: https://web-design-weekly.com
+        name: Web Design Weekly
+        feed: http://web-design-weekly.com/feed/
+        title: Web Design Weekly
+
+        url: http://wesbos.com
+        name: Wes Bos
+        feed: http://feeds.feedburner.com/wesbos/ZXAx
+        title: Wes Bos
+
+        url: http://techblog.wimgodden.be
+        name: Wim Godden's professional blog
+        feed: http://techblog.wimgodden.be/feed/
+        title: Wim Godden's professional blog
+
+        url: http://wolfslittlestore.be
+        name: Wolf's Little Store
+        feed: http://wolfslittlestore.be/feed/
+        title: Wolf's Little Store
+
+
+        name: Yappa tech blog
+        feed: http://tech.yappa.be/feed.atom
+        title: Yappa tech blog
+
+        url: http://www.yegor256.com/
+        name: Yegor Bugayenko
+        feed: http://www.yegor256.com/rss.xml
+        title: Yegor Bugayenko
+
+        url: https://www.sandimetz.com/blog/
+        name: Blog - Sandi Metz
+        feed: http://www.sandimetz.com/blog?format=RSS
+        title: Blog - Sandi Metz
+
+        url: https://www.bram.us
+        name: Bram.us
+        feed: http://www.bram.us/feed/
+        title: Bram.us
+
+        url: http://articles.coreyhaines.com/
+        name: Corey Haines
+        feed: http://articles.coreyhaines.com/atom.xml
+        title: Corey Haines
+
+        url: https://githubengineering.com/
+        name: GitHub Engineering
+        feed: http://githubengineering.com/atom.xml
+        title: GitHub Engineering
+
+        url: http://jaysoo.ca
+        name: Jack Hsu
+        feed: http://jaysoo.ca/feed.xml
+        title: Jack Hsu
+
+        url: http://jeromedalbert.com/
+        name: Jerome's Adventures in Software
+        feed: http://feeds.feedburner.com/jeromedalbert
+        title: Jerome's Adventures in Software
+
+        url: https://mathiasbynens.be/notes
+        name: Mathias Bynens
+        feed: http://mathiasbynens.be/notes.atom
+        title: Mathias Bynens
+
+        url: http://radek.io
+        name: radek.io - Articles
+        feed: http://radek.io/rss.xml
+        title: radek.io - Articles
+
+        url: http://blog.samanthageitz.com/
+        name: Samantha Geitz
+        feed: http://blog.samanthageitz.com/rss/
+        title: Samantha Geitz
+
+        url: http://www.sarahmei.com/blog
+        name: Sarah Mei
+        feed: http://www.sarahmei.com/blog/feed/
+        title: Sarah Mei
+
+        url: https://medium.com/@colindecarlo?source=rss-88c2ac049edd------2
+        name: Stories by Colin DeCarlo on Medium
+        feed: https://medium.com/feed/@colindecarlo
+        title: Stories by Colin DeCarlo on Medium
+
+        url: https://medium.com/@ondrejmirtes?source=rss-1ce5e2eaba6e------2
+        name: Stories by Ondřej Mirtes on Medium
+        feed: https://medium.com/feed/@ondrejmirtes
+        title: Stories by Ondřej Mirtes on Medium
