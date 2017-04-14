@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bobdenotter/seo",
-            "version": "v0.14.1",
+            "version": "v0.14.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobdenotter/seo.git",
-                "reference": "8f4948241b89142672053f88ea33ab6ecc783737"
+                "reference": "1d9bd647137124852c799470754b4054e3b88f99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobdenotter/seo/zipball/8f4948241b89142672053f88ea33ab6ecc783737",
-                "reference": "8f4948241b89142672053f88ea33ab6ecc783737",
+                "url": "https://api.github.com/repos/bobdenotter/seo/zipball/1d9bd647137124852c799470754b4054e3b88f99",
+                "reference": "1d9bd647137124852c799470754b4054e3b88f99",
                 "shasum": ""
             },
             "require": {
@@ -44,10 +44,10 @@
             ],
             "description": "An extension to easily manage SEO title, meta description and OG tags.",
             "support": {
-                "source": "https://github.com/bobdenotter/seo/tree/v0.14.1",
+                "source": "https://github.com/bobdenotter/seo/tree/v0.14.2",
                 "issues": "https://github.com/bobdenotter/seo/issues"
             },
-            "time": "2017-02-06T17:16:37+00:00"
+            "time": "2017-04-06T15:36:42+00:00"
         },
         {
             "name": "bolt/boltforms",
