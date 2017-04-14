@@ -146,12 +146,14 @@ class RssAggregatorExtension extends SimpleExtension
         try {
             if ($app['cache']->contains($author)) {
                 $result = $app['cache']->fetch($author);
+                echo "[Cached]";
             } else {
                 $resource = $reader->download($feedParams->get('feed'));
                 $content = $resource->getContent();
                 $content = str_replace('content:encoded', 'contentEncoded', $content);
                 $result = [ 'url' => $resource->getUrl(), 'content' => $content, 'encoding' => $resource->getEncoding() ];
                 $app['cache']->save($author, $result, 3600);
+                echo "[Fetched]";
             }
 
             $parser = $reader->getParser($result['url'], $result['content'], $result['encoding']);
@@ -162,7 +164,7 @@ class RssAggregatorExtension extends SimpleExtension
         } catch (PicoFeedException $e) {
             echo '<p><b>ERROR IN: ' . $feedParams->get('feed') . '</b></p>';
             $items = [];
-            $app['cache']->delete($author, $content);
+            $app['cache']->delete($author);
         }
 
         /** @var Item $article */
