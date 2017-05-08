@@ -64,7 +64,7 @@
 
       <ul class="feeds">
         {% for author, lastupdated in authors %}
-          {% set feed = attribute(rssfeeds, author) %}
+          {% set feed = attribute(rssfeeds, author)|default() %}
             {% if feed is not empty %}
             <li>
               <a href="/author/{{ author}}" target="_blank">{{ feed.get('title') }}</a>

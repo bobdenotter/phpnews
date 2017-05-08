@@ -76,6 +76,8 @@ class RssAggregatorExtension extends SimpleExtension
      */
     public function RSSAggregator(Request $request)
     {
+        set_time_limit(0);
+
         $config = $this->getConfig();
         $app = $this->getContainer();
 
@@ -87,7 +89,9 @@ class RssAggregatorExtension extends SimpleExtension
         }
 
         foreach ($config->get('feeds') as $author => $feed) {
-            $this->parseFeed($author, $feed);
+            if ($feed->get('skip') != true) {
+                $this->parseFeed($author, $feed);
+            }
         }
 
         return '<br><br><br> Done.';

@@ -121,16 +121,16 @@
         },
         {
             "name": "bolt/disqus",
-            "version": "v2.0.1",
+            "version": "v2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/Disqus.git",
-                "reference": "fbf6e5cd43451a9ed161d66ffcf54558025a13c4"
+                "reference": "2ac667b49bb029ef79b1c2b52075739816957c07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/Disqus/zipball/fbf6e5cd43451a9ed161d66ffcf54558025a13c4",
-                "reference": "fbf6e5cd43451a9ed161d66ffcf54558025a13c4",
+                "url": "https://api.github.com/repos/bolt/Disqus/zipball/2ac667b49bb029ef79b1c2b52075739816957c07",
+                "reference": "2ac667b49bb029ef79b1c2b52075739816957c07",
                 "shasum": ""
             },
             "require": {
@@ -162,23 +162,23 @@
                 "disqus"
             ],
             "support": {
-                "source": "https://github.com/bolt/Disqus/tree/v2.0.1",
+                "source": "https://github.com/bolt/Disqus/tree/v2.0.2",
                 "issues": "https://github.com/bolt/Disqus/issues"
             },
-            "time": "2016-05-28T12:06:15+00:00"
+            "time": "2017-05-04T10:09:02+00:00"
         },
         {
             "name": "bolt/sitemap",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/Sitemap.git",
-                "reference": "5867c9a0d86ea0de21e2c910b5f0fe40c1db15e1"
+                "reference": "745110b0b29008d5216d608b5b1bf64695a67a2a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/5867c9a0d86ea0de21e2c910b5f0fe40c1db15e1",
-                "reference": "5867c9a0d86ea0de21e2c910b5f0fe40c1db15e1",
+                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/745110b0b29008d5216d608b5b1bf64695a67a2a",
+                "reference": "745110b0b29008d5216d608b5b1bf64695a67a2a",
                 "shasum": ""
             },
             "require": {
@@ -217,10 +217,10 @@
                 "sitemap"
             ],
             "support": {
-                "source": "https://github.com/bolt/Sitemap/tree/master",
+                "source": "https://github.com/bolt/Sitemap/tree/2.1.1",
                 "issues": "https://github.com/bolt/Sitemap/issues"
             },
-            "time": "2017-02-26T13:59:52+00:00"
+            "time": "2017-05-04T10:12:13+00:00"
         },
         {
             "name": "wikimedia/composer-merge-plugin",

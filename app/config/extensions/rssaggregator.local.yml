@@ -170,11 +170,6 @@ feeds:
         name: ocramius.github.io
         feed: https://ocramius.github.io/atom.xml
         title: ocramius.github.io
-    alfrednutile:
-        url: https://www.alfrednutile.info/
-        name: Alfred Nutile RSS
-        feed: https://alfrednutile.info/rss_full
-        title: Alfred Nutile RSS
     appstract:
         url: https://medium.com/appstract?source=rss----b9b9a2ab2f0e---4
         name: Appstract - Medium
@@ -290,11 +285,6 @@ feeds:
         name: Ferd.ca
         feed: http://ferd.ca/feed.rss
         title: Ferd.ca
-    fideloper:
-        url: http://fideloper.com
-        name: Fideloper
-        feed: http://fideloper.com/feed
-        title: Fideloper
     geeh:
         url: http://blog.hock.in
         name: "Gary Hockin @GeeH"
@@ -430,11 +420,6 @@ feeds:
         name: Sebastian De Deyne
         feed: https://sebastiandedeyne.com/feed
         title: Sebastian De Deyne
-    serversforhackers:
-        url: https://serversforhackers.com
-        name: Servers for Hackers
-        feed: http://serversforhackers.com/feed.xml
-        title: Servers for Hackers
     signalvnoise:
         url: https://m.signalvnoise.com?source=rss----668e14b18fb1---4
         name: Signal vs. Noise
@@ -564,14 +549,35 @@ feeds:
         name: Stories by Ondřej Mirtes on Medium
         feed: https://medium.com/feed/@ondrejmirtes
         title: Stories by Ondřej Mirtes on Medium
-
-
+    bethtuckerlong:
+        url: http://www.alittleofboth.com/
+        title: A Little of Both
+        name: Beth Tucker Long
+        feed: http://www.alittleofboth.com/feed/
+    # Feed includes no dates. Stupid Laravel:
+    fideloper:
+        url: http://fideloper.com
+        name: Fideloper
+        feed: http://fideloper.com/feed
+        title: Fideloper
+        skip: true
+    # Feed includes no dates. Stupid Laravel:
+    serversforhackers:
+        url: https://serversforhackers.com
+        name: Servers for Hackers
+        feed: http://serversforhackers.com/feed.xml
+        title: Servers for Hackers
+        skip: true
+    # Feed includes no dates. Stupid Laravel:
+    alfrednutile:
+        url: https://www.alfrednutile.info/
+        name: Alfred Nutile RSS
+        feed: https://alfrednutile.info/rss_full
+        title: Alfred Nutile RSS
+        skip: true
 
 # http://www.brandonsavage.net/best-php-blogs-to-follow
 # https://gist.github.com/freekmurze/b7f78708697266d507311a6e800eaeae
-
-to-research:
-
 
 
 
