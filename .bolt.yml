@@ -1,12 +1,5 @@
 paths:
-    cache: app/cache
-    config: app/config
-    database: app/database
-    web: public_html
-    themebase: public_html/theme
-    files: public_html/files
-    view: public_html/bolt-public/view
-
+    web: '%site%/public_html'
 extensions:
     - Local\RSSAggregator\RssAggregatorExtension
     - Local\FeedListing\FeedListingExtension

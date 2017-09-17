@@ -2,6 +2,8 @@
 
 PUBLICFOLDER=""
 
+echo "⇒ Boltflow 🚀 - version 0.5.3"
+
 # Store the script working directory
 WD="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
@@ -45,24 +47,19 @@ if [[ $1 = "config_local_prod" ]] ; then
     exit 1
 fi
 
-if [[ ! -f "$WD/app/config/config_local.yml" ]] ; then
-    echo ""
-    echo "Note: No local config is present at 'app/config/config_local.yml'. Run either of the following to get it:"
-    echo ""
-    echo "./boltflow.sh config_local_dev"
-    echo "./boltflow.sh config_local_prod"
-    echo ""
-fi
-
 if [[ ! -f "$WD/composer.json" ]] ; then
     mv $WD/composer.json.dist $WD/composer.json
 fi
 
-git config core.fileMode false
+if [ -d "$WD/.git" ]; then
+    git config core.fileMode false
 
-if ! (git pull) then
-    echo "\n\nGit pull was not successful. Fix what went wrong, and run this script again.\n\n"
-    exit 1
+    if ! (git pull) then
+        printf "\n\n\e[31mGit pull was not successful. Fix what went wrong, and run this script again.\n\n"
+        exit 1
+    fi
+else
+    printf "\e[31mNo git repository found.\n"
 fi
 
 if [[ ! -f "$WD/composer.json" ]] ; then
@@ -81,9 +78,24 @@ if [[ $1 = "update" ]] ; then
     php composer.phar selfupdate
 fi
 
-php composer.phar $COMPOSERCOMMAND --ignore-platform-reqs --no-dev
+php composer.phar $COMPOSERCOMMAND --no-dev
 
 if [[ -f "$WD/extensions/composer.json" ]] ; then
     cd extensions
-    php ../composer.phar $COMPOSERCOMMAND --ignore-platform-reqs --no-dev
+    php ../composer.phar $COMPOSERCOMMAND --no-dev
+    cd ..
 fi
+
+php app/nut cache:clear
+
+if [[ ! -f "$WD/app/config/config_local.yml" ]] ; then
+    echo ""
+    echo "Note: No local config is present at 'app/config/config_local.yml'. Run either of the following to get it:"
+    echo ""
+    echo "./boltflow.sh config_local_dev"
+    echo "./boltflow.sh config_local_prod"
+    echo ""
+fi
+
+echo ""
+echo "Done! 👍"
