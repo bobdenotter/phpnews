@@ -7,7 +7,7 @@
         "php": "^5.5.9 || ^7.0",
         "bolt/bolt": "^3.3",
         "PasswordLib/PasswordLib": "^1.0@beta",
-        "fguillot/picofeed": "@stable",
+        "miniflux/picofeed": "@stable",
         "bolt/configuration-notices": "^1.0@dev"
     },
     "minimum-stability": "beta",

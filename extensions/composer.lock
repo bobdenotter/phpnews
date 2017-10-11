@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7ad54dd1ba61304e6995134c5e263bd2",
+    "content-hash": "3f8c45563ab65e74e55692790ac71441",
     "packages": [
         {
             "name": "bobdenotter/seo",
@@ -224,16 +224,16 @@
         },
         {
             "name": "nestordedios/bolt-theme-editorial",
-            "version": "v1.0",
+            "version": "v1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nestordedios/bolt-theme-editorial.git",
-                "reference": "06f36c1b5e7e8b3dac60862b64f6e27f3786e70e"
+                "reference": "2a0c5e2e4be6721d6aef5cd99d74bad6d9b60e37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nestordedios/bolt-theme-editorial/zipball/06f36c1b5e7e8b3dac60862b64f6e27f3786e70e",
-                "reference": "06f36c1b5e7e8b3dac60862b64f6e27f3786e70e",
+                "url": "https://api.github.com/repos/nestordedios/bolt-theme-editorial/zipball/2a0c5e2e4be6721d6aef5cd99d74bad6d9b60e37",
+                "reference": "2a0c5e2e4be6721d6aef5cd99d74bad6d9b60e37",
                 "shasum": ""
             },
             "require": {
@@ -273,10 +273,10 @@
                 "theme"
             ],
             "support": {
-                "source": "https://github.com/nestordedios/bolt-theme-editorial/tree/master",
+                "source": "https://github.com/nestordedios/bolt-theme-editorial/tree/v1.2",
                 "issues": "https://github.com/nestordedios/bolt-theme-editorial/issues"
             },
-            "time": "2017-09-11T10:39:47+00:00"
+            "time": "2017-10-06T13:26:33+00:00"
         },
         {
             "name": "wikimedia/composer-merge-plugin",
