@@ -78,6 +78,7 @@ class RssAggregatorExtension extends SimpleExtension
     {
         $config = $this->getConfig();
         $app = $this->getContainer();
+        $feeds = $config->get('feeds');
 
         $currentUser = $app['users']->getCurrentUser();
 
@@ -86,9 +87,18 @@ class RssAggregatorExtension extends SimpleExtension
             return 'Key not correct.';
         }
 
-        foreach ($config->get('feeds') as $author => $feed) {
+        // Get some variables from the URL.
+        $amount = (int) $app['request']->get('amount', $config->getInt('itemAmount'));
+        $verbose = (bool) $app['request']->get('verbose', false);
+
+        // Perhaps we only want one feed.
+        if ($onlyfeed = $app['request']->get('feed')) {
+            $feeds = array_intersect_key($feeds, array_flip([$onlyfeed]));
+        }
+
+        foreach ($feeds as $author => $feed) {
             if ($feed->get('skip') != true) {
-                $this->parseFeed($author, $feed);
+                $this->parseFeed($author, $feed, $amount, $verbose);
             }
         }
 
@@ -135,8 +145,10 @@ class RssAggregatorExtension extends SimpleExtension
      *
      * @param string       $author
      * @param ParameterBag $feedParams
+     * @param integer      $amount
+     * @param bool         $verbose
      */
-    private function parseFeed($author, ParameterBag $feedParams)
+    private function parseFeed($author, ParameterBag $feedParams, $amount = 10, $verbose = false)
     {
         $config = $this->getConfig();
         $app = $this->getContainer();
@@ -162,7 +174,7 @@ class RssAggregatorExtension extends SimpleExtension
             $parsedfeed = $parser->execute();
 
             /** @var Item[] $items */
-            $items = array_slice($parsedfeed->items, 0, $config->getInt('itemAmount'));
+            $items = array_slice($parsedfeed->items, 0, $amount);
         } catch (PicoFeedException $e) {
             echo '<p><b>ERROR IN: ' . $feedParams->get('feed') . '</b></p>';
             $items = [];
@@ -172,6 +184,10 @@ class RssAggregatorExtension extends SimpleExtension
         /** @var Item $article */
         foreach ($items as $article) {
             $needsReview = false;
+
+            if ($verbose) {
+                dump($article);
+            }
 
             // try to get an existing record for this item
             $record = $app['storage']->getContent(
@@ -238,9 +254,17 @@ class RssAggregatorExtension extends SimpleExtension
                 'sitesource' => $feedParams->get('url'),
             ];
 
-            if ($new || $date instanceof \DateTime) {
-                $values['datecreated'] = ($date instanceof \DateTime) ? $date->format('Y-m-d H:i:s') : '';
-                $values['datepublish'] = ($date instanceof \DateTime) ? $date->format('Y-m-d H:i:s') : '';
+            if (1 || $new) {
+                $date = ($date instanceof \DateTime) ? $date->format('Y-m-d H:i:s') : '';
+                $now = new \DateTime(null, new \DateTimeZone("UTC"));
+                $now = $now->format('Y-m-d H:i:s');
+
+                // Some wonky feeds have no date, or the date set past 'now'. We only allow setting dates in the past.
+                if ( (empty($date) || $date >= $now) ) {
+                    $values['datepublish'] = $values['datecreated'] = date('Y-m-d 00:00:00');
+                } else {
+                    $values['datepublish'] = $values['datecreated'] = $date;
+                }
             }
 
             $record->setTaxonomy('authors', $author);
@@ -259,6 +283,10 @@ class RssAggregatorExtension extends SimpleExtension
                 }
             }
 
+            if ($verbose) {
+                dump($values);
+            }
+
             $record->setValues($values);
 
             $id = $app['storage']->saveContent($record);
@@ -272,7 +300,7 @@ class RssAggregatorExtension extends SimpleExtension
                 echo "\n\n<hr>\n\n";
             }
 
-            echo $values['sitetitle'] . ' - ' . $values['title'] . ' - ' . $values['datepublish'] . ' - ' . $id;
+            echo $values['sitetitle'] . ' - ' . $values['title'] . ' - ' . $id;
         }
 
         echo "<hr>";

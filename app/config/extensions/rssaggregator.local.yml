@@ -560,21 +560,21 @@ feeds:
         name: Fideloper
         feed: http://fideloper.com/feed
         title: Fideloper
-        skip: true
+        # skip: true
     # Feed includes no dates. Stupid Laravel:
     serversforhackers:
         url: https://serversforhackers.com
         name: Servers for Hackers
         feed: http://serversforhackers.com/feed.xml
         title: Servers for Hackers
-        skip: true
+        # skip: true
     # Feed includes no dates. Stupid Laravel:
     alfrednutile:
         url: https://www.alfrednutile.info/
         name: Alfred Nutile RSS
         feed: https://alfrednutile.info/rss_full
         title: Alfred Nutile RSS
-        skip: true
+        # skip: true
 
 # http://www.brandonsavage.net/best-php-blogs-to-follow
 # https://gist.github.com/freekmurze/b7f78708697266d507311a6e800eaeae
