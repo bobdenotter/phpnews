@@ -254,7 +254,7 @@ class RssAggregatorExtension extends SimpleExtension
                 'sitesource' => $feedParams->get('url'),
             ];
 
-            if (1 || $new) {
+            if ($new) {
                 $date = ($date instanceof \DateTime) ? $date->format('Y-m-d H:i:s') : '';
                 $now = new \DateTime(null, new \DateTimeZone("UTC"));
                 $now = $now->format('Y-m-d H:i:s');
