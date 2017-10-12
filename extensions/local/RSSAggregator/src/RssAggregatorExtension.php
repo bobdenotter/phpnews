@@ -93,7 +93,7 @@ class RssAggregatorExtension extends SimpleExtension
 
         // Perhaps we only want one feed.
         if ($onlyfeed = $app['request']->get('feed')) {
-            $feeds = array_intersect_key($feeds, array_flip([$onlyfeed]));
+            $feeds = array_intersect_key($feeds, array_flip(explode(',', $onlyfeed)));
         }
 
         foreach ($feeds as $author => $feed) {
@@ -381,6 +381,10 @@ class RssAggregatorExtension extends SimpleExtension
             }
             // Medium tracking pixels.
             if (strpos($tag->getAttribute('src'), 'stat?event') > 0) {
+                continue;
+            }
+            // wordpress.org emoji images.
+            if (strpos($tag->getAttribute('src'), 's.w.org') > 0) {
                 continue;
             }
 
