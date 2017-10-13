@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3f8c45563ab65e74e55692790ac71441",
+    "content-hash": "03f0b1c06c9ae7b3a50283c95a1c9310",
     "packages": [
         {
             "name": "bobdenotter/seo",
@@ -221,6 +221,55 @@
                 "issues": "https://github.com/bolt/Sitemap/issues"
             },
             "time": "2017-06-19T12:58:13+00:00"
+        },
+        {
+            "name": "jadwigo/taxonomylist",
+            "version": "v3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jadwigo/TaxonomyList.git",
+                "reference": "2d15948e5f6c2c90f67ba3391d7603b1a2ae9563"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jadwigo/TaxonomyList/zipball/2d15948e5f6c2c90f67ba3391d7603b1a2ae9563",
+                "reference": "2d15948e5f6c2c90f67ba3391d7603b1a2ae9563",
+                "shasum": ""
+            },
+            "require": {
+                "bolt/bolt": "^3.0"
+            },
+            "type": "bolt-extension",
+            "extra": {
+                "bolt-class": "Bolt\\Extension\\Jadwigo\\TaxonomyList\\TaxonomyListExtension"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bolt\\Extension\\Jadwigo\\TaxonomyList\\": "src"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Lodewijk Evers",
+                    "email": "lodewijk@twokings.nl",
+                    "homepage": "https://github.com/jadwigo"
+                }
+            ],
+            "description": "An extension that adds a twig tag for Taxonomy Listings.",
+            "keywords": [
+                "categories",
+                "category",
+                "listing",
+                "tagcloud",
+                "tagclouds",
+                "tags",
+                "taxonomy"
+            ],
+            "support": {
+                "source": "https://github.com/jadwigo/TaxonomyList/tree/v3.3",
+                "issues": "https://github.com/jadwigo/TaxonomyList/issues"
+            },
+            "time": "2017-10-09T07:56:20+00:00"
         },
         {
             "name": "nestordedios/bolt-theme-editorial",

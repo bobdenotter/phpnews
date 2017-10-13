@@ -5,6 +5,9 @@ itemAmount: 5
 # /bolt/extends/rssaggregate a lot.
 key: aGhgdhTRV35FS
 
+import_taxonomy: tags
+ignore_taxonomy_terms: [ php, programming, uncategorized, desktop-wallpaper, javascript ]
+
 feeds:
     derekrethans:
         name: "Derick Rethans"

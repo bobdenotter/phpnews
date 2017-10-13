@@ -277,9 +277,12 @@ class RssAggregatorExtension extends SimpleExtension
             }
 
             // Add some additional taxonomies, if set.
-            if ($feedParams->get('import_taxonomy') !== null) {
-                foreach ($article->getTag('category') as $taxName => $taxValue) {
-                    $record->setTaxonomy($feedParams->get('import_taxonomy'), trim($taxValue));
+            if ($this->config->get('import_taxonomy') !== null) {
+                foreach ($article->getTag('category') as $taxonomy) {
+                    $taxonomy = $app['slugify']->slugify($taxonomy);
+                    if (!in_array($taxonomy, $this->config->get('ignore_taxonomy_terms'))) {
+                        $record->setTaxonomy($this->config->get('import_taxonomy'), $taxonomy);
+                    }
                 }
             }
 
@@ -290,7 +293,6 @@ class RssAggregatorExtension extends SimpleExtension
             $record->setValues($values);
 
             $id = $app['storage']->saveContent($record);
-            $this->unPublishMatchingYouTubeRecord($record);
 
             if ($needsReview) {
                 echo "\n\n<hr>\n\n";
@@ -433,40 +435,6 @@ class RssAggregatorExtension extends SimpleExtension
         $youTubeId = $imageUrlParts[1];
 
         return sprintf('https://www.youtube.com/watch?v=%s', $youTubeId);
-    }
-
-    /**
-     * Unpublish YouTube source feeds if there is a matching video in another
-     * record.
-     *
-     * @param Content $record
-     */
-    private function unPublishMatchingYouTubeRecord(Content $record)
-    {
-        if ((string) $record['itemid'] === '') {
-            return;
-        }
-        if ((string) $record['video'] === '') {
-            return;
-        }
-        $app = $this->getContainer();
-        $repo = $app['storage']->getRepository('feeditems');
-        $qb = $repo->createQueryBuilder();
-        $qb
-            ->select('content.*')
-            ->where('itemid != :itemid')
-            ->andWhere('video = :video')
-            ->andWhere('sitetitle = :sitetitle')
-            ->setParameter('itemid', (string) $record['itemid'])
-            ->setParameter('video', (string) $record['video'])
-            ->setParameter('sitetitle', 'Youtube channel')
-        ;
-        /** @var Entity\Content $entity */
-        $entity = $repo->findOneWith($qb);
-        if ($entity !== false) {
-            $entity->setStatus('held');
-            $repo->save($entity);
-        }
     }
 
     private function fixWonkyEncoding($str)

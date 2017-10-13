@@ -25,7 +25,7 @@
     "name": "bolt/extensions",
     "prefer-stable": true,
     "provide": {
-        "bolt/bolt": "3.3.6"
+        "bolt/bolt": "3.4.0"
     },
     "repositories": {
         "packagist": false,
@@ -39,6 +39,7 @@
         "bolt/boltforms": "^3.0",
         "bolt/disqus": "^2.0",
         "bolt/sitemap": "^2.0",
+        "jadwigo/taxonomylist": "^3.3",
         "nestordedios/bolt-theme-editorial": "^1.0",
         "wikimedia/composer-merge-plugin": "^1.3"
     },
