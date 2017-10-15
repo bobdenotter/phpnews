@@ -57,6 +57,17 @@
             {% endif %}
         {% endif %}
 
+      <h3>Tags</h3>
+
+            {% set list = taxonomylist('tags', { 'limit': 20, 'weighted': true } ) %}
+    <nav class="tags">
+    {% for item in list %}
+            <a class="taxonomy-{{ item.slug }} weight-{{ item.weightclass }}" href="{{ item.link }}" title="{{ item.name }}">
+                {{ item.name }}
+                <small>{{ item.count }} items</small>
+            </a>
+    {% endfor %}
+    </nav>
 
       <h3>Aggregated feeds</h3>
 

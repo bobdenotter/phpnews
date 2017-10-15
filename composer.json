@@ -5,9 +5,9 @@
     "license": "MIT",
     "require": {
         "php": "^5.5.9 || ^7.0",
-        "bolt/bolt": "3.3.x@dev",
+        "bolt/bolt": "^3.4",
         "PasswordLib/PasswordLib": "^1.0@beta",
-        "fguillot/picofeed": "@stable",
+        "miniflux/picofeed": "@stable",
         "bolt/configuration-notices": "^1.0@dev"
     },
     "minimum-stability": "beta",
@@ -17,6 +17,7 @@
             "Bolt\\Composer\\ScriptHandler::installAssets"
         ],
         "post-update-cmd": [
+            "Bolt\\Composer\\ScriptHandler::updateProject",
             "Bolt\\Composer\\ScriptHandler::installAssets"
         ],
         "post-create-project-cmd": [
@@ -27,7 +28,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master" : "3.3.x-dev"
+            "dev-master": "3.4.x-dev"
         }
     }
 }

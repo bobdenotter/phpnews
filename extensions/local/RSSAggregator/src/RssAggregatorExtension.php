@@ -80,6 +80,7 @@ class RssAggregatorExtension extends SimpleExtension
 
         $config = $this->getConfig();
         $app = $this->getContainer();
+        $feeds = $config->get('feeds');
 
         $currentUser = $app['users']->getCurrentUser();
 
@@ -88,9 +89,18 @@ class RssAggregatorExtension extends SimpleExtension
             return 'Key not correct.';
         }
 
-        foreach ($config->get('feeds') as $author => $feed) {
+        // Get some variables from the URL.
+        $amount = (int) $app['request']->get('amount', $config->getInt('itemAmount'));
+        $verbose = (bool) $app['request']->get('verbose', false);
+
+        // Perhaps we only want one feed.
+        if ($onlyfeed = $app['request']->get('feed')) {
+            $feeds = array_intersect_key($feeds, array_flip(explode(',', $onlyfeed)));
+        }
+
+        foreach ($feeds as $author => $feed) {
             if ($feed->get('skip') != true) {
-                $this->parseFeed($author, $feed);
+                $this->parseFeed($author, $feed, $amount, $verbose);
             }
         }
 
@@ -137,8 +147,10 @@ class RssAggregatorExtension extends SimpleExtension
      *
      * @param string       $author
      * @param ParameterBag $feedParams
+     * @param integer      $amount
+     * @param bool         $verbose
      */
-    private function parseFeed($author, ParameterBag $feedParams)
+    private function parseFeed($author, ParameterBag $feedParams, $amount = 10, $verbose = false)
     {
         $config = $this->getConfig();
         $app = $this->getContainer();
@@ -164,7 +176,7 @@ class RssAggregatorExtension extends SimpleExtension
             $parsedfeed = $parser->execute();
 
             /** @var Item[] $items */
-            $items = array_slice($parsedfeed->items, 0, $config->getInt('itemAmount'));
+            $items = array_slice($parsedfeed->items, 0, $amount);
         } catch (PicoFeedException $e) {
             echo '<p><b>ERROR IN: ' . $feedParams->get('feed') . '</b></p>';
             $items = [];
@@ -174,6 +186,10 @@ class RssAggregatorExtension extends SimpleExtension
         /** @var Item $article */
         foreach ($items as $article) {
             $needsReview = false;
+
+            if ($verbose) {
+                dump($article);
+            }
 
             // try to get an existing record for this item
             $record = $app['storage']->getContent(
@@ -240,9 +256,17 @@ class RssAggregatorExtension extends SimpleExtension
                 'sitesource' => $feedParams->get('url'),
             ];
 
-            if ($new || $date instanceof \DateTime) {
-                $values['datecreated'] = ($date instanceof \DateTime) ? $date->format('Y-m-d H:i:s') : '';
-                $values['datepublish'] = ($date instanceof \DateTime) ? $date->format('Y-m-d H:i:s') : '';
+            if ($new) {
+                $date = ($date instanceof \DateTime) ? $date->format('Y-m-d H:i:s') : '';
+                $now = new \DateTime(null, new \DateTimeZone("UTC"));
+                $now = $now->format('Y-m-d H:i:s');
+
+                // Some wonky feeds have no date, or the date set past 'now'. We only allow setting dates in the past.
+                if ( (empty($date) || $date >= $now) ) {
+                    $values['datepublish'] = $values['datecreated'] = date('Y-m-d 00:00:00');
+                } else {
+                    $values['datepublish'] = $values['datecreated'] = $date;
+                }
             }
 
             $record->setTaxonomy('authors', $author);
@@ -255,16 +279,22 @@ class RssAggregatorExtension extends SimpleExtension
             }
 
             // Add some additional taxonomies, if set.
-            if ($feedParams->get('import_taxonomy') !== null) {
-                foreach ($article->getTag('category') as $taxName => $taxValue) {
-                    $record->setTaxonomy($feedParams->get('import_taxonomy'), trim($taxValue));
+            if ($this->config->get('import_taxonomy') !== null) {
+                foreach ($article->getTag('category') as $taxonomy) {
+                    $taxonomy = $app['slugify']->slugify($taxonomy);
+                    if (!in_array($taxonomy, $this->config->get('ignore_taxonomy_terms'))) {
+                        $record->setTaxonomy($this->config->get('import_taxonomy'), $taxonomy);
+                    }
                 }
+            }
+
+            if ($verbose) {
+                dump($values);
             }
 
             $record->setValues($values);
 
             $id = $app['storage']->saveContent($record);
-            $this->unPublishMatchingYouTubeRecord($record);
 
             if ($needsReview) {
                 echo "\n\n<hr>\n\n";
@@ -274,7 +304,7 @@ class RssAggregatorExtension extends SimpleExtension
                 echo "\n\n<hr>\n\n";
             }
 
-            echo $values['sitetitle'] . ' - ' . $values['title'] . ' - ' . $values['datepublish'] . ' - ' . $id;
+            echo $values['sitetitle'] . ' - ' . $values['title'] . ' - ' . $id;
         }
 
         echo "<hr>";
@@ -357,6 +387,10 @@ class RssAggregatorExtension extends SimpleExtension
             if (strpos($tag->getAttribute('src'), 'stat?event') > 0) {
                 continue;
             }
+            // wordpress.org emoji images.
+            if (strpos($tag->getAttribute('src'), 's.w.org') > 0) {
+                continue;
+            }
 
             $image = $tag->getAttribute('src');
 
@@ -403,40 +437,6 @@ class RssAggregatorExtension extends SimpleExtension
         $youTubeId = $imageUrlParts[1];
 
         return sprintf('https://www.youtube.com/watch?v=%s', $youTubeId);
-    }
-
-    /**
-     * Unpublish YouTube source feeds if there is a matching video in another
-     * record.
-     *
-     * @param Content $record
-     */
-    private function unPublishMatchingYouTubeRecord(Content $record)
-    {
-        if ((string) $record['itemid'] === '') {
-            return;
-        }
-        if ((string) $record['video'] === '') {
-            return;
-        }
-        $app = $this->getContainer();
-        $repo = $app['storage']->getRepository('feeditems');
-        $qb = $repo->createQueryBuilder();
-        $qb
-            ->select('content.*')
-            ->where('itemid != :itemid')
-            ->andWhere('video = :video')
-            ->andWhere('sitetitle = :sitetitle')
-            ->setParameter('itemid', (string) $record['itemid'])
-            ->setParameter('video', (string) $record['video'])
-            ->setParameter('sitetitle', 'Youtube channel')
-        ;
-        /** @var Entity\Content $entity */
-        $entity = $repo->findOneWith($qb);
-        if ($entity !== false) {
-            $entity->setStatus('held');
-            $repo->save($entity);
-        }
     }
 
     private function fixWonkyEncoding($str)

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "591a8491f0b7eff53590b1e8ecc45b48",
+    "content-hash": "03f0b1c06c9ae7b3a50283c95a1c9310",
     "packages": [
         {
             "name": "bobdenotter/seo",
@@ -169,16 +169,16 @@
         },
         {
             "name": "bolt/sitemap",
-            "version": "2.1.1",
+            "version": "2.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/Sitemap.git",
-                "reference": "745110b0b29008d5216d608b5b1bf64695a67a2a"
+                "reference": "6f9630daa9d6f8d7f06b2483c2444d780b3ffe7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/745110b0b29008d5216d608b5b1bf64695a67a2a",
-                "reference": "745110b0b29008d5216d608b5b1bf64695a67a2a",
+                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/6f9630daa9d6f8d7f06b2483c2444d780b3ffe7d",
+                "reference": "6f9630daa9d6f8d7f06b2483c2444d780b3ffe7d",
                 "shasum": ""
             },
             "require": {
@@ -217,23 +217,128 @@
                 "sitemap"
             ],
             "support": {
-                "source": "https://github.com/bolt/Sitemap/tree/2.1.1",
+                "source": "https://github.com/bolt/Sitemap/tree/2.2.3",
                 "issues": "https://github.com/bolt/Sitemap/issues"
             },
-            "time": "2017-05-04T10:12:13+00:00"
+            "time": "2017-06-19T12:58:13+00:00"
         },
         {
-            "name": "wikimedia/composer-merge-plugin",
-            "version": "v1.4.0",
+            "name": "jadwigo/taxonomylist",
+            "version": "v3.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/wikimedia/composer-merge-plugin.git",
-                "reference": "ca453f9f13d8b05f86f20ea10be992a782e6f78c"
+                "url": "https://github.com/jadwigo/TaxonomyList.git",
+                "reference": "2d15948e5f6c2c90f67ba3391d7603b1a2ae9563"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wikimedia/composer-merge-plugin/zipball/ca453f9f13d8b05f86f20ea10be992a782e6f78c",
-                "reference": "ca453f9f13d8b05f86f20ea10be992a782e6f78c",
+                "url": "https://api.github.com/repos/jadwigo/TaxonomyList/zipball/2d15948e5f6c2c90f67ba3391d7603b1a2ae9563",
+                "reference": "2d15948e5f6c2c90f67ba3391d7603b1a2ae9563",
+                "shasum": ""
+            },
+            "require": {
+                "bolt/bolt": "^3.0"
+            },
+            "type": "bolt-extension",
+            "extra": {
+                "bolt-class": "Bolt\\Extension\\Jadwigo\\TaxonomyList\\TaxonomyListExtension"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bolt\\Extension\\Jadwigo\\TaxonomyList\\": "src"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Lodewijk Evers",
+                    "email": "lodewijk@twokings.nl",
+                    "homepage": "https://github.com/jadwigo"
+                }
+            ],
+            "description": "An extension that adds a twig tag for Taxonomy Listings.",
+            "keywords": [
+                "categories",
+                "category",
+                "listing",
+                "tagcloud",
+                "tagclouds",
+                "tags",
+                "taxonomy"
+            ],
+            "support": {
+                "source": "https://github.com/jadwigo/TaxonomyList/tree/v3.3",
+                "issues": "https://github.com/jadwigo/TaxonomyList/issues"
+            },
+            "time": "2017-10-09T07:56:20+00:00"
+        },
+        {
+            "name": "nestordedios/bolt-theme-editorial",
+            "version": "v1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nestordedios/bolt-theme-editorial.git",
+                "reference": "2a0c5e2e4be6721d6aef5cd99d74bad6d9b60e37"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nestordedios/bolt-theme-editorial/zipball/2a0c5e2e4be6721d6aef5cd99d74bad6d9b60e37",
+                "reference": "2a0c5e2e4be6721d6aef5cd99d74bad6d9b60e37",
+                "shasum": ""
+            },
+            "require": {
+                "bolt/bolt": "^3.0"
+            },
+            "type": "bolt-theme",
+            "extra": {
+                "bolt-screenshots": [
+                    "screenshots/homepage-desktop-top.PNG",
+                    "screenshots/homepage-desktop.png",
+                    "screenshots/homepage-tablet-portrait.png",
+                    "screenshots/homepage-mobile-open-menu.png",
+                    "screenshots/record-page-desktop.png",
+                    "screenshots/record-page-mobile-close-menu.png"
+                ]
+            },
+            "license": [
+                "CCA (Creative Commons Attribution)"
+            ],
+            "authors": [
+                {
+                    "name": "Nestor de Dios Fernandez",
+                    "email": "nestordedios@outlook.es"
+                },
+                {
+                    "name": "HTML5 UP",
+                    "homepage": "www.html5up.net"
+                }
+            ],
+            "description": "Editorial - A fully responsive site theme.",
+            "keywords": [
+                "editorial",
+                "elegant",
+                "responsive",
+                "simple",
+                "template",
+                "theme"
+            ],
+            "support": {
+                "source": "https://github.com/nestordedios/bolt-theme-editorial/tree/v1.2",
+                "issues": "https://github.com/nestordedios/bolt-theme-editorial/issues"
+            },
+            "time": "2017-10-06T13:26:33+00:00"
+        },
+        {
+            "name": "wikimedia/composer-merge-plugin",
+            "version": "v1.4.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wikimedia/composer-merge-plugin.git",
+                "reference": "81c6ac72a24a67383419c7eb9aa2b3437f2ab100"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wikimedia/composer-merge-plugin/zipball/81c6ac72a24a67383419c7eb9aa2b3437f2ab100",
+                "reference": "81c6ac72a24a67383419c7eb9aa2b3437f2ab100",
                 "shasum": ""
             },
             "require": {
@@ -277,10 +382,10 @@
             ],
             "description": "Composer plugin to merge multiple composer.json files",
             "support": {
-                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/v1.4.0",
+                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/master",
                 "issues": "https://github.com/wikimedia/composer-merge-plugin/issues"
             },
-            "time": "2017-03-13T16:52:55+00:00"
+            "time": "2017-04-25T02:31:25+00:00"
         }
     ],
     "packages-dev": [],

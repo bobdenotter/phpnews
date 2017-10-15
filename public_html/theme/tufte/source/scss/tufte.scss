@@ -680,3 +680,10 @@ mark {
   background-color: rgba(249, 238, 123, 0.5);
   border-bottom: 1px solid rgba(249, 238, 123, 1);
 }
+
+nav.tags {
+  a {
+    margin-right: 15px;
+    border: 1px solid #F00;
+  }
+}
