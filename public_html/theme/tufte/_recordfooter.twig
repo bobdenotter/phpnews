@@ -1,15 +1,12 @@
 {# This file is inserted as the 'footer' of each listed record. #}
-
-<p class="meta">
+{% spaceless %}
+<p class='meta'>
     Written by <strong><a href="/author/{{record.get('author') }}">
         {{ attribute(rssfeeds, record.get('author')).get('name') -}}
-    </a></strong>
-    {% if record.get('source') %}
-    - Published on <a href="{{ record.get('source') }}" target="_blank">
+    </a></strong>, published on <a href="{{ record.get('source') }}" target="_blank">
         {{ attribute(rssfeeds, record.get('author')).get('title') -}}
-    </a>
-    {% endif %}
-    <br>
+    </a> –
     Aggregated on {{ record.datepublish|localdate("%A %B %e, %Y")}} -
     <a href="{{ record.link }}">Permalink</a>
 </p>
+{% endspaceless %}

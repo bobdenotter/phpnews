@@ -1,22 +1,30 @@
 {% extends '_base.twig' %}
-
 {% import '_macro.twig' as macros %}
 
+{% block bodyclass %}detail{% endblock %}
+
 {% block pagename %}
-    <a href='{{ record.link }}'>{{ record.title|excerpt(50) }}</a>
+    <a href='{{ record.link }}'>{{ record.title|excerpt(38) }}</a>
 {% endblock %}
 
-{% block title %}
-    {{ record.title }}
-{% endblock %}
+{% block container %}
+    <header>
+        <h1>
+        {{ record.title }}
+        </h1>
+        {% include '_recordfooter.twig' with {record: record} %}
+    </header>
 
-{% block content %}
+    <article class="content">
 
-    <section>
+        {% if record.introduction is not empty %}
+            <p class='subtitle'>
+                {{ record.introduction|striptags('<b><em><i><strong><a><u>')|raw }}
+            </p>
+        {% endif %}
 
-    {% include '_recordfooter.twig' with {record: record} %}
 
-    {{ record.content }}
+        {{ record.content }}
 
     <hr>
 
@@ -37,7 +45,7 @@
         {% endif %}
     </p>
 
+    </article>
 
-    </section>
+{% endblock container %}
 
-{% endblock %}

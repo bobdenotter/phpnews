@@ -117,7 +117,7 @@ record_template: record.twig
 #         website, be sure to check for a config.yml file in your theme's
 #         folder. If a template is set there, it will override the setting here.
 listing_template: listing.twig
-listing_records: 6
+listing_records: 12
 listing_sort: datepublish DESC
 
 # Because of limitations on how the underlying database queries work, there are

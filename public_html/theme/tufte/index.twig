@@ -1,73 +1,75 @@
 {% extends '_base.twig' %}
-
 {% import '_macro.twig' as macros %}
 
-{% block content %}
+{% block bodyclass %}homepage{% endblock %}
 
-    {# {% setcontent records = 'feeditems/latest/6' allowpaging %} #}
-    {% for record in records %}
+{% block container %}
+    <header>
+        <h1>
+            {{ app.config.get('general/sitename') }}
+        </h1>
+    </header>
 
-        <h2><a href='{{ record.link() }}'>{{ record.title }}</a></h2>
+    {# {% setcontent records = 'feeditems/latest/12' allowpaging %} #}
+    {% set record = records|first %}
 
-        {% include '_recordfooter.twig' with {'compact': true } %}
+        <article class='content'>
 
-        {% if record.image != '' and 'avatar' not in ('' ~ record.image) %}
-          {{ macros.image(record.image, record, 'main') }}
-        {% endif %}
+            <h2><a href='{{ record.link() }}'>{{ record.title }}</a></h2>
 
-        <p>
-            {{ record.content|excerpt(400) }}
-        </p>
+            {% include '_recordfooter.twig' with {'compact': true } %}
 
-        <p><a href='{{ record.link }}'>Continue reading &raquo;</a></p>
+            {% if record.image!='' %}
+            {{ macros.image(record.image, record, 'main') }}
+            {% endif %}
 
-        <hr>
+            <p>{{ record.content|excerpt(320) }}</p>
+
+            <p><a href='{{ record.link }}'>Continue reading &raquo;</a></p>
+
+            <hr>
+
+        </article>
+
+    <section>
+    {% for record in records|slice(1) %}
+
+        <article class='content'>
+
+            {# {% if record.image!='' %}
+            {{ macros.image(record.image, record, 'sidebar') }}
+            {% endif %} #}
+
+            <h2><a href='{{ record.link() }}'>{{ record.title }}</a></h2>
+
+            {% include '_recordfooter.twig' with {'compact': true } %}
+
+            {% if record.image!='' %}
+            {{ macros.image(record.image, record, 'main') }}
+            {% endif %}
+
+            <p>{{ record.content|excerpt(320) }}</p>
+
+            <p><a href='{{ record.link }}'>Continue reading &raquo;</a></p>
+
+            <hr>
+
+        </article>
 
     {% endfor %}
 
     {{ pager() }}
 
-{% endblock %}
 
-{% block aside %}
-      <aside class='col-xxs-12 col-m-4'>
 
-        {# let's see if we have a 'block' resource type, with 'about' for a slug? #}
-        {% setcontent about = 'blocks/about-us' %}
+    </section>
+
+    <aside class='content'>
+        {% setcontent about = 'page/about' %}
         {% if about is not empty %}
-          <h3>{{ about.title }}</h3>
-          {{ about.content }}
-          {% if about.contentlink is not empty %}
-            <a href='{{ about.contentlink }}'>Continue reading &raquo;</a>
-          {% endif %}
-        {% else %}
-
-          {# otherwise we might have a 'page' with slug 'about'? #}
-          {% setcontent about = 'page/about' %}
-            {% if about is not empty %}
-              {{ about.excerpt(200) }}
-              <a href='{{ about.link() }}'>Continue reading &raquo;</a>
-            {% else %}
-
-              {# fallback to dummy text #}
-              <p>
-                Welcome to the Tufte theme! Read the supplied README on instructions on how to change this blurb, right here. Thanks for choosing this simple theme!
-              </p>
-
-            {% endif %}
+            {{ about.teaser }}
+            <a href='{{ about.link() }}'>Continue reading &raquo;</a>
         {% endif %}
-
-      <h3>Tags</h3>
-
-            {% set list = taxonomylist('tags', { 'limit': 20, 'weighted': true } ) %}
-    <nav class="tags">
-    {% for item in list %}
-            <a class="taxonomy-{{ item.slug }} weight-{{ item.weightclass }}" href="{{ item.link }}" title="{{ item.name }}">
-                {{ item.name }}
-                <small>{{ item.count }} items</small>
-            </a>
-    {% endfor %}
-    </nav>
 
       <h3>Aggregated feeds</h3>
 
@@ -85,7 +87,12 @@
         {% endfor %}
       </ul>
 
+    </aside>
 
-      </aside>
 
-{% endblock aside %}
+
+
+
+{% endblock container %}
+
+
