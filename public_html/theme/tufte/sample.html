@@ -168,8 +168,7 @@
 (map tufte-css blog-posts)
 ;;;; if unfamiliar, see http://www.lispcast.com/annotated-map
 
-;; side-effecty loop (unformatted, causing text overflow) - from https://clojuredocs.org/clojure.core/doseq
-(doseq [[[a b] [c d]] (map list (sorted-map :1 1 :2 2) (sorted-map :3 3 :4 4))] (prn (* b d)))
+;; side-effecty loop (unformatted, causing text overflow) - from https://clojuredocs.org/clojure.core/doseq (doseq [[[a b] [c d]] (map list (sorted-map :1 1 :2 2) (sorted-map :3 3 :4 4))] (prn (* b d)))
 
 ;; that same side-effecty loop, formatted
 (doseq [[[a b] [c d]] (map list
