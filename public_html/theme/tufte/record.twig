@@ -1,5 +1,5 @@
 {% extends '_base.twig' %}
-{% import '_macro.twig' as macros %}
+{% import 'partials/_macro.twig' as macros %}
 
 {% block bodyclass %}detail{% endblock %}
 
@@ -12,7 +12,7 @@
         <h1>
         {{ record.title }}
         </h1>
-        {% include '_recordfooter.twig' with {record: record} %}
+        {% include 'partials/_recordfooter.twig' with {verbose: true} %}
     </header>
 
     <article class="content">

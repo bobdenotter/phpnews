@@ -39,7 +39,7 @@
 
     <div class="navbar-menu" id="navMenu">
       <div class="navbar-end">
-        {{ menu() }}
+        {{ menu(template = 'partials/_sub_menu.twig') }}
       </div>
     </div>
   </div>
@@ -51,6 +51,10 @@
     {% block container %}
     {% endblock container %}
 </div>
+
+<footer>
+&mdash; <span>&#10087;</span> &mdash;
+</footer>
 
 {% if theme.boxed|default(false) %}</div>{% endif %}
 

@@ -1,5 +1,5 @@
 {% extends '_base.twig' %}
-{% import '_macro.twig' as macros %}
+{% import 'partials/_macro.twig' as macros %}
 
 {% block bodyclass %}homepage{% endblock %}
 
@@ -17,7 +17,7 @@
 
             <h2><a href='{{ record.link() }}'>{{ record.title }}</a></h2>
 
-            {% include '_recordfooter.twig' with {'compact': true } %}
+            {% include 'partials/_recordfooter.twig' %}
 
             {% if record.image!='' %}
             {{ macros.image(record.image, record, 'main') }}
@@ -42,7 +42,7 @@
 
             <h2><a href='{{ record.link() }}'>{{ record.title }}</a></h2>
 
-            {% include '_recordfooter.twig' with {'compact': true } %}
+            {% include 'partials/_recordfooter.twig' %}
 
             {% if record.image!='' %}
             {{ macros.image(record.image, record, 'main') }}

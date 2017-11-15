@@ -109,7 +109,10 @@ body {
     }
     p.meta {
       font-family: $font-serif;
-      font-size: 1.2rem;
+      font-size: 1.0rem;
+      @include desktop {
+        font-size: 1.2rem;
+      }
     }
   }
 
@@ -141,7 +144,6 @@ header {
 h1,
 h2,
 h3 {
-
   font-weight: 400;
   line-height: 1.2;
 
@@ -180,7 +182,7 @@ h3 {
   }
 }
 
-.content h3 {
+.content h3, aside h3 {
   font-style: italic;
   font-size: 1.7rem;
   margin-bottom: 0;
@@ -218,6 +220,10 @@ p.meta {
   color: #555;
   margin: 0.7rem 0;
   font-style: italic;
+
+  @include desktop {
+    font-size: 1.3rem;
+  }
 
   a {
     &:hover {
@@ -285,7 +291,7 @@ table.booktabs {
     padding-top: 0.65ex;
   }
 
-   /* add space between thead row and tbody */
+  /* add space between thead row and tbody */
   td {
     padding-left: 0.5em;
     padding-right: 0.5em;
@@ -344,7 +350,6 @@ article {
   @include desktop {
     padding-right: 2rem;
   }
-
 }
 
 aside {
@@ -362,7 +367,6 @@ aside {
     line-height: 1.4rem !important;
 
   }
-
 }
 
 div.sideimage {
@@ -398,23 +402,36 @@ div.sideimage {
       margin-right: calc(-50% - 3rem);
     }
   }
-
 }
 
 article p a,
 aside p a {
-    color: $color-accent;
-    text-decoration: underline;
-    text-shadow: 2px 0 white, 1px 0 white, -1px 0 white, -2px 0 white;
-    &:hover {
-      color: darken($color-accent, 11%);
-    }
+  color: $color-accent;
+  text-decoration: underline;
+  text-shadow: 2px 0 white, 1px 0 white, -1px 0 white, -2px 0 white;
+  &:hover {
+    color: darken($color-accent, 11%);
   }
-
+}
 
 section {
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+
+footer {
+  font-family: Georgia;
+  font-size: 1.6rem;
+  text-align: center;
+  color: #AAA;
+  margin: 2em;
+  vertical-align: middle;
+
+  span {
+    line-height: 2.4rem;
+    font-size: 2.4rem;
+    vertical-align: middle;
+  }
 }
 
 p, ol, ul {
@@ -446,16 +463,12 @@ blockquote {
     font-size: 1.1rem;
     font-style: normal;
     text-align: right;
-
   }
-
 }
 
 samp {
   background-color: transparent;
 }
-
-
 
 .table-caption {
   float: right;
@@ -468,7 +481,6 @@ samp {
   line-height: 1.6;
 }
 
-
 .imageholder {
   padding: 4px;
   background-color: lighten($color-body, 10);
@@ -476,8 +488,8 @@ samp {
   display: block;
 
   @include tablet {
-    body.detail & {
-      margin: 0 -4em;
+    body.detail &.wide {
+      margin: 0 -5em;
     }
   }
 
@@ -499,19 +511,22 @@ samp {
     color: #666;
     margin: 0.5em 0;
   }
-
 }
 
-
-.code {
+code {
   font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  font-size: 1.125rem;
+  font-size: 0.875em;
   line-height: 1.6;
+  color: #950b2f;
   background-color: #E8E8E8;
   padding: 2px;
+  -ms-font-feature-settings: normal;
+  -o-font-feature-settings: normal;
+  -webkit-font-feature-settings: normal;
+  font-feature-settings: normal;
 }
 
-h1 .code, h2 .code, h3 .code {
+h1 code, h2 code, h3 code {
   font-size: 0.80em;
 }
 
@@ -522,28 +537,54 @@ h1 .code, h2 .code, h3 .code {
 .content pre {
   background-color: rgb(244, 243, 236);
   white-space: pre-wrap;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  overflow-x: scroll;
 
-  // @include touch {
-  //   margin-right: -260px;
-  // }
+  @include touch {
+    margin-right: -260px;
+  }
 
-  .code {
-    overflow-x: scroll;
+  @include desktop {
+    max-width: 608px;
+
+    &.wide {
+      margin-left: -100px;
+      margin-right: -100px;
+      max-width: 808px;
+    }
+  }
+
+  @include widescreen {
+    max-width: 736px;
+
+    &.wide {
+      margin-left: -160px;
+      margin-right: -160px;
+      max-width: 1056px;
+    }
+  }
+
+  .line-numbers-sizer {
+    height: 0; // We don't need this.
+  }
+
+  .number {
+    background-color: transparent;
+    font-size: 1em;
+    height: 1em;
+    margin: 0;
+    padding: 0;
+    align-items: baseline;
+    min-width: 0.3em;
   }
 }
 
-.fullwidth {
-  max-width: 90%;
-}
-
-span.newthought {
-  font-variant: small-caps;
-  font-size: 1.2em;
-}
-
-input.margin-toggle {
-  display: none;
+input[type="search"] {
+  border: 1px solid darken($color-body, 25);
+  padding: 4px;
+  font-family: $font-sans-serif;
+  font-size: 1.0rem;
+  height: 2rem;
 }
 
 label.sidenote-number {
@@ -591,7 +632,6 @@ nav#mainnav {
     color: #222;
     text-decoration: none;
   }
-
 }
 
 
