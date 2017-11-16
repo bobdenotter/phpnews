@@ -33,14 +33,14 @@
         {% if previous %}
             <a href="{{ previous.link }}">&laquo; {{ previous.title|excerpt(40) }}</a> -
             {% set a = '' ~ previous.author %}
-            {{ attribute(rssfeeds, a).get('name') }}
+            {{ attribute(rssfeeds, a).get('name')|default('unknown') }}
         {% endif %}
     </p>
     <p class="meta" style="text-align: right;">
         {% set next = record.next('id') %}
         {% if next %}
             {% set a = '' ~ next.author %}
-            {{ attribute(rssfeeds, a).get('name') }}
+            {{ attribute(rssfeeds, a).get('name')|default('unknown') }}
             - <a href="{{ next.link }}">{{ next.title|excerpt(40) }} &raquo;</a>
         {% endif %}
     </p>

@@ -578,10 +578,25 @@ feeds:
         feed: https://alfrednutile.info/rss_full
         title: Alfred Nutile RSS
         # skip: true
-
-# http://www.brandonsavage.net/best-php-blogs-to-follow
-# https://gist.github.com/freekmurze/b7f78708697266d507311a6e800eaeae
-
-
+    troyhunt:
+        url: https://www.troyhunt.com/
+        name: Troy Hunt
+        feed: https://www.troyhunt.com/rss/
+        title: Troy Hunt
+    scotchio:
+        url: https://www.scotch.io/
+        name: Scotch.io
+        feed: https://scotch.io/feed
+        title: Scotch.io
+    remysharp:
+        url: https://remysharp.com/
+        name: Remy Sharp
+        feed: https://remysharp.com/feed.xml
+        title: Remy Sharp's b:log
+    marcoament:
+        url: https://marco.org
+        name: Marco Ament
+        feed: https://marco.org/rss
+        title: Marco Ament
 
 
