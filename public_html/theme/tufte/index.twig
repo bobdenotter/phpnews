@@ -11,28 +11,9 @@
     </header>
 
     {# {% setcontent records = 'feeditems/latest/12' allowpaging %} #}
-    {% set record = records|first %}
-
-        <article class='content'>
-
-            <h2><a href='{{ record.link() }}'>{{ record.title }}</a></h2>
-
-            {% include 'partials/_recordfooter.twig' %}
-
-            {% if record.image!='' %}
-            {{ macros.image(record.image, record, 'main') }}
-            {% endif %}
-
-            <p>{{ record.content|excerpt(320) }}</p>
-
-            <p><a href='{{ record.link }}'>Continue reading &raquo;</a></p>
-
-            <hr>
-
-        </article>
 
     <section>
-    {% for record in records|slice(1) %}
+    {% for record in records %}
 
         <article class='content'>
 
@@ -40,17 +21,28 @@
             {{ macros.image(record.image, record, 'sidebar') }}
             {% endif %} #}
 
-            <h2><a href='{{ record.link() }}'>{{ record.title }}</a></h2>
+{% set author = attribute(rssfeeds, record.get('author')).all() %}
+{% set compact = author.compact|default(false) %}
 
-            {% include 'partials/_recordfooter.twig' %}
-
-            {% if record.image!='' %}
-            {{ macros.image(record.image, record, 'main') }}
+            {% if record.image!='' and compact %}
+            {{ macros.image(record.image, record, 'compact') }}
             {% endif %}
 
-            <p>{{ record.content|excerpt(320) }}</p>
+            <h2 {% if compact %}class='compact'{% endif %}>
+                <a href='{{ record.link() }}'>{{ record.title|excerpt(78) }}</a>
+            </h2>
 
-            <p><a href='{{ record.link }}'>Continue reading &raquo;</a></p>
+            {% if record.image!='' and not compact %}
+            {{ macros.image(record.image, record) }}
+            {% endif %}
+
+            <p>{{ record.content|excerpt(compact ? 160 : 320) }}</p>
+
+            {% if not compact %}
+                <p><a href='{{ record.link }}'>Continue reading &raquo;</a></p>
+            {% endif %}
+
+            {% include 'partials/_recordfooter.twig' %}
 
             <hr>
 
@@ -78,7 +70,7 @@
       <ul class="feeds">
         {% for author, lastupdated in authors %}
           {% set feed = attribute(rssfeeds, author)|default() %}
-            {% if feed is not empty %}
+            {% if feed is not empty and not feed.get('skip') %}
             <li>
               <a href="/author/{{ author}}" target="_blank">{{ feed.get('title') }}</a>
               <small><em>(<a href="{{feed.get('url') }}">Link</a>, <span title="Last updated {{ lastupdated }}">{{ lastupdated|localedatetime("%e %b '%y") }}</span>)</em></small>

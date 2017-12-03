@@ -48,10 +48,10 @@ feeditems:
     taxonomy: [ tags, authors ]
     record_template: feeditem.twig
     listing_template: listing.twig
-    listing_records: 10
+    listing_records: 20
     default_status: published
     sort: -datepublish
-    recordsperpage: 10
+    recordsperpage: 20
 
 pages:
     name: Pages

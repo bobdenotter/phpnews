@@ -9,6 +9,48 @@ import_taxonomy: tags
 ignore_taxonomy_terms: [ php, programming, uncategorized, desktop-wallpaper, javascript ]
 
 feeds:
+    symfony:
+        name: "Symfony blog"
+        title: "The Symfony blog"
+        url: "http://symfony.com/blog/"
+        feed: "http://feeds.feedburner.com/symfony/blog"
+        compact: true
+    laracasts:
+        url: http://laracasts.com/feed
+        name: Laracasts
+        feed: https://laracasts.com/feed
+        title: Laracasts
+        compact: true
+    laravelnews:
+        url: https://laravel-news.com
+        name: Laravel News
+        feed: https://feed.laravel-news.com/
+        title: Laravel News
+        compact: true
+    scotchio:
+        url: https://www.scotch.io/
+        name: Scotch.io
+        feed: https://scotch.io/feed
+        title: Scotch.io
+        compact: true
+    signalvnoise:
+        url: https://m.signalvnoise.com?source=rss----668e14b18fb1---4
+        name: Signal vs. Noise
+        feed: https://signalvnoise.com/posts.rss
+        title: Signal vs. Noise
+        compact: true
+    googleblog:
+        url: http://security.googleblog.com/
+        name: Google Online Security Blog
+        feed: http://googleonlinesecurity.blogspot.com/feeds/posts/default
+        title: Google Online Security Blog
+        compact: true
+    tutorialzine:
+        url: http://tutorialzine.com
+        name: Tutorialzine
+        feed: http://feeds.feedburner.com/Tutorialzine
+        title: Tutorialzine
+
     derekrethans:
         name: "Derick Rethans"
         title: "Derick Rethans' blog'"
@@ -114,11 +156,6 @@ feeds:
         title: "Sitepoint"
         url: "http://www.sitepoint.com/"
         feed: "http://www.sitepoint.com/php/feed/"
-    symfony:
-        name: "Symfony blog"
-        title: "The Symfony blog"
-        url: "http://symfony.com/blog/"
-        feed: "http://feeds.feedburner.com/symfony/blog"
     annafilina:
         name: "Anna Filina"
         title: "Anna Filina's weblog"
@@ -243,6 +280,7 @@ feeds:
         name: CSI: PHP
         feed: http://csiphp.com/atom.xml
         title: CSI: PHP
+        skip: true
     derickbailey:
         url: https://derickbailey.com
         name: DerickBailey.com
@@ -253,6 +291,7 @@ feeds:
         name: Dev Metal
         feed: http://www.dev-metal.com/feed/
         title: Dev Metal
+        skip: true
     labnol:
         url: https://www.labnol.org
         name: Digital Inspiration Technology Blog
@@ -278,6 +317,7 @@ feeds:
         name: everzet's blog
         feed: http://everzet.com/rss
         title: everzet's blog
+        skip: true
     facebook:
         url: https://code.facebook.com/
         name: Facebook Code
@@ -293,11 +333,7 @@ feeds:
         name: "Gary Hockin @GeeH"
         feed: http://blog.hock.in/feed/
         title: "Gary Hockin @GeeH"
-    googleblog:
-        url: http://security.googleblog.com/
-        name: Google Online Security Blog
-        feed: http://googleonlinesecurity.blogspot.com/feeds/posts/default
-        title: Google Online Security Blog
+
     hannesvdvreken:
         url: https://hannesvdvreken.com/
         name: Hannes Van De Vreken
@@ -308,11 +344,13 @@ feeds:
         name: Harrie Verveer
         feed: http://harrieverveer.nl/rss/feed.xml
         title: Harrie Verveer
+        skip: true
     ieblog:
         url: https://blogs.msdn.microsoft.com/ie
         name: IEBlog
         feed: http://blogs.msdn.com/b/ie/rss.aspx
         title: IEBlog
+        skip: true
     ignorethecode:
         url: http://ignorethecode.net
         name: ignorethecode.net
@@ -324,9 +362,9 @@ feeds:
         feed: https://igor.io/index.atom
         title: igorw
     intracto:
-        url: https://www.intracto.com/nl/blog/archief
+        url: https://blog.intracto.com/
         name: Intracto
-        feed: http://www.intracto.com/feed
+        feed: https://blog.intracto.com/rss.xml
         title: Intracto
     JasonMcCreary:
         url: http://jason.pureconcepts.net/
@@ -353,16 +391,7 @@ feeds:
         name: Keith Cirkel
         feed: http://blog.keithcirkel.co.uk/rss/
         title: Keith Cirkel
-    laracasts:
-        url: http://laracasts.com/feed
-        name: Laracasts
-        feed: https://laracasts.com/feed
-        title: Laracasts
-    laravelnews:
-        url: https://laravel-news.com
-        name: Laravel News
-        feed: https://feed.laravel-news.com/
-        title: Laravel News
+
     mathiasverraes:
         url: http://verraes.net/
         name: Mathias Verraes
@@ -373,6 +402,7 @@ feeds:
         name: Matt Briggs
         feed: http://mattbriggs.net/atom.xml
         title: Matt Briggs
+        skip: true
     matthewsetter:
         url: https://www.matthewsetter.com/blog/
         name: Matthew Setter
@@ -423,11 +453,6 @@ feeds:
         name: Sebastian De Deyne
         feed: https://sebastiandedeyne.com/feed
         title: Sebastian De Deyne
-    signalvnoise:
-        url: https://m.signalvnoise.com?source=rss----668e14b18fb1---4
-        name: Signal vs. Noise
-        feed: https://signalvnoise.com/posts.rss
-        title: Signal vs. Noise
     simonecarletti:
         url: https://simonecarletti.com/
         name: Simone Carletti
@@ -458,21 +483,18 @@ feeds:
         name: The Stakeholder Whisperer
         feed: http://stakeholderwhisperer.com/?format=rss
         title: The Stakeholder Whisperer
+        skip: true
     feryn:
         url: https://blog.feryn.eu
         name: Thijs Feryn's blog
         feed: http://blog.feryn.eu/feed/
         title: Thijs Feryn's blog
-    tutorialzine:
-        url: http://tutorialzine.com
-        name: Tutorialzine
-        feed: http://feeds.feedburner.com/Tutorialzine
-        title: Tutorialzine
     uxmyths:
         url: http://uxmyths.com/
         name: UX Myths
         feed: http://feeds.feedburner.com/uxmyths
         title: UX Myths
+        skip: true
     vinkla:
         url: http://vinkla.com/
         name: vinkla/xml
@@ -512,6 +534,7 @@ feeds:
         name: Corey Haines
         feed: http://articles.coreyhaines.com/atom.xml
         title: Corey Haines
+        skip: true
     githubengineering:
         url: https://githubengineering.com/
         name: GitHub Engineering
