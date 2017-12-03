@@ -76,6 +76,7 @@ feeds:
         title: "Erika Heidi's blog"
         name: "Erika Heidi"
         feed: "http://feeds.feedburner.com/erikaheidi/blog" # http://erikaheidi.com/entries/rss/feed.rss"
+        skip: true
     calevans:
         name: "Cal Evans"
         title: "Cal Evans - Postcards From My Life"
@@ -205,6 +206,7 @@ feeds:
         name: asked.io
         feed: https://asked.io/rss
         title: asked.io
+        skip: true
     ocramius:
         url: https://ocramius.github.io/
         name: ocramius.github.io
@@ -463,6 +465,7 @@ feeds:
         name: SOFTonSOFA
         feed: https://softonsofa.com/feed/
         title: SOFTonSOFA
+        skip: true
     barryvdh:
         url: https://medium.com/@barryvdh
         name: Stories by Barry vd. Heuvel on Medium
@@ -500,6 +503,7 @@ feeds:
         name: vinkla/xml
         feed: https://vinkla.com/feed.xml
         title: vinkla/xml
+        skip: true
     web-design-weekly:
         url: https://web-design-weekly.com
         name: Web Design Weekly
