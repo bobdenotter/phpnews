@@ -34,6 +34,8 @@ class RssAggregatorExtension extends SimpleExtension
     protected function registerBackendRoutes(ControllerCollection $collection)
     {
         $collection->get('/extensions/rssaggregate', [$this, 'RSSAggregator']);
+
+        $collection->get('/extensions/rssaggregate/list', [$this, 'listFeeds']);
     }
 
     /**
@@ -105,6 +107,27 @@ class RssAggregatorExtension extends SimpleExtension
         }
 
         return '<br><br><br> Done.';
+    }
+
+    public function listFeeds(Request $request)
+    {
+        $config = $this->getConfig();
+        $app = $this->getContainer();
+        $feeds = $config->get('feeds');
+
+        $currentUser = $app['users']->getCurrentUser();
+
+        $key = $config->getAlnum('key');
+        if ($key !== '' && $key !== $request->query->get('key') && $currentUser === null) {
+            return 'Key not correct.';
+        }
+
+        $context = [
+            'feeds' => $feeds,
+        ];
+        $output = $this->renderTemplate('list.twig', $context);
+
+        return $output;
     }
 
     /**

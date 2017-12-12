@@ -252,6 +252,7 @@ feeds:
         name: CatsWhoCode.com
         feed: http://feeds2.feedburner.com/Catswhocode
         title: CatsWhoCode.com
+        skip: true
     wyrihaximus:
         url: https://blog.wyrihaximus.net/
         name: Cees-Jan Kiewiet's blog
@@ -430,6 +431,7 @@ feeds:
         name: murze.be
         feed: https://murze.be/feed/
         title: murze.be
+        compact: true
     pascalbaljetmedia:
         url: https://pascalbaljetmedia.com/rss
         name: Pascal Baljet Media - Blog

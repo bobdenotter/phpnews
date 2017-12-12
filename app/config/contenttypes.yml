@@ -47,7 +47,7 @@ feeditems:
             variant: inline
     taxonomy: [ tags, authors ]
     record_template: feeditem.twig
-    listing_template: listing.twig
+    listing_template: index.twig
     listing_records: 20
     default_status: published
     sort: -datepublish

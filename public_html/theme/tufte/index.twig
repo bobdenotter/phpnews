@@ -10,7 +10,11 @@
         </h1>
     </header>
 
-    {# {% setcontent records = 'feeditems/latest/12' allowpaging %} #}
+    {% set author = app.request.get('author') %}
+    {% if author %}
+        {% setcontent records = 'feeditems' where { author: author } limit 20 allowpaging %}
+    {% endif %}
+
 
     <section>
     {% for record in records %}

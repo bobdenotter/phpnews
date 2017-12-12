@@ -1,0 +1,48 @@
+{% extends '@bolt/_base/_page-nav.twig' %}
+{% from '@bolt/_buic/_moment.twig' import buic_moment %}
+
+{% block page_title "All feeds" %}
+
+{% block page_main %}
+
+    <style>
+    .dashboardlisting td {
+        padding: 4px 8px;
+    }
+    </style>
+
+    {% for key, feed in feeds %}
+
+        <h2>
+            {{ feed.get('name') }}
+            {% if feed.get('name') != feed.get('title') %} <small>on {{ feed.get('title') }}</small>{% endif %}
+        </h2>
+
+        {% if not feed.get('skip') %}
+            <p>
+                Key: <code>{{ key }}</code> /
+                Feed & URL:
+                <a href='{{ feed.get('feed') }}' target='_blank'>{{ feed.get('feed') }}</a> /
+                <a href='{{ feed.get('url') }}' target='_blank'>{{ feed.get('url') }}</a>
+                {% if feed.get('compact') %} / <strong>Compact view</strong>{% endif %}
+            </p>
+
+            {% setcontent items = 'feeditems' where { author: key } limit 5 %}
+            <table class="table-striped dashboardlisting">
+            {% for item in items %}
+                <tr>
+                    <td><a href='{{ item.editlink() }}'>{{ item.id }}</a></td>
+                    <td><a href='{{ item.editlink() }}'>{{ item.title }}</a></td>
+                    <td><a href='{{ item.source }}' target='_blank'>source</a></td>
+                    <td>{{ buic_moment(item.datepublish) }}</td>
+                    <td>{{ item.content|length() }} chars</td>
+                </tr>
+            {% endfor %}
+            </table>
+        {% else %}
+            Feed skipped.
+        {% endif %}
+
+    {% endfor %}
+
+{% endblock %}

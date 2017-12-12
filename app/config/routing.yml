@@ -5,6 +5,13 @@
 # ------------------------------------------------------------------------------
 # Place your own routes here, that have a HIGHER priority than the default routes.
 
+authorlisting:
+    path: /author/{author}
+    defaults:
+        _controller: controller.frontend:listing
+        contenttypeslug: feeditems
+    requirements:
+        contenttypeslug: controller.requirement:pluralContentTypes
 
 
 # ------------------------------------------------------------------------------
