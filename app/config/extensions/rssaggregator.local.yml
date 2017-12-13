@@ -50,7 +50,6 @@ feeds:
         name: Tutorialzine
         feed: http://feeds.feedburner.com/Tutorialzine
         title: Tutorialzine
-
     derekrethans:
         name: "Derick Rethans"
         title: "Derick Rethans' blog'"
@@ -389,12 +388,6 @@ feeds:
         name: Joe Ferguson
         feed: http://www.joeferguson.me/feed/
         title: Joe Ferguson
-    keithcirkel:
-        url: https://www.keithcirkel.co.uk/
-        name: Keith Cirkel
-        feed: http://blog.keithcirkel.co.uk/rss/
-        title: Keith Cirkel
-
     mathiasverraes:
         url: http://verraes.net/
         name: Mathias Verraes
@@ -470,9 +463,9 @@ feeds:
         skip: true
     barryvdh:
         url: https://medium.com/@barryvdh
-        name: Stories by Barry vd. Heuvel on Medium
+        name: Barry vd. Heuvel
         feed: https://medium.com/feed/@barryvdh
-        title: Stories by Barry vd. Heuvel on Medium
+        title: Barry vd. Heuvel
     stuartherbert:
         url: http://blog.stuartherbert.com/multifeed
         name: Stuart Herbert - Blog
@@ -573,14 +566,14 @@ feeds:
         title: Sarah Mei
     colindecarlo:
         url: https://medium.com/@colindecarlo?source=rss-88c2ac049edd------2
-        name: Stories by Colin DeCarlo on Medium
+        name: Colin DeCarlo
         feed: https://medium.com/feed/@colindecarlo
-        title: Stories by Colin DeCarlo on Medium
+        title: Colin DeCarlo
     ondrejmirtes:
         url: https://medium.com/@ondrejmirtes?source=rss-1ce5e2eaba6e------2
-        name: Stories by Ondřej Mirtes on Medium
+        name: Ondřej Mirtes
         feed: https://medium.com/feed/@ondrejmirtes
-        title: Stories by Ondřej Mirtes on Medium
+        title: Ondřej Mirtes
     bethtuckerlong:
         url: http://www.alittleofboth.com/
         title: A Little of Both
@@ -628,4 +621,10 @@ feeds:
         feed: https://marco.org/rss
         title: Marco Ament
 
+# Frontend stuff
 
+    keithcirkel:
+        url: https://www.keithcirkel.co.uk/
+        name: Keith Cirkel
+        feed: http://blog.keithcirkel.co.uk/rss/
+        title: Keith Cirkel

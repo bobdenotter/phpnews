@@ -32,7 +32,7 @@
             {% for item in items %}
                 <tr>
                     <td><a href='{{ item.editlink() }}'>{{ item.id }}</a></td>
-                    <td><a href='{{ item.editlink() }}'>{{ item.title }}</a></td>
+                    <td><a href='{{ item.link() }}'>{{ item.title }}</a></td>
                     <td><a href='{{ item.source }}' target='_blank'>source</a></td>
                     <td>{{ buic_moment(item.datepublish) }}</td>
                     <td>{{ item.content|length() }} chars</td>
