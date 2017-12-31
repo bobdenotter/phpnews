@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bolt/bolt",
-            "version": "v3.4.3",
+            "version": "v3.4.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/bolt.git",
-                "reference": "a29e4625463822b1fa7b2513f23507e4506dcd3e"
+                "reference": "fda04d9a77c21067ed710019ab4d950efcb7fe29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/bolt/zipball/a29e4625463822b1fa7b2513f23507e4506dcd3e",
-                "reference": "a29e4625463822b1fa7b2513f23507e4506dcd3e",
+                "url": "https://api.github.com/repos/bolt/bolt/zipball/fda04d9a77c21067ed710019ab4d950efcb7fe29",
+                "reference": "fda04d9a77c21067ed710019ab4d950efcb7fe29",
                 "shasum": ""
             },
             "require": {
@@ -104,6 +104,7 @@
                 "roave/security-advisories": "dev-master@dev",
                 "sebastian/phpcpd": "^2.0",
                 "sorien/silex-pimple-dumper": "^1.0",
+                "symfony/browser-kit": "^2.8 || ^3.3",
                 "symfony/phpunit-bridge": "^2.8 || ^3.3.2"
             },
             "bin": [
@@ -135,7 +136,7 @@
                 "silex",
                 "symfony"
             ],
-            "time": "2017-12-06T14:57:25+00:00"
+            "time": "2017-12-18T15:36:47+00:00"
         },
         {
             "name": "bolt/collection",
@@ -242,16 +243,16 @@
         },
         {
             "name": "bolt/configuration-notices",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/configuration-notices.git",
-                "reference": "9e1e1827a71fb52b118654d7be56d1af52acfe29"
+                "reference": "6b8f63ba979309ef4c607d8da8cc63d9581695b3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/9e1e1827a71fb52b118654d7be56d1af52acfe29",
-                "reference": "9e1e1827a71fb52b118654d7be56d1af52acfe29",
+                "url": "https://api.github.com/repos/bolt/configuration-notices/zipball/6b8f63ba979309ef4c607d8da8cc63d9581695b3",
+                "reference": "6b8f63ba979309ef4c607d8da8cc63d9581695b3",
                 "shasum": ""
             },
             "require": {
@@ -292,7 +293,7 @@
                 "helper",
                 "notices"
             ],
-            "time": "2017-08-17T08:23:04+00:00"
+            "time": "2017-12-18T15:09:45+00:00"
         },
         {
             "name": "bolt/filesystem",
@@ -789,16 +790,16 @@
         },
         {
             "name": "composer/composer",
-            "version": "1.5.5",
+            "version": "1.5.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "aab6229c9a4b6731f23b36107c39f4007c290b50"
+                "reference": "4f7f9c12753ec43f1e4629e2a71cabe81f2a4eab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/aab6229c9a4b6731f23b36107c39f4007c290b50",
-                "reference": "aab6229c9a4b6731f23b36107c39f4007c290b50",
+                "url": "https://api.github.com/repos/composer/composer/zipball/4f7f9c12753ec43f1e4629e2a71cabe81f2a4eab",
+                "reference": "4f7f9c12753ec43f1e4629e2a71cabe81f2a4eab",
                 "shasum": ""
             },
             "require": {
@@ -862,7 +863,7 @@
                 "dependency",
                 "package"
             ],
-            "time": "2017-12-01T13:42:57+00:00"
+            "time": "2017-12-18T11:09:18+00:00"
         },
         {
             "name": "composer/semver",
