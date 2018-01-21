@@ -36,21 +36,18 @@ class FeedListingExtension extends SimpleExtension
         $config = $this->getConfig();
         $app = $this->getContainer();
 
-        // dump($config->get('feeds'));
-
-        $query = "select author, datepublish from (select * from bolt_feeditems order by datepublish DESC) AS x GROUP BY author;";
+        $query = "SELECT author, MAX(datepublish) as d FROM bolt_feeditems GROUP BY author";
         $stmt = $app['db']->query($query);
 
         $authors = [];
 
         foreach($stmt->fetchAll() as $row) {
-            $authors[ $row['author'] ] = $row['datepublish'];
+            $authors[ $row['author'] ] = $row['d'];
         }
         asort($authors);
         $authors = array_reverse($authors);
 
         return $authors;
-
     }
 
     /**
