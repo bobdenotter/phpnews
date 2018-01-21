@@ -48,3 +48,4 @@ scrutinizer.phar
 Thumbs.db
 Vagrantfile
 
+public_html/.htaccess

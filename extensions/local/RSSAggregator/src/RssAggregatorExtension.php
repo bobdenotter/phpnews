@@ -351,41 +351,41 @@ class RssAggregatorExtension extends SimpleExtension
     {
         if ($article->hasNamespace('media')) {
             $value = $article->getTag('media:thumbnail', 'url');
-            if (!empty($value)) {
-                return $this->fixImageLink(current($value), $baseUrl);
+            if ($image = $this->fixImageLink(current($value), $baseUrl)) {
+                return $image;
             }
 
             $value = $article->getTag('media:content', 'url');
-            if (!empty($value)) {
-                return $this->fixImageLink(current($value), $baseUrl);
+            if ($image = $this->fixImageLink(current($value), $baseUrl)) {
+                return $image;
             }
         }
 
         if ($article->xml->featuredImage) {
             $value = $article->xml->featuredImage;
-            if (!empty($value)) {
-                return $this->fixImageLink(current($value), $baseUrl);
+            if ($image = $this->fixImageLink(current($value), $baseUrl)) {
+                return $image;
             }
         }
 
         if ($article->xml->youtubeImage) {
             $value = $article->xml->youtubeImage;
-            if (!empty($value)) {
-                return $this->fixImageLink(current($value), $baseUrl);
+            if ($image = $this->fixImageLink(current($value), $baseUrl)) {
+                return $image;
             }
         }
 
         if ($article->hasNamespace('image')) {
             $value = $article->getTag('image');
-            if (!empty($value)) {
-                return $this->fixImageLink(current($value), $baseUrl);
+            if ($image = $this->fixImageLink(current($value), $baseUrl)) {
+                return $image;
             }
         }
 
         if ($article->hasNamespace('enclosure')) {
             $value = $article->getTag('enclosure', 'url');
-            if (!empty($value)) {
-                return $this->fixImageLink(current($value), $baseUrl);
+            if ($image = $this->fixImageLink(current($value), $baseUrl)) {
+                return $image;
             }
         }
 
@@ -399,27 +399,11 @@ class RssAggregatorExtension extends SimpleExtension
 
         /** @var \DOMElement $tag */
         foreach ($tags as $tag) {
-            // Skip feedburner images.
-            if (strpos($tag->getAttribute('src'), 'feedburner.com') > 0) {
-                continue;
-            }
-            if (strpos($tag->getAttribute('src'), 'flattr.com') > 0) {
-                continue;
-            }
-            // Medium tracking pixels.
-            if (strpos($tag->getAttribute('src'), 'stat?event') > 0) {
-                continue;
-            }
-            // wordpress.org emoji images.
-            if (strpos($tag->getAttribute('src'), 's.w.org') > 0) {
-                continue;
-            }
-
             $image = $tag->getAttribute('src');
 
-            return $this->fixImageLink($image, $baseUrl);
-            // echo $tag->getAttribute('src') . "<br>\n";
-            // printf("<img src='%s' width='100'>", $tag->getAttribute('src'));
+            if ($image = $this->fixImageLink(current($value), $baseUrl)) {
+                return $image;
+            }
         }
 
         return '';
@@ -435,9 +419,22 @@ class RssAggregatorExtension extends SimpleExtension
      */
     private function fixImageLink($image, $baseUrl)
     {
+        if (empty($image)) {
+            return null;
+        }
+
         if (strpos($image, 'http') === false) {
             $baseUrl = parse_url($baseUrl);
             $image = $baseUrl['scheme'] . '://' . $baseUrl['host'] . $image;
+        }
+
+        // skip Feedburner, Gravatar, Medium pixels, WP emoji, etc.
+        $skippartials = ['feedburner.com', 'flattr.com', 'stat?event', 's.w.org', 'gravatar', 'placeholder'];
+
+        foreach($skippartials as $partial) {
+            if (strpos($image, $partial) > 0) {
+                return null;
+            }
         }
 
         return $image;

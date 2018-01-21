@@ -14,7 +14,7 @@
         {% set class = false %}
     {% endif %}
 
-    {% if (img is not empty) and 'avatar' not in img %}
+    {% if img is not empty %}
         {% if class %}
             <div class='{{ class }}'>
         {% endif %}

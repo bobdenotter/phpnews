@@ -507,6 +507,10 @@ samp {
   border: 1px solid darken($color-body, 20);
   display: block;
 
+  h2 + & {
+    margin-top: 1.4rem;
+  }
+
   @include tablet {
     body.detail &.wide {
       margin: 0 -5em;

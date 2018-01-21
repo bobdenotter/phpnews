@@ -171,6 +171,11 @@ feeds:
         title: "Joshua Thijssen's weblog"
         url: "https://www.adayinthelifeof.nl/"
         feed: "https://www.adayinthelifeof.nl/feed/"
+    daylerees:
+        name: "Dayle Rees"
+        title: "Dayle Rees' weblog"
+        feed: "https://daylerees.com/rss/"
+        url: "https://daylerees.com/"
     davedevelopment:
         name: "Dave Marshall"
         title: "Dave Marshall's weblog"
