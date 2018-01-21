@@ -401,7 +401,7 @@ class RssAggregatorExtension extends SimpleExtension
         foreach ($tags as $tag) {
             $image = $tag->getAttribute('src');
 
-            if ($image = $this->fixImageLink(current($value), $baseUrl)) {
+            if ($image = $this->fixImageLink($image, $baseUrl)) {
                 return $image;
             }
         }
