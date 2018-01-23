@@ -251,6 +251,12 @@ feeds:
         name: Bram.us
         feed: http://www.bram.us/feed/
         title: Bram.us
+    thishosting.rocks:
+        url: https://thishosting.rocks/tag/php/
+        name: ThisHosting.Rocks
+        title: ThisHosting.Rocks
+        feed: https://thishosting.rocks/tag/php/feed/
+        compact: true
     catswhocode:
         url: http://www.catswhocode.com/blog
         name: CatsWhoCode.com
