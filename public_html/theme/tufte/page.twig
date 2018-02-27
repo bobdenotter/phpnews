@@ -1,0 +1,37 @@
+{% extends '_base.twig' %}
+{% import 'partials/_macro.twig' as macros %}
+
+{% block bodyclass %}detail{% endblock %}
+
+{% block pagename %}
+    <a href='{{ record.link }}'>{{ record.title|excerpt(38) }}</a>
+{% endblock %}
+
+{% block container %}
+    <header>
+        <h1>
+        {{ record.title }}
+        </h1>
+        {# {% include 'partials/_recordfooter.twig' with {verbose: true} %} #}
+    </header>
+
+    <article class="content">
+
+        {% if record.introduction is not empty %}
+            <p class='subtitle'>
+                {{ record.introduction|striptags('<b><em><i><strong><a><u>')|raw }}
+            </p>
+        {% endif %}
+
+        {{ record.content }}
+
+    {% if record.slug == 'contact' %}
+    {{ boltforms('contact') }}
+    {% endif %}
+
+    <hr>
+
+    </article>
+
+{% endblock container %}
+

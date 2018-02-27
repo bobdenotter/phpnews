@@ -101,11 +101,12 @@ body {
   counter-reset: sidenote-counter;
 
   &.sans {
-    p, li {
+    p, li, label, button, input, textarea {
       font-family: $font-sans-serif;
       font-size: 1.1rem;
       line-height: 1.7rem;
     }
+
     p.meta {
       font-family: $font-serif;
       font-size: 1.1rem;

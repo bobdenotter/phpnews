@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "57ddddbed1ad28664c796c7f3e7850d4",
+    "content-hash": "b1f54ccc5fb482cfcb82b30230e90c73",
     "packages": [
         {
             "name": "bobdenotter/seo",
@@ -51,20 +51,22 @@
         },
         {
             "name": "bolt/boltforms",
-            "version": "v3.1.0",
+            "version": "v4.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/boltforms.git",
-                "reference": "3d7edfe2356fd71146227211ad790a3bde20ae17"
+                "reference": "e291cacb37edff0332da4e9e6efa0f86b2e4a569"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/boltforms/zipball/3d7edfe2356fd71146227211ad790a3bde20ae17",
-                "reference": "3d7edfe2356fd71146227211ad790a3bde20ae17",
+                "url": "https://api.github.com/repos/bolt/boltforms/zipball/e291cacb37edff0332da4e9e6efa0f86b2e4a569",
+                "reference": "e291cacb37edff0332da4e9e6efa0f86b2e4a569",
                 "shasum": ""
             },
             "require": {
-                "bolt/bolt": "^3.0"
+                "bolt/bolt": "^3.0",
+                "bolt/email-spooler": "^3.0",
+                "google/recaptcha": "^1.1.2"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.7"
@@ -78,16 +80,18 @@
                 "bolt-class": "Bolt\\Extension\\Bolt\\BoltForms\\BoltFormsExtension",
                 "bolt-icon": "icon-boltforms.png",
                 "branch-alias": {
-                    "dev-master": "3.0.x-dev"
+                    "dev-4.0": "4.0.x-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
                     "Bolt\\Extension\\Bolt\\BoltForms\\": [
                         "src/"
-                    ],
-                    "ReCaptcha\\": "lib/ReCaptcha/"
-                }
+                    ]
+                },
+                "classmap": [
+                    "docs/example/"
+                ]
             },
             "autoload-dev": {
                 "psr-4": {
@@ -105,7 +109,7 @@
                     "email": "gawain.lynch@gmail.com"
                 }
             ],
-            "description": "Symfony Forms API for bolt",
+            "description": "Powerful and flexible HTML form generator for Bolt based on Symfony Forms",
             "keywords": [
                 "comments",
                 "contact",
@@ -114,10 +118,10 @@
                 "uploads"
             ],
             "support": {
-                "source": "https://github.com/bolt/boltforms/tree/3.1",
+                "source": "https://github.com/bolt/boltforms/tree/4.2",
                 "issues": "https://github.com/bolt/boltforms/issues"
             },
-            "time": "2016-10-31T11:22:11+00:00"
+            "time": "2018-01-23T22:17:50+00:00"
         },
         {
             "name": "bolt/disqus",
@@ -168,17 +172,65 @@
             "time": "2017-05-04T10:09:02+00:00"
         },
         {
-            "name": "bolt/sitemap",
-            "version": "2.2.3",
+            "name": "bolt/email-spooler",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/bolt/Sitemap.git",
-                "reference": "6f9630daa9d6f8d7f06b2483c2444d780b3ffe7d"
+                "url": "https://github.com/bolt/bolt-extension-email-spooler.git",
+                "reference": "3f2fa17f4072e413e0fca4ab6b70cd440d4c3f3c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/6f9630daa9d6f8d7f06b2483c2444d780b3ffe7d",
-                "reference": "6f9630daa9d6f8d7f06b2483c2444d780b3ffe7d",
+                "url": "https://api.github.com/repos/bolt/bolt-extension-email-spooler/zipball/3f2fa17f4072e413e0fca4ab6b70cd440d4c3f3c",
+                "reference": "3f2fa17f4072e413e0fca4ab6b70cd440d4c3f3c",
+                "shasum": ""
+            },
+            "require": {
+                "bolt/bolt": "^3.3",
+                "php": ">=5.5.9"
+            },
+            "type": "bolt-extension",
+            "extra": {
+                "bolt-class": "Bolt\\Extension\\Bolt\\EmailSpooler\\EmailSpoolerExtension",
+                "branch-alias": {
+                    "dev-master": "3.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bolt\\Extension\\Bolt\\EmailSpooler\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gawain Lynch",
+                    "email": "gawain.lynch@gmail.com"
+                }
+            ],
+            "keywords": [
+                "email",
+                "spool"
+            ],
+            "support": {
+                "source": "https://github.com/bolt/bolt-extension-email-spooler/tree/v3.1.0"
+            },
+            "time": "2017-04-27T10:11:16+00:00"
+        },
+        {
+            "name": "bolt/sitemap",
+            "version": "2.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bolt/Sitemap.git",
+                "reference": "63aaa3df021a4325c66815426b867333f475b308"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/63aaa3df021a4325c66815426b867333f475b308",
+                "reference": "63aaa3df021a4325c66815426b867333f475b308",
                 "shasum": ""
             },
             "require": {
@@ -187,7 +239,10 @@
             "type": "bolt-extension",
             "extra": {
                 "bolt-icon": "icon-sitemap.png",
-                "bolt-class": "Bolt\\Extension\\Bolt\\Sitemap\\SitemapExtension"
+                "bolt-class": "Bolt\\Extension\\Bolt\\Sitemap\\SitemapExtension",
+                "branch-alias": {
+                    "dev-2.x": "2.3.x-dev"
+                }
             },
             "autoload": {
                 "psr-4": {
@@ -217,10 +272,59 @@
                 "sitemap"
             ],
             "support": {
-                "source": "https://github.com/bolt/Sitemap/tree/2.2.3",
+                "source": "https://github.com/bolt/Sitemap/tree/2.x",
                 "issues": "https://github.com/bolt/Sitemap/issues"
             },
-            "time": "2017-06-19T12:58:13+00:00"
+            "time": "2018-01-22T09:11:24+00:00"
+        },
+        {
+            "name": "google/recaptcha",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/recaptcha.git",
+                "reference": "5a56d15ca10a7b75158178752b2ad8f755eb4f78"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/recaptcha/zipball/5a56d15ca10a7b75158178752b2ad8f755eb4f78",
+                "reference": "5a56d15ca10a7b75158178752b2ad8f755eb4f78",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "ReCaptcha\\": "src/ReCaptcha"
+                }
+            },
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "description": "Client library for reCAPTCHA, a free service that protect websites from spam and abuse.",
+            "homepage": "http://www.google.com/recaptcha/",
+            "keywords": [
+                "abuse",
+                "captcha",
+                "recaptcha",
+                "spam"
+            ],
+            "support": {
+                "forum": "https://groups.google.com/forum/#!forum/recaptcha",
+                "source": "https://github.com/google/recaptcha",
+                "issues": "https://github.com/google/recaptcha/issues"
+            },
+            "time": "2017-03-09T18:44:34+00:00"
         },
         {
             "name": "jadwigo/taxonomylist",

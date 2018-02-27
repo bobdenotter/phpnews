@@ -36,7 +36,7 @@
     },
     "require": {
         "bobdenotter/seo": "^0.14.1",
-        "bolt/boltforms": "^3.0",
+        "bolt/boltforms": "^4.0",
         "bolt/disqus": "^2.0",
         "bolt/sitemap": "^2.0",
         "jadwigo/taxonomylist": "^3.3",
