@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1f54ccc5fb482cfcb82b30230e90c73",
+    "content-hash": "b1c45824fd49291ee798001c5522674e",
     "packages": [
         {
             "name": "bobdenotter/seo",
-            "version": "v0.14.2",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bobdenotter/seo.git",
-                "reference": "1d9bd647137124852c799470754b4054e3b88f99"
+                "reference": "07f8b5b2ab1da80559d68028c2030ec0b7d5392b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bobdenotter/seo/zipball/1d9bd647137124852c799470754b4054e3b88f99",
-                "reference": "1d9bd647137124852c799470754b4054e3b88f99",
+                "url": "https://api.github.com/repos/bobdenotter/seo/zipball/07f8b5b2ab1da80559d68028c2030ec0b7d5392b",
+                "reference": "07f8b5b2ab1da80559d68028c2030ec0b7d5392b",
                 "shasum": ""
             },
             "require": {
@@ -44,10 +44,10 @@
             ],
             "description": "An extension to easily manage SEO title, meta description and OG tags.",
             "support": {
-                "source": "https://github.com/bobdenotter/seo/tree/v0.14.2",
+                "source": "https://github.com/bobdenotter/seo/tree/master",
                 "issues": "https://github.com/bobdenotter/seo/issues"
             },
-            "time": "2017-04-06T15:36:42+00:00"
+            "time": "2018-03-05T16:38:28+00:00"
         },
         {
             "name": "bolt/boltforms",

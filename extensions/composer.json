@@ -25,7 +25,7 @@
     "name": "bolt/extensions",
     "prefer-stable": true,
     "provide": {
-        "bolt/bolt": "3.4.6"
+        "bolt/bolt": "3.4.9"
     },
     "repositories": {
         "packagist": false,
@@ -35,7 +35,7 @@
         }
     },
     "require": {
-        "bobdenotter/seo": "^0.14.1",
+        "bobdenotter/seo": "^1.1",
         "bolt/boltforms": "^4.0",
         "bolt/disqus": "^2.0",
         "bolt/sitemap": "^2.0",
