@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1c45824fd49291ee798001c5522674e",
+    "content-hash": "de393e1a43b9c2cb8b3cbaa3c1524872",
     "packages": [
         {
             "name": "bobdenotter/seo",
@@ -51,16 +51,16 @@
         },
         {
             "name": "bolt/boltforms",
-            "version": "v4.2.0",
+            "version": "v4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/boltforms.git",
-                "reference": "e291cacb37edff0332da4e9e6efa0f86b2e4a569"
+                "reference": "12ace338ffd4061e03a1347cd7e730b0d8414454"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/boltforms/zipball/e291cacb37edff0332da4e9e6efa0f86b2e4a569",
-                "reference": "e291cacb37edff0332da4e9e6efa0f86b2e4a569",
+                "url": "https://api.github.com/repos/bolt/boltforms/zipball/12ace338ffd4061e03a1347cd7e730b0d8414454",
+                "reference": "12ace338ffd4061e03a1347cd7e730b0d8414454",
                 "shasum": ""
             },
             "require": {
@@ -121,7 +121,7 @@
                 "source": "https://github.com/bolt/boltforms/tree/4.2",
                 "issues": "https://github.com/bolt/boltforms/issues"
             },
-            "time": "2018-01-23T22:17:50+00:00"
+            "time": "2018-03-20T13:33:43+00:00"
         },
         {
             "name": "bolt/disqus",
@@ -221,16 +221,16 @@
         },
         {
             "name": "bolt/sitemap",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/Sitemap.git",
-                "reference": "63aaa3df021a4325c66815426b867333f475b308"
+                "reference": "6559117ae4c53441d433ccfdda3e2d34e1a12492"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/63aaa3df021a4325c66815426b867333f475b308",
-                "reference": "63aaa3df021a4325c66815426b867333f475b308",
+                "url": "https://api.github.com/repos/bolt/Sitemap/zipball/6559117ae4c53441d433ccfdda3e2d34e1a12492",
+                "reference": "6559117ae4c53441d433ccfdda3e2d34e1a12492",
                 "shasum": ""
             },
             "require": {
@@ -275,7 +275,7 @@
                 "source": "https://github.com/bolt/Sitemap/tree/2.x",
                 "issues": "https://github.com/bolt/Sitemap/issues"
             },
-            "time": "2018-01-22T09:11:24+00:00"
+            "time": "2018-03-15T19:00:47+00:00"
         },
         {
             "name": "google/recaptcha",

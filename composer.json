@@ -5,10 +5,10 @@
     "license": "MIT",
     "require": {
         "php": "^5.5.9 || ^7.0",
-        "bolt/bolt": "^3.4",
+        "bolt/bolt": "^3.5@beta",
         "PasswordLib/PasswordLib": "^1.0@beta",
         "miniflux/picofeed": "@stable",
-        "bolt/configuration-notices": "^1.0@dev"
+        "bolt/configuration-notices": "^1.0"
     },
     "minimum-stability": "beta",
     "prefer-stable": true,
