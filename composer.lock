@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "bolt/bolt",
-            "version": "v3.5.0-beta1",
+            "version": "v3.5.0-beta2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/bolt.git",
-                "reference": "1ce209c39f1dfb52fccdcb9589d079d49cce56df"
+                "reference": "c327d5f3afa0db81a8fa088cf6666ccf3de99381"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/bolt/zipball/1ce209c39f1dfb52fccdcb9589d079d49cce56df",
-                "reference": "1ce209c39f1dfb52fccdcb9589d079d49cce56df",
+                "url": "https://api.github.com/repos/bolt/bolt/zipball/c327d5f3afa0db81a8fa088cf6666ccf3de99381",
+                "reference": "c327d5f3afa0db81a8fa088cf6666ccf3de99381",
                 "shasum": ""
             },
             "require": {
@@ -130,7 +130,7 @@
                 "silex",
                 "symfony"
             ],
-            "time": "2018-03-21T15:56:47+00:00"
+            "time": "2018-03-26T11:50:46+00:00"
         },
         {
             "name": "bolt/collection",
@@ -528,16 +528,16 @@
         },
         {
             "name": "bolt/themes",
-            "version": "v2.0.0-beta3",
+            "version": "v2.0.0-beta4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/themes.git",
-                "reference": "1c30b9b6a9f240ceda1467bd3b1ac7c6bbaabcd7"
+                "reference": "3be81f117dcd1e29999bd03991a07cdf5fb8cdfe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/themes/zipball/1c30b9b6a9f240ceda1467bd3b1ac7c6bbaabcd7",
-                "reference": "1c30b9b6a9f240ceda1467bd3b1ac7c6bbaabcd7",
+                "url": "https://api.github.com/repos/bolt/themes/zipball/3be81f117dcd1e29999bd03991a07cdf5fb8cdfe",
+                "reference": "3be81f117dcd1e29999bd03991a07cdf5fb8cdfe",
                 "shasum": ""
             },
             "require": {
@@ -562,7 +562,7 @@
                 "cms",
                 "twig"
             ],
-            "time": "2018-03-21T09:27:36+00:00"
+            "time": "2018-03-21T20:42:57+00:00"
         },
         {
             "name": "bolt/thumbs",
