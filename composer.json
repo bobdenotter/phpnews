@@ -8,7 +8,8 @@
         "bolt/bolt": "^3.5@beta",
         "PasswordLib/PasswordLib": "^1.0@beta",
         "miniflux/picofeed": "@stable",
-        "bolt/configuration-notices": "^1.0"
+        "bolt/configuration-notices": "^1.0",
+        "symfony/finder": "^2.8, !=2.8.37"
     },
     "minimum-stability": "beta",
     "prefer-stable": true,
