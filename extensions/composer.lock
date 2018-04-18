@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
     "content-hash": "de393e1a43b9c2cb8b3cbaa3c1524872",
@@ -486,7 +486,7 @@
             ],
             "description": "Composer plugin to merge multiple composer.json files",
             "support": {
-                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/master",
+                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/v1.4.1",
                 "issues": "https://github.com/wikimedia/composer-merge-plugin/issues"
             },
             "time": "2017-04-25T02:31:25+00:00"
