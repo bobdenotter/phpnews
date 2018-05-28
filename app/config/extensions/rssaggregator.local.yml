@@ -631,6 +631,12 @@ feeds:
         name: Marco Ament
         feed: https://marco.org/rss
         title: Marco Ament
+    patricklouys:
+        url: https://patricklouys.com
+        name: Patrick Louys
+        feed: https://patricklouys.com/feed.xml
+        title: A software development blog
+
 
 # Frontend stuff
 
