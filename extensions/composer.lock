@@ -51,16 +51,16 @@
         },
         {
             "name": "bolt/boltforms",
-            "version": "v4.2.2",
+            "version": "v4.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/boltforms.git",
-                "reference": "12ace338ffd4061e03a1347cd7e730b0d8414454"
+                "reference": "b6b8d2151bf9d1e41fdf17d97180b377711ea118"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/boltforms/zipball/12ace338ffd4061e03a1347cd7e730b0d8414454",
-                "reference": "12ace338ffd4061e03a1347cd7e730b0d8414454",
+                "url": "https://api.github.com/repos/bolt/boltforms/zipball/b6b8d2151bf9d1e41fdf17d97180b377711ea118",
+                "reference": "b6b8d2151bf9d1e41fdf17d97180b377711ea118",
                 "shasum": ""
             },
             "require": {
@@ -121,7 +121,7 @@
                 "source": "https://github.com/bolt/boltforms/tree/4.2",
                 "issues": "https://github.com/bolt/boltforms/issues"
             },
-            "time": "2018-03-20T13:33:43+00:00"
+            "time": "2018-05-20T00:19:01+00:00"
         },
         {
             "name": "bolt/disqus",
@@ -173,16 +173,16 @@
         },
         {
             "name": "bolt/email-spooler",
-            "version": "v3.1.0",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bolt/bolt-extension-email-spooler.git",
-                "reference": "3f2fa17f4072e413e0fca4ab6b70cd440d4c3f3c"
+                "reference": "75a0e2dd2bd004af623d22a8d24d33be986ba9cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bolt/bolt-extension-email-spooler/zipball/3f2fa17f4072e413e0fca4ab6b70cd440d4c3f3c",
-                "reference": "3f2fa17f4072e413e0fca4ab6b70cd440d4c3f3c",
+                "url": "https://api.github.com/repos/bolt/bolt-extension-email-spooler/zipball/75a0e2dd2bd004af623d22a8d24d33be986ba9cf",
+                "reference": "75a0e2dd2bd004af623d22a8d24d33be986ba9cf",
                 "shasum": ""
             },
             "require": {
@@ -215,9 +215,9 @@
                 "spool"
             ],
             "support": {
-                "source": "https://github.com/bolt/bolt-extension-email-spooler/tree/v3.1.0"
+                "source": "https://github.com/bolt/bolt-extension-email-spooler/tree/master"
             },
-            "time": "2017-04-27T10:11:16+00:00"
+            "time": "2018-05-19T14:33:45+00:00"
         },
         {
             "name": "bolt/sitemap",
