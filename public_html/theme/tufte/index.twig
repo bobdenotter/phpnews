@@ -63,6 +63,7 @@
     <aside class='content'>
         {% setcontent about = 'page/about' %}
         {% if about is not empty %}
+            <h3>{{ about.title }}</h3>
             {{ about.teaser }}
             <a href='{{ about.link() }}'>Continue reading &raquo;</a>
         {% endif %}
