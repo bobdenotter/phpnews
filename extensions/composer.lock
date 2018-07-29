@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "de393e1a43b9c2cb8b3cbaa3c1524872",
+    "content-hash": "b07d30ca85d778ba80047cf3c8139355",
     "packages": [
         {
             "name": "bobdenotter/seo",
@@ -486,7 +486,7 @@
             ],
             "description": "Composer plugin to merge multiple composer.json files",
             "support": {
-                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/v1.4.1",
+                "source": "https://github.com/wikimedia/composer-merge-plugin/tree/master",
                 "issues": "https://github.com/wikimedia/composer-merge-plugin/issues"
             },
             "time": "2017-04-25T02:31:25+00:00"
