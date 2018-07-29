@@ -34,7 +34,6 @@ class RssAggregatorExtension extends SimpleExtension
     protected function registerBackendRoutes(ControllerCollection $collection)
     {
         $collection->get('/extensions/rssaggregate', [$this, 'RSSAggregator']);
-
         $collection->get('/extensions/rssaggregate/list', [$this, 'listFeeds']);
     }
 
